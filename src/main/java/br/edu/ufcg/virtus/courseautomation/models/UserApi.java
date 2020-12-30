@@ -1,26 +1,23 @@
 package br.edu.ufcg.virtus.courseautomation.models;
 
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity(name ="user")
-public class User {
-
-    @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+@Entity
+public class UserApi {
+    @Id @GeneratedValue
     private Long id;
-
     private String name;
     private String email;
     private String password;
 
 
-    public User() {
+    public UserApi() {
     }
 
-    public User(Long id, String name, String email, String password) {
+    public UserApi(Long id, String name, String email, String password) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -29,7 +26,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
+        return "UserApi{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +

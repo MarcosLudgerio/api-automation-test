@@ -2,9 +2,7 @@ package br.edu.ufcg.virtus.courseautomation.services;
 
 
 import br.edu.ufcg.virtus.courseautomation.exceptions.PostException;
-import br.edu.ufcg.virtus.courseautomation.exceptions.UserApiException;
 import br.edu.ufcg.virtus.courseautomation.models.Post;
-import br.edu.ufcg.virtus.courseautomation.models.UserApi;
 import br.edu.ufcg.virtus.courseautomation.repositories.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,8 +41,11 @@ public class PostService {
         return postFinder;
     }
 
-    public void deletePost(Long id) throws PostException {
-        this.postRepository.delete(id);
+    public Post deletePost(Long id) throws PostException {
+        Post post = this.findOne(id);
+        this.postRepository.delete(post);
+        return post;
+
     }
 
 }

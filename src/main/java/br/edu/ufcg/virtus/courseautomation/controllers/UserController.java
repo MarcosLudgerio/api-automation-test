@@ -1,6 +1,7 @@
 package br.edu.ufcg.virtus.courseautomation.controllers;
 
 
+import br.edu.ufcg.virtus.courseautomation.dtos.UserDTO;
 import br.edu.ufcg.virtus.courseautomation.exceptions.UserApiException;
 import br.edu.ufcg.virtus.courseautomation.models.UserApi;
 import br.edu.ufcg.virtus.courseautomation.services.UserService;
@@ -19,22 +20,21 @@ public class UserController {
     UserService userService;
 
     @GetMapping(value = "/users")
-    public ResponseEntity<List<UserApi>> getAllUsers(){
+    public ResponseEntity<List<UserApi>> getAllUsers() {
         return new ResponseEntity<>(userService.findAllUsers(), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/users/{id}")
+    @GetMapping(value = "/users/{id}", produces = "application/json")
     public ResponseEntity<?> geUser(@PathVariable Long id) {
-        try{
+        try {
             return new ResponseEntity<>(this.userService.findOne(id), HttpStatus.OK);
-        }catch (UserApiException exception){
-            return ResponseEntity.ok().body(exception.getMessage());
+        } catch (UserApiException exception) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-
     }
 
     @PostMapping(value = "/users")
-    public ResponseEntity<UserApi> createNewUser(@RequestBody UserApi userApi){
+    public ResponseEntity<UserDTO> createNewUser(@RequestBody UserApi userApi) {
         return new ResponseEntity<>(this.userService.createNewUser(userApi), HttpStatus.CREATED);
     }
 
@@ -43,9 +43,13 @@ public class UserController {
         return new ResponseEntity<>(this.userService.updateUser(userApi), HttpStatus.OK);
     }
 
-    @DeleteMapping (value = "/users/{id}")
-    public ResponseEntity<UserApi> dropUser(@PathVariable Long idUser) throws UserApiException {
-        return new ResponseEntity<>(this.userService.deleteUser(idUser), HttpStatus.OK);
+    @DeleteMapping(value = "/users")
+    public ResponseEntity<UserDTO> dropUser(@RequestHeader("Authorization") String token){
+        try {
+            return new ResponseEntity<>(this.userService.deleteUser(token), HttpStatus.OK);
+        } catch (UserApiException exception) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
 }

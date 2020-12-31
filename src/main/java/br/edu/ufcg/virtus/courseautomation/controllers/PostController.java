@@ -17,7 +17,7 @@ public class PostController {
     @Autowired
     public PostService postService;
 
-    @GetMapping(value = "/posts")
+    @GetMapping(value = "/posts", produces = "application/json")
     public List<Post> findAll() {
         return this.postService.findAllPosts();
     }
@@ -31,17 +31,17 @@ public class PostController {
         }
     }
 
-    @PostMapping(value = "/posts")
+    @PostMapping(value = "/posts", produces = "application/json")
     public ResponseEntity<Post> createNewPost(@RequestBody Post post) {
         return new ResponseEntity<>(this.postService.createNewPost(post), HttpStatus.CREATED);
     }
 
-    @PutMapping(value = "/posts")
+    @PutMapping(value = "/posts", produces = "application/json")
     public ResponseEntity<Post> updatePost(@RequestBody Post post) throws PostException {
         return new ResponseEntity<>(this.postService.updatePost(post), HttpStatus.OK);
     }
 
-    @DeleteMapping(value = "/posts/{id}")
+    @DeleteMapping(value = "/posts/{id}", produces = "application/json")
     public ResponseEntity<?> dropPost(@PathVariable Long idPost) {
         try {
             return new ResponseEntity<>(this.postService.deletePost(idPost), HttpStatus.OK);

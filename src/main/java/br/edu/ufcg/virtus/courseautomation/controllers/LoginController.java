@@ -16,8 +16,12 @@ public class LoginController {
     @Autowired
     private JWTService jwtService;
 
-    @PostMapping(value = "/auth/login")
-    public ResponseEntity<String> authentication(@RequestBody UserDTO userDTO) throws UserApiException {
-        return new ResponseEntity<>(jwtService.autentication(userDTO), HttpStatus.OK);
+    @PostMapping(value = "/auth/login", produces = "application/json")
+    public ResponseEntity<String> authentication(@RequestBody UserDTO userDTO) {
+        try {
+            return new ResponseEntity<>(jwtService.autentication(userDTO), HttpStatus.OK);
+        } catch (UserApiException ex) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 }

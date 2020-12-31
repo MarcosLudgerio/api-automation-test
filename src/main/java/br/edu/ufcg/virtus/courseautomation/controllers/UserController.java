@@ -19,7 +19,7 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @GetMapping(value = "/users")
+    @GetMapping(value = "/users", produces = "application/json")
     public ResponseEntity<List<UserApi>> getAllUsers() {
         return new ResponseEntity<>(userService.findAllUsers(), HttpStatus.OK);
     }
@@ -33,17 +33,17 @@ public class UserController {
         }
     }
 
-    @PostMapping(value = "/users")
+    @PostMapping(value = "/users", produces = "application/json")
     public ResponseEntity<UserDTO> createNewUser(@RequestBody UserApi userApi) {
         return new ResponseEntity<>(this.userService.createNewUser(userApi), HttpStatus.CREATED);
     }
 
-    @PutMapping(value = "/users")
+    @PutMapping(value = "/users", produces = "application/json")
     public ResponseEntity<UserApi> updateUserApi(@RequestBody UserApi userApi) throws UserApiException {
         return new ResponseEntity<>(this.userService.updateUser(userApi), HttpStatus.OK);
     }
 
-    @DeleteMapping(value = "/users")
+    @DeleteMapping(value = "/users", produces = "application/json")
     public ResponseEntity<UserDTO> dropUser(@RequestHeader("Authorization") String token){
         try {
             return new ResponseEntity<>(this.userService.deleteUser(token), HttpStatus.OK);

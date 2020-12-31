@@ -1,27 +1,30 @@
 package br.edu.ufcg.virtus.courseautomation.models;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class UserApi {
-    @Id @GeneratedValue
+
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
     private String email;
     private String password;
 
+    @OneToMany
+    private List<Post> posts;
 
     public UserApi() {
     }
 
-    public UserApi(Long id, String name, String email, String password) {
+    public UserApi(Long id, String name, String email, String password, List<Post> posts) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
+        this.posts = posts;
     }
 
     @Override

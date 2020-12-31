@@ -18,10 +18,10 @@ public class UserService {
         return this.userRepository.findAll();
     }
 
-    public Optional<UserApi> findOne(Long id) throws UserApiException {
+    public UserApi findOne(Long id) throws UserApiException {
         Optional<UserApi> userFind = this.userRepository.findById(id);
-       // return userFind.orElseThrow(() -> new UserApiException("Usuário não encontrado, tente novamente"));
-    return userFind;
+        return userFind.orElseThrow(() -> new UserApiException("Usuário não encontrado, tente novamente"));
+        // return userFind;
     }
 
     public UserApi createNewUser(UserApi user) {
@@ -30,7 +30,7 @@ public class UserService {
     }
 
     public UserApi updateUser(UserApi user) throws UserApiException {
-        UserApi userFinder = this.findOne(user.getId()).get();
+        UserApi userFinder = this.findOne(user.getId());
         userFinder.setName(user.getName());
         userFinder.setPassword(user.getPassword());
         userFinder.setEmail(user.getEmail());
@@ -38,12 +38,11 @@ public class UserService {
         return userFinder;
     }
 
-    public Optional<UserApi>  deleteUser(Long id) throws UserApiException {
-        Optional<UserApi> user = this.findOne(id);
+    public UserApi deleteUser(Long id) throws UserApiException {
+        UserApi user = this.findOne(id);
         this.userRepository.delete(id);
         return user;
     }
-
 
 
 }

@@ -2,6 +2,7 @@ package br.edu.ufcg.virtus.courseautomation.services;
 
 
 import br.edu.ufcg.virtus.courseautomation.exceptions.PostException;
+import br.edu.ufcg.virtus.courseautomation.exceptions.TokenException;
 import br.edu.ufcg.virtus.courseautomation.exceptions.UserApiException;
 import br.edu.ufcg.virtus.courseautomation.models.Post;
 import br.edu.ufcg.virtus.courseautomation.models.UserApi;
@@ -24,7 +25,7 @@ public class PostService {
     @Autowired
     private JWTService jwtService;
 
-    public List<Post> findAllPosts(String token) throws UserApiException {
+    public List<Post> findAllPosts(String token) throws UserApiException, TokenException {
         Optional<String> userLog = jwtService.restoreAccount(token);
         UserApi user = userService.validateUsuario(userLog);
         if(user.getName().equals(""))
@@ -32,17 +33,16 @@ public class PostService {
         return this.postRepository.findAll();
     }
 
-    public Post findOne(String token, Long id) throws PostException, UserApiException {
+    public Post findOne(String token, Long id) throws PostException, UserApiException, TokenException {
         Optional<String> userLog = jwtService.restoreAccount(token);
         UserApi user = userService.validateUsuario(userLog);
         if(user.getName().equals(""))
             throw new UserApiException("Usuário não encontrado, tente novamente!");
         Optional<Post> postFind = this.postRepository.findById(id);
         return postFind.orElseThrow(() -> new PostException("Post não encontrado"));
-        // return userFind;
     }
 
-    public Post createNewPost(String token, Post post) throws UserApiException {
+    public Post createNewPost(String token, Post post) throws UserApiException, TokenException {
         Optional<String> userLog = jwtService.restoreAccount(token);
         UserApi user = userService.validateUsuario(userLog);
         if(user.getName().equals(""))
@@ -51,10 +51,9 @@ public class PostService {
         return post;
     }
 
-    public Post updatePost(String token, Long id, Post post) throws PostException, UserApiException {
+    public Post updatePost(String token, Long id, Post post) throws PostException, UserApiException, TokenException {
 
         Post postFinder = this.findOne(token, id);
-
         if (!post.getAutor().equals(""))
             postFinder.setAutor(post.getAutor());
         if (post.getData() != null)
@@ -68,13 +67,10 @@ public class PostService {
         return postFinder;
     }
 
-    public Post deletePost(String token, Long id) throws PostException, UserApiException {
-        System.out.println("token " + token);
-        System.out.println("id " + id);
+    public Post deletePost(String token, Long id) throws PostException, UserApiException, TokenException {
         Post post = this.findOne(token, id);
         this.postRepository.delete(post);
         return post;
-
     }
 
 }

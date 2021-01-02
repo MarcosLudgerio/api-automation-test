@@ -52,7 +52,7 @@ public class UserController {
         try {
             return new ResponseEntity<>(this.userService.updateUser(token, userApi), HttpStatus.OK);
         } catch (UserApiException ex) {
-            return new ResponseEntity<>(HandleException.noPrivilegesForThat(ex, "/users"), HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(HandleException.noPrivilegesForThat(ex, "").getBody(), HttpStatus.UNAUTHORIZED);
         } catch (TokenException e) {
             return new ResponseEntity<>(HandleException.invalidToken(e, "/users").getBody(), HttpStatus.UNAUTHORIZED);
         }
@@ -62,8 +62,8 @@ public class UserController {
     public ResponseEntity<?> dropUser(@RequestHeader("Authorization") String token) {
         try {
             return new ResponseEntity<>(this.userService.deleteUser(token), HttpStatus.OK);
-        } catch (UserApiException | SecurityException exception) {
-            return new ResponseEntity<>(exception, HttpStatus.UNAUTHORIZED);
+        } catch (UserApiException exception) {
+            return new ResponseEntity<>(HandleException.noPrivilegesForThat(exception, "/users").getBody(), HttpStatus.UNAUTHORIZED);
         } catch (TokenException e) {
             return new ResponseEntity<>(HandleException.invalidToken(e, "/users").getBody(), HttpStatus.UNAUTHORIZED);
         }

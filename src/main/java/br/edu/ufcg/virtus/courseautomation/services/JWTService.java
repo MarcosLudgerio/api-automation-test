@@ -37,8 +37,8 @@ public class JWTService {
         String subject = "";
         try {
             subject = Jwts.parser().setSigningKey(NOTHING).parseClaimsJws(headerAuthorization).getBody().getSubject(); // subject return email
-        } catch (SignatureException ex) {
-            throw new TokenException("Erro de validação do token");
+        } catch (SignatureException | ExpiredJwtException ex) {
+            throw new TokenException("Token inválido, refaça login e tente novamente");
         }
 
         return Optional.of(subject);

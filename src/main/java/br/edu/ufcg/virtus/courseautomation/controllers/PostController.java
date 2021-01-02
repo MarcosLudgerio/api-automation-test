@@ -6,6 +6,8 @@ import br.edu.ufcg.virtus.courseautomation.exceptions.TokenException;
 import br.edu.ufcg.virtus.courseautomation.exceptions.UserApiException;
 import br.edu.ufcg.virtus.courseautomation.models.Post;
 import br.edu.ufcg.virtus.courseautomation.services.PostService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,12 +15,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
+@RequestMapping(value = "/posts", produces = "application/json")
+@Api(value = "API Rest Curso Automação")
+@CrossOrigin(origins = "*")
 public class PostController {
 
     @Autowired
     public PostService postService;
 
-    @GetMapping(value = "/posts", produces = "application/json")
+    @GetMapping(value = "/", produces = "application/json")
+    @ApiOperation(value = "Retorna todos os posts cadastrados")
     public ResponseEntity<?> findAll(@RequestHeader("Authorization") String token) {
         try {
             return new ResponseEntity<>(this.postService.findAllPosts(token), HttpStatus.OK);
@@ -29,7 +35,8 @@ public class PostController {
         }
     }
 
-    @GetMapping(value = "/posts/{id}", produces = "application/json")
+    @GetMapping(value = "/{id}", produces = "application/json")
+    @ApiOperation(value = "Retorna um post específico")
     public ResponseEntity<?> getPost(@RequestHeader("Authorization") String token, @PathVariable Long id) {
         try {
             return new ResponseEntity<>(this.postService.findOne(token, id), HttpStatus.OK);
@@ -42,7 +49,8 @@ public class PostController {
         }
     }
 
-    @PostMapping(value = "/posts", produces = "application/json")
+    @PostMapping(value = "/", produces = "application/json")
+    @ApiOperation(value = "Cadastra um novo post")
     public ResponseEntity<?> createNewPost(@RequestHeader("Authorization") String token, @RequestBody Post post) {
         try {
             return new ResponseEntity<>(this.postService.createNewPost(token, post), HttpStatus.CREATED);
@@ -54,6 +62,7 @@ public class PostController {
     }
 
     @PutMapping(value = "/posts/{id}", produces = "application/json")
+    @ApiOperation(value = "Atualiza post")
     public ResponseEntity<?> updatePost(@RequestHeader("Authorization") String token, @PathVariable Long id, @RequestBody Post post) throws PostException {
         try {
             return new ResponseEntity<>(this.postService.updatePost(token, id, post), HttpStatus.OK);
@@ -64,7 +73,8 @@ public class PostController {
         }
     }
 
-    @DeleteMapping(value = "/posts/{id}", produces = "application/json")
+    @DeleteMapping(value = "/{id}", produces = "application/json")
+    @ApiOperation(value = "Apaga post")
     public ResponseEntity<?> dropPost(@RequestHeader("Authorization") String token, @PathVariable Long id) {
         try {
             return new ResponseEntity<>(this.postService.deletePost(token, id), HttpStatus.OK);

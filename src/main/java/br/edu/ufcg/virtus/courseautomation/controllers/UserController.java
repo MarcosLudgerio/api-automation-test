@@ -8,6 +8,8 @@ import br.edu.ufcg.virtus.courseautomation.exceptions.TokenException;
 import br.edu.ufcg.virtus.courseautomation.exceptions.UserApiException;
 import br.edu.ufcg.virtus.courseautomation.models.UserApi;
 import br.edu.ufcg.virtus.courseautomation.services.UserService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -18,37 +20,41 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
+@RequestMapping(value = "/users", produces = "application/json")
+@Api(value = "API Rest Curso Automação")
+@CrossOrigin(origins = "*")
 public class UserController {
 
     @Autowired
     UserService userService;
 
-
-    @GetMapping(value = "/users", produces = "application/json")
+    @GetMapping(value = "/", produces = "application/json")
+    @ApiOperation(value = "Retorna todos os usuários cadastrados")
     public ResponseEntity<List<UserWithoutPassDTO>> getAllUsers() {
         return new ResponseEntity<>(userService.findAllUsers(), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/users/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody
-    ResponseEntity<?> getUser(@RequestHeader("Authorization") String token) {
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Retorna detalhes de um único usuário")
+    public ResponseEntity<?> getUser(@RequestHeader("Authorization") String token) {
         try {
             return new ResponseEntity<>(this.userService.findOne(token), HttpStatus.OK);
         } catch (UserApiException exception) {
             return new ResponseEntity<>(HandleException.noPrivilegesForThat(exception, "/users").getBody(), HttpStatus.UNAUTHORIZED);
         } catch (TokenException e) {
-           return new ResponseEntity<>(HandleException.invalidToken(e, "/users").getBody(), HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(HandleException.invalidToken(e, "/users").getBody(), HttpStatus.UNAUTHORIZED);
         }
     }
 
-    @PostMapping(value = "/users", produces = "application/json")
+    @PostMapping(value = "/", produces = "application/json")
+    @ApiOperation(value = "Cadastra um novo usuário")
     public ResponseEntity<UserDTO> createNewUser(@RequestBody UserApi userApi) {
         return new ResponseEntity<>(this.userService.createNewUser(userApi), HttpStatus.CREATED);
     }
 
-    @PutMapping(value = "/users/{id}", produces = "application/json")
-    public @ResponseBody
-    ResponseEntity<?> updateUserApi(@RequestHeader("Authorization") String token, @RequestBody UserApi userApi) {
+    @PutMapping(value = "/{id}", produces = "application/json")
+    @ApiOperation(value = "Atualiza dados do usuário")
+    public ResponseEntity<?> updateUserApi(@RequestHeader("Authorization") String token, @RequestBody UserApi userApi) {
         try {
             return new ResponseEntity<>(this.userService.updateUser(token, userApi), HttpStatus.OK);
         } catch (UserApiException ex) {
@@ -58,7 +64,8 @@ public class UserController {
         }
     }
 
-    @DeleteMapping(value = "/users", produces = "application/json")
+    @DeleteMapping(value = "/", produces = "application/json")
+    @ApiOperation(value = "Apaga um usuário")
     public ResponseEntity<?> dropUser(@RequestHeader("Authorization") String token) {
         try {
             return new ResponseEntity<>(this.userService.deleteUser(token), HttpStatus.OK);

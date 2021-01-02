@@ -4,7 +4,6 @@ import br.edu.ufcg.virtus.courseautomation.dtos.UserDTO;
 import br.edu.ufcg.virtus.courseautomation.exceptions.UserApiException;
 import br.edu.ufcg.virtus.courseautomation.models.UserApi;
 import br.edu.ufcg.virtus.courseautomation.repositories.UserRepository;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +12,7 @@ import java.util.Optional;
 
 @Service
 public class UserService {
+
     @Autowired
     UserRepository userRepository;
 
@@ -23,39 +23,47 @@ public class UserService {
         return this.userRepository.findAll();
     }
 
-    public UserApi findOne(Long id) throws UserApiException {
+    public UserApi findOne(String token) throws UserApiException {
+        if (token.equals(null) || token.equals(""))
+            throw new UserApiException("Usuário não encontrado, tente novamente");
+        Optional<String> userLog = jwtService.restoreAccount(token);
+        System.out.println("userLog" + userLog);
+        UserApi userFinder = this.validateUsuario(userLog);
+        return userFinder;
+    }
+
+    public UserApi findOneAuth(Long id) throws UserApiException {
         Optional<UserApi> userFind = this.userRepository.findById(id);
         return userFind.orElseThrow(() -> new UserApiException("Usuário não encontrado, tente novamente"));
-        // return userFind;
     }
+
 
     public UserDTO createNewUser(UserApi user) {
         this.userRepository.save(user);
         return new UserDTO(user);
     }
 
-    public UserApi updateUser(UserApi user) throws UserApiException {
-        UserApi userFinder = this.findOne(user.getId());
-        userFinder.setName(user.getName());
-        userFinder.setPassword(user.getPassword());
-        userFinder.setEmail(user.getEmail());
+    public UserApi updateUser(String token, UserApi user) throws UserApiException {
+        Optional<String> userLog = jwtService.restoreAccount(token);
+        UserApi userFinder = this.validateUsuario(userLog);
+        if (!user.getName().equals(""))
+            userFinder.setName(user.getName());
+        if (!user.getPassword().equals(""))
+            userFinder.setPassword(user.getPassword());
+        if (!user.getEmail().equals(""))
+            userFinder.setEmail(user.getEmail());
         this.createNewUser(userFinder);
         return userFinder;
     }
 
     public UserDTO deleteUser(String token) throws UserApiException {
-
-        System.out.println("token" + token);
         Optional<String> userLog = jwtService.restoreAccount(token);
-        System.out.println("UserLOG " + userLog);
         UserApi user = this.validateUsuario(userLog);
-        System.out.println("User " + userLog);
         this.userRepository.delete(user);
         return new UserDTO(user);
     }
 
-
-    private UserApi validateUsuario(Optional<String> id) throws UserApiException {
+    public UserApi validateUsuario(Optional<String> id) throws UserApiException {
         if (!id.isPresent())
             throw new UserApiException("Usuário não encontrado");
         Optional<UserApi> usuario = this.userRepository.findByEmail(id.get());
@@ -63,6 +71,4 @@ public class UserService {
             throw new UserApiException("E-mail não encontrado!");
         return usuario.get();
     }
-
-
 }

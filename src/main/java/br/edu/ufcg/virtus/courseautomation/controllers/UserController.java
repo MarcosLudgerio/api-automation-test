@@ -25,11 +25,11 @@ public class UserController {
     }
 
     @GetMapping(value = "/users/{id}", produces = "application/json")
-    public ResponseEntity<?> geUser(@PathVariable Long id) {
+    public ResponseEntity<?> geUser(@RequestHeader("Authorization") String token) {
         try {
-            return new ResponseEntity<>(this.userService.findOne(id), HttpStatus.OK);
+            return new ResponseEntity<>(this.userService.findOne(token), HttpStatus.OK);
         } catch (UserApiException exception) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(exception.getMessage(), HttpStatus.UNAUTHORIZED);
         }
     }
 
@@ -38,17 +38,21 @@ public class UserController {
         return new ResponseEntity<>(this.userService.createNewUser(userApi), HttpStatus.CREATED);
     }
 
-    @PutMapping(value = "/users", produces = "application/json")
-    public ResponseEntity<UserApi> updateUserApi(@RequestBody UserApi userApi) throws UserApiException {
-        return new ResponseEntity<>(this.userService.updateUser(userApi), HttpStatus.OK);
+    @PutMapping(value = "/users/{id}", produces = "application/json")
+    public ResponseEntity<?> updateUserApi(@RequestHeader("Authorization") String token, @RequestBody UserApi userApi) {
+        try{
+            return new ResponseEntity<>(this.userService.updateUser(token, userApi), HttpStatus.OK);
+        }catch(UserApiException ex){
+            return new ResponseEntity<>(ex.getMessage(), HttpStatus.UNAUTHORIZED);
+        }
     }
 
     @DeleteMapping(value = "/users", produces = "application/json")
-    public ResponseEntity<UserDTO> dropUser(@RequestHeader("Authorization") String token){
+    public ResponseEntity<?> dropUser(@RequestHeader("Authorization") String token){
         try {
             return new ResponseEntity<>(this.userService.deleteUser(token), HttpStatus.OK);
         } catch (UserApiException exception) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
         }
     }
 

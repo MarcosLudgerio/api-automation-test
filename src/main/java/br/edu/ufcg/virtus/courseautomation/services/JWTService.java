@@ -21,7 +21,7 @@ public class JWTService {
 
     public String autentication(UserDTO user) throws UserApiException {
         String errorMessage = "Login failed, please try again";
-        UserApi userFinder = userService.findOne(user.getId());
+        UserApi userFinder = userService.findOneAuth(user.getId());
         if (user.getPassword().equals(userFinder.getPassword()) && userFinder.getEmail().equals(user.getEmail()))
             return this.generateToken(user);
         return errorMessage;
@@ -33,13 +33,10 @@ public class JWTService {
     }
 
     public Optional<String> restoreAccount(String headerAuthorization) {
-        System.out.println("headerAuthorization " + headerAuthorization);
-        if (headerAuthorization == null || !headerAuthorization.startsWith("Bearer ")) throw new SecurityException();
-        String token = headerAuthorization.substring(TokenFilter.TOKEN_INDEX);
-        System.out.println("token " + token);
+        if (headerAuthorization == null)
+            throw new SecurityException("UNAUTHORIZED");
         String subject = "";
-        subject = Jwts.parser().setSigningKey(this.NOTHING).parseClaimsJws(token).getBody().getSubject(); // subject retorna o email
-        System.out.println("subject" + subject);
+        subject = Jwts.parser().setSigningKey(NOTHING).parseClaimsJws(headerAuthorization).getBody().getSubject(); // subject return email
         return Optional.of(subject);
     }
 }

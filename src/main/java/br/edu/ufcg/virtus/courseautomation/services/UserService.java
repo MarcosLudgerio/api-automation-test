@@ -43,7 +43,7 @@ public class UserService {
         return new UserDTO(user);
     }
 
-    public UserApi updateUser(String token, UserApi user) throws UserApiException {
+    public UserApi updateUser(String token, UserApi user) throws UserApiException, SecurityException {
         Optional<String> userLog = jwtService.restoreAccount(token);
         UserApi userFinder = this.validateUsuario(userLog);
         if (!user.getName().equals(""))
@@ -56,14 +56,14 @@ public class UserService {
         return userFinder;
     }
 
-    public UserDTO deleteUser(String token) throws UserApiException {
+    public UserDTO deleteUser(String token) throws UserApiException, SecurityException {
         Optional<String> userLog = jwtService.restoreAccount(token);
         UserApi user = this.validateUsuario(userLog);
         this.userRepository.delete(user);
         return new UserDTO(user);
     }
 
-    public UserApi validateUsuario(Optional<String> id) throws UserApiException {
+    public UserApi validateUsuario(Optional<String> id) throws UserApiException, SecurityException {
         if (!id.isPresent())
             throw new UserApiException("Usuário não encontrado");
         Optional<UserApi> usuario = this.userRepository.findByEmail(id.get());

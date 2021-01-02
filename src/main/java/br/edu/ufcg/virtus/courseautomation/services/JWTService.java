@@ -40,7 +40,6 @@ public class JWTService {
         } catch (SignatureException | ExpiredJwtException ex) {
             throw new TokenException("Token inválido, refaça login e tente novamente");
         }
-
         return Optional.of(subject);
     }
 }

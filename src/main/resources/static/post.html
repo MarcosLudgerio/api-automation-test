@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- BOOTSTRAP CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.css">
+    <title>CTAA</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200&display=swap');
+        body {
+            background-color: #F2FBFF;
+            padding: 5%;
+            margin: 0;
+            font-family: "Nunito";
+            font-size: 20px;
+        }
+
+        div.conteudo {
+            font-size: 20px;
+            padding-top: 2%;
+            background-color: #77919E;
+            border: 1px solid black;
+            align-items: center;
+        }
+
+        div.conteudo .row .col-12 {
+            background-color: #595959;
+        }
+
+        .titulo {
+            font-size: 35px;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        h6 {
+            color: #F2FBFF;
+        }
+
+        .col-12 ul li a {
+            text-decoration: none;
+        }
+
+        strong {
+            font-size: 30px;
+        }
+
+        .sub {
+            font-size: 20pt;
+        }
+
+        .sub-2 {
+            font-size: 15pt;
+        }
+
+        .titulo-principal {
+            background-color: #9E8567;
+            color: #262421;
+        }
+
+        .titulo-principal:hover {
+            color: #EBDBC7;
+        }
+
+        .titulo-secundario {
+            background-color: #9E8567;
+            color: #262421;
+        }
+
+        .titulo-secundario:hover {
+            color: #EBDBC7;
+        }
+    </style>
+
+</head>
+
+<body>
+<div class="container conteudo">
+    <div class="row">
+        <div class="col"></div>
+        <div class="col-7">
+            <p class="font-weight-bold titulo">Curso Testes Automatizados de API</p>
+        </div>
+        <div class="col"></div>
+    </div>
+    <div class="row">
+        <div class="col"></div>
+        <div class="col-12">
+            <br>
+            <ul>
+                <li>
+                    <a href="#" class="titulo-principal badge" data-toggle="collapse" data-target="#demo">
+                        <strong>SOBRE</strong></a>
+                    <div id="demo" class="collapse">
+                        <h6 class="text-justify">
+                            Curso de testes de <a href="https://api-course-test-automatized.herokuapp.com/swagger-ui.html" target="_blank" class="badge-light" tabindex="-1" aria-disabled="true">API</a> usando postman. Para o curso foi desenvolvida
+                            uma API, usando Spring Boot com alumas tecnologias para auxiliar. A API permite operações de usuários e posts, que são publicações: blogs, tutoriais, relatos de experiência e entre outras coisas. Uma aplicação simples de
+                            blog. Terá cadastro de usuários e cada usuário poderá cadastrar vários posts. Cada usuário fará o seu cadastro e com ele poderá ter privilégios para cadastrar posts, que podem ser artigos, tutoriais, relatos de experiências
+                            e vivências de tecnologias.
+                        </h6>
+                    </div>
+                </li>
+                <br>
+                <li>
+                    <a href="#" class="titulo-principal badge" data-toggle="collapse" data-target="#contato">
+                        <strong>CONTATO</strong></a>
+                    <div id="contato" class="collapse">
+                        <h6>Criado por Marcos Ludgério <br> Código fonte: <a href="https://github.com/MarcosLudgerio/api-automation-test" class="badge-light" target="_blank">https://github.com/MarcosLudgerio/api-automation-test</a> <br> E-mail: raimundo.marcos@dcx.ufpb.br</h6>
+                    </div>
+                </li>
+                <br>
+                <li>
+                    <a href="#" class="titulo-principal badge" data-toggle="collapse" data-target="#programa">
+                        <strong>Conteúdo</strong>
+                    </a>
+                </li>
+                <br>
+                <li>
+                    <ul>
+                        <li>
+                            <div id="programa" class="collapse">
+                                <a href="#" class="titulo-secundario badge" data-toggle="collapse" data-target="#teoria"><strong class="sub">Teoria</strong></a>
+                                <div id="teoria" class="collapse">
+                                    <br>
+                                    <ul>
+                                        <li>
+                                            <div id="programa" class="collapse">
+                                                <a href="#" data-toggle="collapse" class="badge bg-info text-dark" data-target="#testes"><strong class="sub-2">Testes Automatizados</strong></a>
+                                                <div id="testes" class="collapse">
+                                                    <h6 class="font-weight-normal text-justify">
+                                                        <p> - O que são testes? <br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Teste de software geralmente é a última etapa na construção de um programa, visando checar o seu nível de qualidade. Os defeitos que
+                                                            um teste busca identificar incluem erro de compatibilidade, de algum algoritmo, de requisitos que não podem ser complementados, limitação de hardware etc. A lista é grande e aumenta com o
+                                                            tamanho do programa.
+                                                            <br>
+                                                            <a href="https://blog.onedaytesting.com.br/teste-de-software/" class="badge-light" target="_blank">Ver mais</a>
+                                                        </p>
+                                                        <p> - O que são testes automatizados? <br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Testes automatizados se fundamentam no uso de ferramentas para controlar a execução de testes de software. Através da
+                                                            aplicação de estratégias, o objetivo é basicamente escrever um software que testará seu programa por você.A automação permite que o teste seja repetido várias vezes, sendo mais fácil encontrar
+                                                            novos erros através da repetição e da simulação de cenários específicos. O objetivo final dos testes automatizados é minimizar os problemas da abordagem manual, o tempo despendido e, consequentemente,
+                                                            o custo final.
+                                                            <br>
+                                                            <a href="https://blog.geekhunter.com.br/as-maiores-vantagens-de-testes-automatizados/" class="badge-light" target="_blank">Ver mais</a>
+                                                        </p>
+
+                                                        <p> - Por que automatizar testes? <br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; A automação de testes está diretamente atrelada ao que é esperado do produto final. Esse é um passo que deve ser dado visando
+                                                            principalmente a viabilidade do processo. É importante que com a automação de testes de software você ganhe tempo, mantenha a qualidade e reduza os custos. Além disso, tenha em mente a quantidade
+                                                            de vezes que esses testes devem ser realizados e com qual frequência serão feitos novamente, o que é esperado quanto aos testes obtidos e o grau de mudança das funcionalidades que irão para
+                                                            teste. Afinal, não é interessante automatizar o teste de uma funcionalidade que vai ser alterada num intervalo pequeno de tempo.
+                                                            <br>
+                                                            <a href="https://www.ipsense.com.br/blog/saiba-tudo-sobre-a-automacao-de-testes-de-software/" class="badge-light" target="_blank">Ver mais</a>
+                                                        </p>
+                                                        <p> - Caso de testes: <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Um caso de teste responde a pergunta: "O que eu irei testar?" Você desenvolve casos de teste para definir o que deve ser validado para
+                                                            garantir que o sistema esteja funcionando corretamente e esteja compilado com um alto nível de qualidade.
+                                                            <br>
+                                                            <a href="https://www.ibm.com/support/knowledgecenter/pt-br/SSYMRC_6.0.4/com.ibm.rational.test.qm.doc/topics/c_testcase_overview.html" class="badge-light" target="_blank">Ver mais</a>
+                                                        </p>
+                                                        <p> - Suite de testes: <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Um Suíte de Testes é uma coleção de casos de testes que são agrupados para propósitos de execução de teste. Os suítes de teste podem
+                                                            identificar as diferenças em um esforço de teste, quando a conclusão bem-sucedida de um caso de teste deve ocorrer antes que você inicie o próximo caso de teste. Por exemplo, não é possível
+                                                            incluir novos produtos em um carrinho antes de efetuar login com sucesso no aplicativo. Ao executar um suíte de testes no modo sequencial, é possível optar por parar a execução do suíte de
+                                                            testes se um único caso de teste não passar. Parar a execução será útil se a execução de um caso de teste em um Suíte de Testes depender do êxito dos casos de teste anteriore
+                                                            <br>
+                                                            <a href="https://www.ibm.com/support/knowledgecenter/pt-br/SSYMRC_6.0.4/com.ibm.rational.test.qm.doc/topics/c_testcase_overview.html" class="badge-light" target="_blank">Ver mais</a>
+                                                        </p>
+                                                    </h6>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <br>
+                                        <li>
+                                            <div id="programa" class="collapse">
+                                                <a href="#" data-toggle="collapse" class="badge bg-info text-dark" data-target="#api"><strong class="sub-2">API</strong></a>
+                                                <div id="api" class="collapse">
+                                                    <h6 class="font-weight-normal">
+                                                        <p> - O que é API? <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; API é um conjunto de rotinas e padrões de programação para acesso a um aplicativo de software ou plataforma baseado na Web. A sigla API
+                                                            refere-se ao termo em inglês "Application Programming Interface" que significa em tradução para o português "Interface de Programação de Aplicativos". Uma API é criada quando uma empresa
+                                                            de software tem a intenção de que outros criadores de software desenvolvam produtos associados ao seu serviço. Existem vários deles que disponibilizam seus códigos e instruções para serem
+                                                            usados em outros sites da maneira mais conveniente para seus usuários. O Google Maps é um dos grandes exemplos na área de APIs. Por meio de seu código original, muitos outros sites e aplicações
+                                                            utilizam os dados do Google Maps adaptando-o da melhor forma a fim de utilizar esse serviço. <br>
+                                                            <a href="https://canaltech.com.br/software/o-que-e-api/" class="badge-light" target="_blank">Ver mais</a>
+                                                        </p>
+                                                        <p> - Protocolo HTTP: <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; HTTP é um protocolo (protocol) que permite a obtenção de recursos, como documentos HTML. É a base de qualquer troca de dados na Web e
+                                                            um protocolo cliente-servidor, o que significa que as requisições são iniciadas pelo destinatário, geralmente um navegador da Web. Um documento completo é reconstruído a partir dos diferentes
+                                                            sub-documentos obtidos, como por exemplo texto, descrição do layout, imagens, vídeos, scripts e muito mais. Clientes e servidores se comunicam trocando mensagens individuais (ao contrário
+                                                            de um fluxo de dados). As mensagens enviadas pelo cliente, geralmente um navegador da Web, são chamadas de solicitações (requests), ou também requisições, e as mensagens enviadas pelo servidor
+                                                            como resposta são chamadas de respostas (responses). <br>
+                                                            <a href="https://developer.mozilla.org/pt-BR/docs/Web/HTTP/Overview" class="badge-light" target="_blank">Ver mais</a>
+                                                        </p>
+                                                        <p> - Frontend: <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; O desenvolvimento de front end é a parte do desenvolvimento da web que codifica e cria elementos de front end de um site, que são recursos
+                                                            diretamente visíveis e acessíveis pelo usuário final ou cliente. Essencialmente, um desenvolvedor front-end é responsável por tudo o que você vê e trabalha para aprimorar a experiência do
+                                                            usuário para garantir que seja perfeita. Eles ajudam a criar o design geral e a estética, além de depurar e usar a análise estática de código.<br>
+                                                            <a href="https://www.switchup.org/blog/backend-vs-frontend" class="badge-light" target="_blank">Ver mais</a>
+                                                        </p>
+                                                        <p> - Backend: <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; O desenvolvimento de back-end é apropriadamente nomeado para o desenvolvimento da web que ocorre no back-end dos programas. Em contraste com
+                                                            o desenvolvimento de front-end, que se concentra em produtos e programas voltados para o cliente, o desenvolvimento de back-end aborda a lógica e a integração de aplicativos da Web do lado
+                                                            do servidor. Os desenvolvedores de back-end escrevem código para ajudar um banco de dados e um aplicativo a se comunicarem. Essencialmente, um desenvolvedor de back-end lida com o que você
+                                                            não vê; eles são responsáveis ​​pelo back-end de um site, que inclui servidores, bancos de dados e aplicativos. <br>
+                                                            <a href="https://www.switchup.org/blog/backend-vs-frontend" class="badge-light" target="_blank">Ver mais</a>
+                                                        </p>
+                                                        <p> - Fullstack <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; O termo full-stack refere-se à totalidade de um sistema de computador ou aplicativo. Os desenvolvedores full-stack têm experiência e conhecimento
+                                                            em desenvolvimento web front-end e back-end. Eles são proficientes em todos os estágios de desenvolvimento de software; dos conceitos iniciais ao design UX, implementação, operações e coleta
+                                                            de dados, os desenvolvedores full-stack fazem tudo! Para produzir um produto acabado, os desenvolvedores full-stack usam seu conhecimento de várias linguagens de programação como HTML, CSS,
+                                                            JavaScript, Ruby e muito mais.
+                                                            <br>
+                                                            <a href="https://www.switchup.org/blog/switchup-s-guide-to-full-stack-web-development" class="badge-light" target="_blank">Ver mais</a>
+                                                        </p>
+                                                    </h6>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <br>
+                                        <li>
+                                            <div id="programa" class="collapse">
+                                                <a href="#" class="badge bg-info text-dark" data-toggle="collapse" data-target="#postman"><strong class="sub-2">Postman</strong></a>
+                                                <div id="postman" class="collapse">
+                                                    <h6 class="font-weight-normal">
+                                                        <p> - O que é postman? <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; O Postman é um aplicativo com a função de testar e desenvolver APIs em uma interface bastante simples e intuitiva. Ele nos permite simular
+                                                            requisições HTTP de forma rápida, armazenando-as para que possamos usá-las posteriormente. Além disso, para cada requisição feita, o Postman analisa as respostas enviadas pela API e as exibe
+                                                            visualmente de forma muito agradável e fácil de entender, o que reduz consideravelmente o tempo necessário para o desenvolvimento e testes de sua aplicação <br>
+                                                            <br>
+                                                            <a href="https://blog.bsource.com.br/tecnologia/2019/10/29/o-que-e-postman/" class="badge-light" target="_blank">Ver mais</a>
+                                                        </p>
+                                                        <p> - Para que serve? <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Você pode escrever scripts de teste para suas solicitações de API do Postman em JavaScript. Os testes permitem que você garanta que sua
+                                                            API está funcionando conforme o esperado, para estabelecer se as integrações entre os serviços estão funcionando de forma confiável e para verificar se os novos desenvolvimentos não quebraram
+                                                            nenhuma funcionalidade existente. Você também pode usar o código de teste para ajudar no processo de depuração quando algo der errado com seu projeto de API. <br>
+                                                            <a href="https://learning.postman.com/docs/writing-scripts/test-scripts/" class="badge-light" target="_blank">Ver mais</a>
+                                                        </p>
+                                                        <p> - Instalação: <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Para fazer download e instalar o programa, siga os passos do tutorial abaixo: <br>
+                                                            <a href="https://learning.postman.com/docs/getting-started/installation-and-updates/" class="badge-light" target="_blank">Ver mais</a>
+                                                        </p>
+                                                    </h6>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                        <br>
+                        <li>
+                            <div id="programa" class="collapse">
+                                <a href="#" data-toggle="collapse" class="titulo-secundario badge" data-target="#pratica"><strong class="sub">Prática</strong></a>
+
+                                <div id="pratica" class="collapse">
+                                    <br>
+                                    <ul>
+                                        <li>
+                                            <div id="programa" class="collapse">
+                                                <a href="#" data-toggle="collapse" class="badge bg-info text-dark" data-target="#config"><strong class="sub-2">Configurando o postman</strong></a>
+                                                <div id="config" class="collapse">
+                                                    <h6 class="font-weight-normal">
+                                                        <p> - Configurando ferramenta:
+                                                            <a href="https://learning.postman.com/docs/getting-started/installation-and-updates/" class="badge-light" target="_blank">Ver mais</a>
+                                                        </p>
+                                                    </h6>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <br>
+                                        <li>
+                                            <div id="programa" class="collapse">
+                                                <a href="#" data-toggle="collapse" class="badge bg-info text-dark" data-target="#suite"><strong class="sub-2">Criando suíte de testes</strong></a>
+                                                <div id="suite" class="collapse">
+                                                    <h6 class="font-weight-normal">
+                                                        <p> - Como criar coleções e suíte de testes no postman:
+                                                            <a href="https://suporte.braspag.com.br/hc/pt-br/articles/360024762671-Postman-instala%C3%A7%C3%A3o-cria%C3%A7%C3%A3o-de-collections-e-request" class="badge-light" target="_blank">Ver mais</a>
+                                                        </p>
+                                                    </h6>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <br>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="col"></div>
+    </div>
+</div>
+
+
+<!-- BOOTSTRAP JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.js"></script>
+</body>
+
+</html>

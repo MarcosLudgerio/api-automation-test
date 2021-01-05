@@ -1,6 +1,7 @@
 package br.edu.ufcg.virtus.courseautomation.services;
 
 
+import br.edu.ufcg.virtus.courseautomation.dtos.PostDTO;
 import br.edu.ufcg.virtus.courseautomation.exceptions.PostException;
 import br.edu.ufcg.virtus.courseautomation.exceptions.TokenException;
 import br.edu.ufcg.virtus.courseautomation.exceptions.UserApiException;
@@ -42,19 +43,19 @@ public class PostService {
         return postFind.orElseThrow(() -> new PostException("Post não encontrado"));
     }
 
-    public Post createNewPost(String token, Post post) throws UserApiException, TokenException {
+    public PostDTO createNewPost(String token, Post post) throws UserApiException, TokenException {
         Optional<String> userLog = jwtService.restoreAccount(token);
         UserApi user = userService.validateUsuario(userLog);
         if(user.getName().equals(""))
             throw new UserApiException("Usuário não encontrado, tente novamente!");
         this.postRepository.save(post);
-        return post;
+        return new PostDTO(post);
     }
 
     public Post updatePost(String token, Long id, Post post) throws PostException, UserApiException, TokenException {
 
         Post postFinder = this.findOne(token, id);
-        if (!post.getAutor().equals(""))
+        if (!post.getAutor().equals(null))
             postFinder.setAutor(post.getAutor());
         if (post.getData() != null)
             postFinder.setData(post.getData());

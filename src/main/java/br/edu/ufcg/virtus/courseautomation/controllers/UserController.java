@@ -5,6 +5,7 @@ import br.edu.ufcg.virtus.courseautomation.dtos.UserDTO;
 import br.edu.ufcg.virtus.courseautomation.dtos.UserWithoutPassDTO;
 import br.edu.ufcg.virtus.courseautomation.exceptions.HandleException;
 import br.edu.ufcg.virtus.courseautomation.exceptions.TokenException;
+import br.edu.ufcg.virtus.courseautomation.exceptions.UserAlreadyExistsException;
 import br.edu.ufcg.virtus.courseautomation.exceptions.UserApiException;
 import br.edu.ufcg.virtus.courseautomation.models.UserApi;
 import br.edu.ufcg.virtus.courseautomation.services.UserService;
@@ -28,31 +29,35 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @GetMapping(value = "/", produces = "application/json")
+    @GetMapping(value = "", produces = "application/json")
     @ApiOperation(value = "Retorna todos os usuários cadastrados")
     public ResponseEntity<List<UserWithoutPassDTO>> getAllUsers() {
         return new ResponseEntity<>(userService.findAllUsers(), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "details", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Retorna detalhes de um único usuário")
     public ResponseEntity<?> getUser(@RequestHeader("Authorization") String token) {
         try {
             return new ResponseEntity<>(this.userService.findOne(token), HttpStatus.OK);
         } catch (UserApiException exception) {
-            return new ResponseEntity<>(HandleException.noPrivilegesForThat(exception, "/users").getBody(), HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(HandleException.noPrivilegesForThat(exception, "users").getBody(), HttpStatus.UNAUTHORIZED);
         } catch (TokenException e) {
             return new ResponseEntity<>(HandleException.invalidToken(e, "/users").getBody(), HttpStatus.UNAUTHORIZED);
         }
     }
 
-    @PostMapping(value = "/", produces = "application/json")
+    @PostMapping(value = "", produces = "application/json")
     @ApiOperation(value = "Cadastra um novo usuário")
-    public ResponseEntity<UserDTO> createNewUser(@RequestBody UserApi userApi) {
-        return new ResponseEntity<>(this.userService.createNewUser(userApi), HttpStatus.CREATED);
+    public ResponseEntity<?> createNewUser(@RequestBody UserApi userApi) {
+        try {
+            return new ResponseEntity<>(this.userService.createNewUser(userApi), HttpStatus.CREATED);
+        } catch (UserAlreadyExistsException e) {
+            return new ResponseEntity<>(HandleException.userAlreadyExists(e, "/users").getBody(), HttpStatus.UNAUTHORIZED);
+        }
     }
 
-    @PutMapping(value = "/{id}", produces = "application/json")
+    @PutMapping(value = "", produces = "application/json")
     @ApiOperation(value = "Atualiza dados do usuário")
     public ResponseEntity<?> updateUserApi(@RequestHeader("Authorization") String token, @RequestBody UserApi userApi) {
         try {
@@ -61,18 +66,8 @@ public class UserController {
             return new ResponseEntity<>(HandleException.noPrivilegesForThat(ex, "").getBody(), HttpStatus.UNAUTHORIZED);
         } catch (TokenException e) {
             return new ResponseEntity<>(HandleException.invalidToken(e, "/users").getBody(), HttpStatus.UNAUTHORIZED);
-        }
-    }
-
-    @DeleteMapping(value = "/", produces = "application/json")
-    @ApiOperation(value = "Apaga um usuário")
-    public ResponseEntity<?> dropUser(@RequestHeader("Authorization") String token) {
-        try {
-            return new ResponseEntity<>(this.userService.deleteUser(token), HttpStatus.OK);
-        } catch (UserApiException exception) {
-            return new ResponseEntity<>(HandleException.noPrivilegesForThat(exception, "/users").getBody(), HttpStatus.UNAUTHORIZED);
-        } catch (TokenException e) {
-            return new ResponseEntity<>(HandleException.invalidToken(e, "/users").getBody(), HttpStatus.UNAUTHORIZED);
+        } catch (UserAlreadyExistsException e) {
+            return new ResponseEntity<>(HandleException.userAlreadyExists(e, "/users").getBody(), HttpStatus.BAD_REQUEST);
         }
     }
 

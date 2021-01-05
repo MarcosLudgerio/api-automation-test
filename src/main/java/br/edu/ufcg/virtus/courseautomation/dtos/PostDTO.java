@@ -1,8 +1,6 @@
 package br.edu.ufcg.virtus.courseautomation.dtos;
 
 import br.edu.ufcg.virtus.courseautomation.models.Post;
-import br.edu.ufcg.virtus.courseautomation.models.UserApi;
-import br.edu.ufcg.virtus.courseautomation.services.PostService;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -12,20 +10,16 @@ public class PostDTO {
 
     private String titulo;
 
-    private UserApi autor;
+    private UserWithoutPassDTO autor;
 
     private LocalDate data;
 
     private String texto;
 
-    public PostDTO(String titulo, UserApi autor, LocalDate data, String texto) {
-        this.titulo = titulo;
-        this.autor = autor;
-        this.data = data;
-        this.texto = texto;
-    }
-
-    public PostDTO(Post post){
-        this(post.getTitulo(), post.getAutor(), post.getData(), post.getTexto());
+    public PostDTO(Post post) {
+        this.titulo = post.getTitulo();
+        this.autor = new UserWithoutPassDTO(post.getAutor());
+        this.data = post.getData();
+        this.texto = post.getTexto();
     }
 }

@@ -23,7 +23,7 @@ public class PostController {
     @Autowired
     public PostService postService;
 
-    @GetMapping(value = "/", produces = "application/json")
+    @GetMapping(value = "", produces = "application/json")
     @ApiOperation(value = "Retorna todos os posts cadastrados")
     public ResponseEntity<?> findAll(@RequestHeader("Authorization") String token) {
         try {
@@ -35,7 +35,7 @@ public class PostController {
         }
     }
 
-    @GetMapping(value = "/{id}", produces = "application/json")
+    @GetMapping(value = "{id}", produces = "application/json")
     @ApiOperation(value = "Retorna um post específico")
     public ResponseEntity<?> getPost(@RequestHeader("Authorization") String token, @PathVariable Long id) {
         try {
@@ -49,7 +49,7 @@ public class PostController {
         }
     }
 
-    @PostMapping(value = "/", produces = "application/json")
+    @PostMapping(value = "", produces = "application/json")
     @ApiOperation(value = "Cadastra um novo post")
     public ResponseEntity<?> createNewPost(@RequestHeader("Authorization") String token, @RequestBody Post post) {
         try {
@@ -61,7 +61,7 @@ public class PostController {
         }
     }
 
-    @PutMapping(value = "/posts/{id}", produces = "application/json")
+    @PutMapping(value = "{id}", produces = "application/json")
     @ApiOperation(value = "Atualiza post")
     public ResponseEntity<?> updatePost(@RequestHeader("Authorization") String token, @PathVariable Long id, @RequestBody Post post) throws PostException {
         try {
@@ -70,10 +70,13 @@ public class PostController {
             return new ResponseEntity<>(HandleException.noPrivilegesForThat(exception, "posts/" + id).getBody(), HttpStatus.NOT_FOUND);
         } catch (TokenException e) {
             return new ResponseEntity<>(HandleException.invalidToken(e, "posts/" + id).getBody(), HttpStatus.UNAUTHORIZED);
+        }catch (PostException e) {
+            return new ResponseEntity<>(HandleException.postNotFound(e, "posts/" + id).getBody(), HttpStatus.UNAUTHORIZED);
         }
+
     }
 
-    @DeleteMapping(value = "/{id}", produces = "application/json")
+    @DeleteMapping(value = "{id}", produces = "application/json")
     @ApiOperation(value = "Apaga post")
     public ResponseEntity<?> dropPost(@RequestHeader("Authorization") String token, @PathVariable Long id) {
         try {

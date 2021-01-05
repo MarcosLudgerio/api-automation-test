@@ -5,11 +5,14 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(uniqueConstraints={@UniqueConstraint(columnNames={"email"})})
 public class UserApi {
 
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
+    @Column(unique = true)
     private String email;
     private String password;
 

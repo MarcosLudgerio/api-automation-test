@@ -29,5 +29,12 @@ public class HandleException {
         return ResponseEntity.status(status).body(err);
     }
 
+    @ExceptionHandler(UserAlreadyExistsException.class)
+    public static ResponseEntity<StandardError> userAlreadyExists(UserAlreadyExistsException e, String uri) {
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        StandardError err = new StandardError(System.currentTimeMillis(), status.value(), "Not Found", e.getMessage(), "http://localhost:8080/" + uri);
+        return ResponseEntity.status(status).body(err);
+    }
+
 
 }

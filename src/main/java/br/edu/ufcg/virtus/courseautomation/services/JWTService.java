@@ -1,6 +1,7 @@
 package br.edu.ufcg.virtus.courseautomation.services;
 
 import br.edu.ufcg.virtus.courseautomation.dtos.UserDTO;
+import br.edu.ufcg.virtus.courseautomation.dtos.UserLoginDTO;
 import br.edu.ufcg.virtus.courseautomation.exceptions.TokenException;
 import br.edu.ufcg.virtus.courseautomation.exceptions.UserApiException;
 import br.edu.ufcg.virtus.courseautomation.models.UserApi;
@@ -18,21 +19,24 @@ public class JWTService {
     @Autowired
     private UserService userService;
 
-    public String autentication(UserDTO user) throws UserApiException {
+    public String autentication(UserLoginDTO user) throws UserApiException, TokenException {
         String errorMessage = "Login failed, please try again";
-        UserApi userFinder = userService.findOneAuth(user.getId());
+        UserApi userFinder = userService.findByEmail(user.getEmail());
+        if(!user.getPassword().equals(userFinder.getPassword()))
+            throw new TokenException(errorMessage);
         if (user.getPassword().equals(userFinder.getPassword()) && userFinder.getEmail().equals(user.getEmail()))
             return this.generateToken(user);
         return errorMessage;
     }
 
-    private String generateToken(UserDTO user) {
+    private String generateToken(UserLoginDTO user) {
         String token = Jwts.builder().setSubject(user.getEmail()).signWith(SignatureAlgorithm.HS512, NOTHING).setExpiration(new Date(System.currentTimeMillis() + 30 * 60 * 1000)).compact();
         return token;
     }
 
     public Optional<String> restoreAccount(String headerAuthorization) throws UserApiException, TokenException {
-        if (headerAuthorization == null || !headerAuthorization.startsWith("eyJhbGciOiJIUzUxMiJ9") || headerAuthorization.length() != 167)
+        if (headerAuthorization.equals(null) || !headerAuthorization.startsWith("eyJhbGciOiJIUzUxMiJ9"))
+            //yJhbGciOiJIUzUxMiJ9
             throw new UserApiException("Ação não autorizada, por favor verifique os dados e tente novamente");
         String subject = "";
         try {

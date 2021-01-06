@@ -1,6 +1,7 @@
 package br.edu.ufcg.virtus.courseautomation.services;
 
 import br.edu.ufcg.virtus.courseautomation.dtos.UserDTO;
+import br.edu.ufcg.virtus.courseautomation.dtos.UserWithoutIdDTO;
 import br.edu.ufcg.virtus.courseautomation.dtos.UserWithoutPassDTO;
 import br.edu.ufcg.virtus.courseautomation.exceptions.TokenException;
 import br.edu.ufcg.virtus.courseautomation.exceptions.UserAlreadyExistsException;
@@ -43,7 +44,7 @@ public class UserService {
         return userFind.orElseThrow(() -> new UserApiException("Usuário não encontrado, tente novamente"));
     }
 
-    public UserWithoutPassDTO createNewUser(UserApi user) throws UserAlreadyExistsException {
+    public UserWithoutPassDTO createNewUser(UserWithoutIdDTO user) throws UserAlreadyExistsException {
         Optional<UserApi> userFind = this.userRepository.findByEmail(user.getEmail());
         if (userFind.isPresent()) throw new UserAlreadyExistsException("Usuário já existe, verifique os dados");
         this.userRepository.save(user);
@@ -59,7 +60,7 @@ public class UserService {
             userFinder.setPassword(user.getPassword());
         if (!user.getEmail().equals(""))
             userFinder.setEmail(user.getEmail());
-        this.createNewUser(userFinder);
+        this.createNewUser(new UserWithoutIdDTO(userFinder));
         return userFinder;
     }
 

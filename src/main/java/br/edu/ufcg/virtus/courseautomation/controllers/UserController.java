@@ -2,6 +2,7 @@ package br.edu.ufcg.virtus.courseautomation.controllers;
 
 
 import br.edu.ufcg.virtus.courseautomation.dtos.UserDTO;
+import br.edu.ufcg.virtus.courseautomation.dtos.UserWithoutIdDTO;
 import br.edu.ufcg.virtus.courseautomation.dtos.UserWithoutPassDTO;
 import br.edu.ufcg.virtus.courseautomation.exceptions.HandleException;
 import br.edu.ufcg.virtus.courseautomation.exceptions.TokenException;
@@ -49,7 +50,8 @@ public class UserController {
 
     @PostMapping(value = "", produces = "application/json")
     @ApiOperation(value = "Cadastra um novo usuário")
-    public ResponseEntity<?> createNewUser(@RequestBody UserApi userApi) {
+    public ResponseEntity<?> createNewUser(@RequestBody UserWithoutIdDTO userApi) {
+        System.out.println(" userAPI " + userApi);
         try {
             return new ResponseEntity<>(this.userService.createNewUser(userApi), HttpStatus.CREATED);
         } catch (UserAlreadyExistsException e) {

@@ -24,9 +24,9 @@ public class LoginController {
         try {
             return new ResponseEntity<>(jwtService.autentication(userDTO), HttpStatus.OK);
         } catch (UserApiException ex) {
-            return new ResponseEntity<>(HandleException.noPrivilegesForThat(ex, "").getBody(), HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(HandleException.noPrivilegesForThat(ex, "/auth/login").getBody(), HttpStatus.UNAUTHORIZED);
         } catch (TokenException e) {
-            return new ResponseEntity<>(HandleException.invalidToken(e, "").getBody(), HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(HandleException.invalidToken(e, "/auth/login").getBody(), HttpStatus.UNAUTHORIZED);
         }
     }
 }

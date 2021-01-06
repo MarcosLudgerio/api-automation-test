@@ -14,4 +14,10 @@ public class UserWithoutPassDTO {
         this.email = userApi.getEmail();
         this.name = userApi.getName();
     }
+
+    public UserWithoutPassDTO(UserWithoutIdDTO userApi) {
+        this.email = userApi.getEmail();
+        this.name = userApi.getName();
+
+    }
 }

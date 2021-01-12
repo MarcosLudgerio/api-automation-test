@@ -15,8 +15,6 @@ public class UserApi {
     private Long id;
     private String name;
     @Column(unique = true)
-    @NotEmpty(message="Required")
-    @Email(message="Invalid email")
     private String email;
     private String password;
 
@@ -74,5 +72,13 @@ public class UserApi {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
     }
 }

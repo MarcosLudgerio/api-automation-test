@@ -1,8 +1,7 @@
 package br.edu.ufcg.virtus.courseautomation.controllers;
 
-import br.edu.ufcg.virtus.courseautomation.dtos.UserDTO;
+import br.edu.ufcg.virtus.courseautomation.controllers.exceptions.ExceptionHandle;
 import br.edu.ufcg.virtus.courseautomation.dtos.UserLoginDTO;
-import br.edu.ufcg.virtus.courseautomation.exceptions.HandleException;
 import br.edu.ufcg.virtus.courseautomation.exceptions.TokenException;
 import br.edu.ufcg.virtus.courseautomation.exceptions.UserApiException;
 import br.edu.ufcg.virtus.courseautomation.services.JWTService;
@@ -24,9 +23,9 @@ public class LoginController {
         try {
             return new ResponseEntity<>(jwtService.autentication(userDTO), HttpStatus.OK);
         } catch (UserApiException ex) {
-            return new ResponseEntity<>(HandleException.noPrivilegesForThat(ex, "/auth/login").getBody(), HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(ExceptionHandle.noPrivilegesForThat(ex, "/users").getBody(), HttpStatus.UNAUTHORIZED);
         } catch (TokenException e) {
-            return new ResponseEntity<>(HandleException.invalidToken(e, "/auth/login").getBody(), HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(ExceptionHandle.invalidToken(e, "/users").getBody(), HttpStatus.UNAUTHORIZED);
         }
     }
 }

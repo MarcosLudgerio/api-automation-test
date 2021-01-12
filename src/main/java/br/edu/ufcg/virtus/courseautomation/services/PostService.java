@@ -26,11 +26,12 @@ public class PostService {
     @Autowired
     private JWTService jwtService;
 
-    public List<Post> findAllPosts(String token) throws UserApiException, TokenException {
+    public List<PostDTO> findAllPosts(String token) throws UserApiException, TokenException {
         Optional<String> userLog = jwtService.restoreAccount(token);
         UserApi user = userService.validateUsuario(userLog);
         if(user.getName().equals(""))
-            throw new UserApiException("Usuário não encontrado, tente novamente!");
+            throw new UserApiException("Dados inváidos, tente novamente");
+
         return this.postRepository.findAll();
     }
 
@@ -38,16 +39,16 @@ public class PostService {
         Optional<String> userLog = jwtService.restoreAccount(token);
         UserApi user = userService.validateUsuario(userLog);
         if(user.getName().equals(""))
-            throw new UserApiException("Usuário não encontrado, tente novamente!");
+            throw new UserApiException("Dados inválidos, por favor tente novamente");
         Optional<Post> postFind = this.postRepository.findById(id);
-        return postFind.orElseThrow(() -> new PostException("Post não encontrado"));
+        return postFind.orElseThrow(() -> new PostException());
     }
 
     public PostDTO createNewPost(String token, Post post) throws UserApiException, TokenException {
         Optional<String> userLog = jwtService.restoreAccount(token);
         UserApi user = userService.validateUsuario(userLog);
         if(user.getName().equals(""))
-            throw new UserApiException("Usuário não encontrado, tente novamente!");
+            throw new UserApiException("Dados inválidos, por favor tente novamente");
         this.postRepository.save(post);
         return new PostDTO(post);
     }
@@ -73,5 +74,6 @@ public class PostService {
         this.postRepository.delete(post);
         return post;
     }
+
 
 }

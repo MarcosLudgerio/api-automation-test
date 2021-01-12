@@ -1,7 +1,7 @@
 package br.edu.ufcg.virtus.courseautomation.services;
 
 import br.edu.ufcg.virtus.courseautomation.dtos.UserDTO;
-import br.edu.ufcg.virtus.courseautomation.dtos.UserWithoutIdDTO;
+import br.edu.ufcg.virtus.courseautomation.dtos.UserWithPostDTO;
 import br.edu.ufcg.virtus.courseautomation.dtos.UserWithoutPassDTO;
 import br.edu.ufcg.virtus.courseautomation.exceptions.TokenException;
 import br.edu.ufcg.virtus.courseautomation.exceptions.UserAlreadyExistsException;
@@ -31,27 +31,32 @@ public class UserService {
         return usersDTO;
     }
 
-    public UserWithoutPassDTO findOne(String token) throws UserApiException, TokenException {
+    public UserWithPostDTO findOne(String token) throws UserApiException, TokenException {
         if (token.equals(null) || token.equals(""))
-            throw new UserApiException("Erro de validação, tente novamente");
+            throw new TokenException("Token inválido, verifique os dados e tente novamente");
         Optional<String> userLog = jwtService.restoreAccount(token);
         UserApi userFinder = this.validateUsuario(userLog);
-        return new UserWithoutPassDTO(userFinder);
+        return new UserWithPostDTO(userFinder);
     }
 
     public UserApi findByEmail(String email) throws UserApiException {
         Optional<UserApi> userFind = this.userRepository.findByEmail(email);
-        return userFind.orElseThrow(() -> new UserApiException("Usuário não encontrado, tente novamente"));
+        return userFind.orElseThrow(() -> new UserApiException("Usuário não encontrado"));
     }
 
-    public UserWithoutPassDTO createNewUser(UserWithoutIdDTO user) throws UserAlreadyExistsException {
+    public UserWithoutPassDTO createNewUser(UserApi user) throws UserAlreadyExistsException {
         Optional<UserApi> userFind = this.userRepository.findByEmail(user.getEmail());
-        if (userFind.isPresent()) throw new UserAlreadyExistsException("Usuário já existe, verifique os dados");
+        if (userFind.isPresent()) throw new UserAlreadyExistsException("Usuário já cadastrado no sistema");
+
         this.userRepository.save(user);
         return new UserWithoutPassDTO(user);
     }
 
-    public UserApi updateUser(String token, UserApi user) throws UserApiException, TokenException, UserAlreadyExistsException {
+    public UserApi fromDTO(UserDTO userDTO){
+        return new UserApi(userDTO.getId(), userDTO.getName(), userDTO.getEmail(), userDTO.getPassword(), null);
+    }
+
+    public UserApi updateUser(String token, UserApi user) throws UserAlreadyExistsException, UserApiException, TokenException {
         Optional<String> userLog = jwtService.restoreAccount(token);
         UserApi userFinder = this.validateUsuario(userLog);
         if (!user.getName().equals(""))
@@ -60,16 +65,16 @@ public class UserService {
             userFinder.setPassword(user.getPassword());
         if (!user.getEmail().equals(""))
             userFinder.setEmail(user.getEmail());
-        this.createNewUser(new UserWithoutIdDTO(userFinder));
+        this.createNewUser(userFinder);
         return userFinder;
     }
 
     public UserApi validateUsuario(Optional<String> id) throws UserApiException {
         if (!id.isPresent())
-            throw new UserApiException("Usuário não encontrado");
-        Optional<UserApi> usuario = this.userRepository.findByEmail(id.get());
-        if (!usuario.isPresent())
-            throw new UserApiException("E-mail não encontrado!");
-        return usuario.get();
+            throw new UserApiException("Usuário não encontrado, tente novamente");
+        Optional<UserApi> user = this.userRepository.findByEmail(id.get());
+        if (!user.isPresent())
+            throw new UserApiException("Dados inválidos, tente novamente");
+        return user.get();
     }
 }

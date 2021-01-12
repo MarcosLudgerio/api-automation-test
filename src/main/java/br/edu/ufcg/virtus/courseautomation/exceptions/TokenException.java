@@ -4,4 +4,7 @@ public class TokenException extends Exception {
     public TokenException(String s) {
         super(s);
     }
+
+    public TokenException() {
+    }
 }

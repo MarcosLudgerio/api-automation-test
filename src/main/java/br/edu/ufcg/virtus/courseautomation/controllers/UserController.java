@@ -1,14 +1,12 @@
 package br.edu.ufcg.virtus.courseautomation.controllers;
 
 
+import br.edu.ufcg.virtus.courseautomation.controllers.exceptions.ExceptionHandle;
 import br.edu.ufcg.virtus.courseautomation.dtos.UserDTO;
-import br.edu.ufcg.virtus.courseautomation.dtos.UserWithoutIdDTO;
 import br.edu.ufcg.virtus.courseautomation.dtos.UserWithoutPassDTO;
-import br.edu.ufcg.virtus.courseautomation.exceptions.HandleException;
 import br.edu.ufcg.virtus.courseautomation.exceptions.TokenException;
 import br.edu.ufcg.virtus.courseautomation.exceptions.UserAlreadyExistsException;
 import br.edu.ufcg.virtus.courseautomation.exceptions.UserApiException;
-import br.edu.ufcg.virtus.courseautomation.models.UserApi;
 import br.edu.ufcg.virtus.courseautomation.services.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -19,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -42,34 +41,34 @@ public class UserController {
         try {
             return new ResponseEntity<>(this.userService.findOne(token), HttpStatus.OK);
         } catch (UserApiException exception) {
-            return new ResponseEntity<>(HandleException.noPrivilegesForThat(exception, "users").getBody(), HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(ExceptionHandle.noPrivilegesForThat(exception, "/users/details").getBody(), HttpStatus.UNAUTHORIZED);
         } catch (TokenException e) {
-            return new ResponseEntity<>(HandleException.invalidToken(e, "/users").getBody(), HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(ExceptionHandle.invalidToken(e, "/users/details").getBody(), HttpStatus.BAD_REQUEST);
         }
     }
 
     @PostMapping(value = "", produces = "application/json")
     @ApiOperation(value = "Cadastra um novo usuário")
-    public ResponseEntity<?> createNewUser(@RequestBody UserWithoutIdDTO userApi) {
-        System.out.println(" userAPI " + userApi);
+    public ResponseEntity<?> createNewUser(@RequestBody @Valid UserDTO userApi) {
+        System.out.println("user: " + userApi);
         try {
-            return new ResponseEntity<>(this.userService.createNewUser(userApi), HttpStatus.CREATED);
-        } catch (UserAlreadyExistsException e) {
-            return new ResponseEntity<>(HandleException.userAlreadyExists(e, "/users").getBody(), HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(this.userService.createNewUser(userService.fromDTO(userApi)), HttpStatus.CREATED);
+            } catch (UserAlreadyExistsException e) {
+            return new ResponseEntity<>(ExceptionHandle.userAlreadyExists(e, "/users").getBody(), HttpStatus.CONFLICT);
         }
     }
 
     @PutMapping(value = "", produces = "application/json")
     @ApiOperation(value = "Atualiza dados do usuário")
-    public ResponseEntity<?> updateUserApi(@RequestHeader("Authorization") String token, @RequestBody UserApi userApi) {
+    public ResponseEntity<?> updateUserApi(@RequestHeader("Authorization") String token, @RequestBody @Valid UserDTO userDto) {
         try {
-            return new ResponseEntity<>(this.userService.updateUser(token, userApi), HttpStatus.OK);
-        } catch (UserApiException ex) {
-            return new ResponseEntity<>(HandleException.noPrivilegesForThat(ex, "").getBody(), HttpStatus.UNAUTHORIZED);
-        } catch (TokenException e) {
-            return new ResponseEntity<>(HandleException.invalidToken(e, "/users").getBody(), HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(this.userService.updateUser(token, userService.fromDTO(userDto)), HttpStatus.OK);
         } catch (UserAlreadyExistsException e) {
-            return new ResponseEntity<>(HandleException.userAlreadyExists(e, "/users").getBody(), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(ExceptionHandle.userAlreadyExists(e, "/users").getBody(), HttpStatus.CONFLICT);
+        } catch (UserApiException exception) {
+            return new ResponseEntity<>(ExceptionHandle.noPrivilegesForThat(exception, "/users").getBody(), HttpStatus.UNAUTHORIZED);
+        } catch (TokenException e) {
+            return new ResponseEntity<>(ExceptionHandle.invalidToken(e, "/users").getBody(), HttpStatus.BAD_REQUEST);
         }
     }
 

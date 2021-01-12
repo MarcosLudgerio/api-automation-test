@@ -1,6 +1,5 @@
 package br.edu.ufcg.virtus.courseautomation.controllers;
 
-import br.edu.ufcg.virtus.courseautomation.controllers.exceptions.ExceptionHandle;
 import br.edu.ufcg.virtus.courseautomation.exceptions.PostException;
 import br.edu.ufcg.virtus.courseautomation.exceptions.TokenException;
 import br.edu.ufcg.virtus.courseautomation.exceptions.UserApiException;
@@ -29,9 +28,9 @@ public class PostController {
         try {
             return new ResponseEntity<>(this.postService.findAllPosts(token), HttpStatus.OK);
         } catch (TokenException ex) {
-            return new ResponseEntity<>(ExceptionHandle.invalidToken(ex, "/users").getBody(), HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         } catch (UserApiException exception) {
-            return new ResponseEntity<>(ExceptionHandle.noPrivilegesForThat(exception, "/users").getBody(), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -41,11 +40,11 @@ public class PostController {
         try {
             return new ResponseEntity<>(this.postService.findOne(token, id), HttpStatus.OK);
         } catch (TokenException exception) {
-            return new ResponseEntity<>(ExceptionHandle.invalidToken(exception, "/users").getBody(), HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         } catch (UserApiException exception) {
-            return new ResponseEntity<>(ExceptionHandle.noPrivilegesForThat(exception, "/users").getBody(), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (PostException e) {
-            return new ResponseEntity<>(ExceptionHandle.postNotFound(e, "/users").getBody(), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -55,9 +54,9 @@ public class PostController {
         try {
             return new ResponseEntity<>(this.postService.createNewPost(token, post), HttpStatus.CREATED);
         } catch (UserApiException exception) {
-            return new ResponseEntity<>(ExceptionHandle.noPrivilegesForThat(exception, "/users").getBody(), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (TokenException e) {
-            return new ResponseEntity<>(ExceptionHandle.invalidToken(e, "/users").getBody(), HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
     }
 
@@ -67,11 +66,11 @@ public class PostController {
         try {
             return new ResponseEntity<>(this.postService.updatePost(token, id, post), HttpStatus.OK);
         } catch (UserApiException exception) {
-            return new ResponseEntity<>(ExceptionHandle.noPrivilegesForThat(exception, "/users").getBody(), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (TokenException e) {
-            return new ResponseEntity<>(ExceptionHandle.invalidToken(e, "/users").getBody(), HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         } catch (PostException e) {
-            return new ResponseEntity<>(ExceptionHandle.postNotFound(e, "/users").getBody(), HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
 
     }
@@ -82,11 +81,11 @@ public class PostController {
         try {
             return new ResponseEntity<>(this.postService.deletePost(token, id), HttpStatus.OK);
         } catch (PostException e) {
-            return new ResponseEntity<>(ExceptionHandle.postNotFound(e, "/users").getBody(), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (UserApiException exception) {
-            return new ResponseEntity<>(ExceptionHandle.noPrivilegesForThat(exception, "/users").getBody(), HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         } catch (TokenException e) {
-            return new ResponseEntity<>(ExceptionHandle.invalidToken(e, "/users").getBody(), HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
     }
 

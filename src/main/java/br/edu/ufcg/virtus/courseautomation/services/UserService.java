@@ -46,7 +46,7 @@ public class UserService {
 
     public UserWithoutPassDTO createNewUser(UserApi user) throws UserAlreadyExistsException {
         Optional<UserApi> userFind = this.userRepository.findByEmail(user.getEmail());
-        if (userFind.isPresent()) throw new UserAlreadyExistsException("Usuário já cadastrado no sistema");
+        if (userFind.isPresent()) throw new UserAlreadyExistsException("Este usuário já está cadastrado no sistema, verifique o email e tente novamente");
 
         this.userRepository.save(user);
         return new UserWithoutPassDTO(user);

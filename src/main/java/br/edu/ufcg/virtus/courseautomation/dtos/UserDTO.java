@@ -6,16 +6,17 @@ import lombok.Data;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 
 @Data
 public class UserDTO {
     private Long id;
-    @NotBlank(message = "Campo nome é obrigatório")
+    @NotEmpty(message = "Campo nome é obrigatório")
     private String name;
-    @NotBlank(message = "Campo email é obrigatório")
     @Email(message = "Email inválido")
+    @NotBlank(message = "Campo email é obrigatório")
     private String email;
-    @NotBlank(message = "Campo senha é obrigatório")
+    @NotEmpty(message = "Campo senha é obrigatório")
     private String password;
 
     public UserDTO(Long id, String name, String email, String password) {

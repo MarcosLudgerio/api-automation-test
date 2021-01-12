@@ -10,12 +10,16 @@ import javax.validation.constraints.NotEmpty;
 
 @Data
 public class UserDTO {
+
     private Long id;
+
     @NotEmpty(message = "Campo nome é obrigatório")
     private String name;
+
     @Email(message = "Email inválido")
     @NotBlank(message = "Campo email é obrigatório")
     private String email;
+
     @NotEmpty(message = "Campo senha é obrigatório")
     private String password;
 

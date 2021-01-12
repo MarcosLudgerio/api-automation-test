@@ -3,6 +3,7 @@ package br.edu.ufcg.virtus.courseautomation.services;
 import br.edu.ufcg.virtus.courseautomation.dtos.UserDTO;
 import br.edu.ufcg.virtus.courseautomation.dtos.UserLoginDTO;
 import br.edu.ufcg.virtus.courseautomation.exceptions.TokenException;
+import br.edu.ufcg.virtus.courseautomation.exceptions.TokenInvalidException;
 import br.edu.ufcg.virtus.courseautomation.exceptions.UserApiException;
 import br.edu.ufcg.virtus.courseautomation.models.UserApi;
 import io.jsonwebtoken.*;
@@ -36,12 +37,12 @@ public class JWTService {
 
     public Optional<String> restoreAccount(String headerAuthorization) throws UserApiException, TokenException {
         if (headerAuthorization.equals(null) || !headerAuthorization.startsWith("eyJhbGciOiJIUzUxMiJ9"))
-            throw new TokenException("Token inválido, refaça login e tente novamente");
+            throw new TokenInvalidException("Invalidate token, verify data and try again");
         String subject = "";
         try {
             subject = Jwts.parser().setSigningKey(NOTHING).parseClaimsJws(headerAuthorization).getBody().getSubject(); // subject return email
         } catch (SignatureException | ExpiredJwtException ex) {
-            throw new TokenException("Token expirado ou inválido");
+            throw new TokenInvalidException("Expired token, please remake login");
         }
         return Optional.of(subject);
     }

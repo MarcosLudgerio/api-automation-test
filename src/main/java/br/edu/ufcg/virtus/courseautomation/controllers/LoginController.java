@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RestController
 public class LoginController {
 
@@ -18,13 +20,7 @@ public class LoginController {
     private JWTService jwtService;
 
     @PostMapping(value = "/auth/login", produces = "application/json")
-    public ResponseEntity<?> authentication(@RequestBody UserLoginDTO userDTO) {
-        try {
-            return new ResponseEntity<>(jwtService.autentication(userDTO), HttpStatus.OK);
-        } catch (UserApiException ex) {
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        } catch (TokenException e) {
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        }
+    public ResponseEntity<?> authentication(@RequestBody @Valid UserLoginDTO userDTO) {
+        return new ResponseEntity<>(jwtService.autentication(userDTO), HttpStatus.OK);
     }
 }

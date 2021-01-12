@@ -3,9 +3,7 @@ package br.edu.ufcg.virtus.courseautomation.services;
 import br.edu.ufcg.virtus.courseautomation.dtos.UserDTO;
 import br.edu.ufcg.virtus.courseautomation.dtos.UserWithPostDTO;
 import br.edu.ufcg.virtus.courseautomation.dtos.UserWithoutPassDTO;
-import br.edu.ufcg.virtus.courseautomation.exceptions.TokenException;
-import br.edu.ufcg.virtus.courseautomation.exceptions.UserAlreadyExistsException;
-import br.edu.ufcg.virtus.courseautomation.exceptions.UserApiException;
+import br.edu.ufcg.virtus.courseautomation.exceptions.*;
 import br.edu.ufcg.virtus.courseautomation.models.UserApi;
 import br.edu.ufcg.virtus.courseautomation.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +31,7 @@ public class UserService {
 
     public UserWithPostDTO findOne(String token) throws UserApiException, TokenException {
         if (token.equals(null) || token.equals(""))
-            throw new TokenException("Token inválido, verifique os dados e tente novamente");
+            throw new TokenInvalidException("Validation token error.");
         Optional<String> userLog = jwtService.restoreAccount(token);
         UserApi userFinder = this.validateUsuario(userLog);
         return new UserWithPostDTO(userFinder);
@@ -41,12 +39,12 @@ public class UserService {
 
     public UserApi findByEmail(String email) throws UserApiException {
         Optional<UserApi> userFind = this.userRepository.findByEmail(email);
-        return userFind.orElseThrow(() -> new UserApiException("Usuário não encontrado"));
+        return userFind.orElseThrow(() -> new UserNotFoundException("User not found."));
     }
 
     public UserWithoutPassDTO createNewUser(UserApi user) throws UserAlreadyExistsException {
         Optional<UserApi> userFind = this.userRepository.findByEmail(user.getEmail());
-        if (userFind.isPresent()) throw new UserAlreadyExistsException("Este usuário já está cadastrado no sistema, verifique o email e tente novamente");
+        if (userFind.isPresent()) throw new UserAlreadyExistsException("User already exists, verify e-mail and try again");
 
         this.userRepository.save(user);
         return new UserWithoutPassDTO(user);
@@ -71,10 +69,10 @@ public class UserService {
 
     public UserApi validateUsuario(Optional<String> id) throws UserApiException {
         if (!id.isPresent())
-            throw new UserApiException("Usuário não encontrado, tente novamente");
+            throw new UserNotFoundException("User not found, try again");
         Optional<UserApi> user = this.userRepository.findByEmail(id.get());
         if (!user.isPresent())
-            throw new UserApiException("Dados inválidos, tente novamente");
+            throw new UserApiException("Invalid data, please try again");
         return user.get();
     }
 }

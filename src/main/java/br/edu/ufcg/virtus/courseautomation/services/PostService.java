@@ -30,7 +30,7 @@ public class PostService {
         Optional<String> userLog = jwtService.restoreAccount(token);
         UserApi user = userService.validateUsuario(userLog);
         if(user.getName().equals(""))
-            throw new UserApiException("Dados inváidos, tente novamente");
+            throw new UserApiException("Invalidate data, please try again");
 
         return this.postRepository.findAll();
     }
@@ -39,7 +39,7 @@ public class PostService {
         Optional<String> userLog = jwtService.restoreAccount(token);
         UserApi user = userService.validateUsuario(userLog);
         if(user.getName().equals(""))
-            throw new UserApiException("Dados inválidos, por favor tente novamente");
+            throw new UserApiException("Invalidate data, please try again");
         Optional<Post> postFind = this.postRepository.findById(id);
         return postFind.orElseThrow(() -> new PostException());
     }
@@ -48,7 +48,7 @@ public class PostService {
         Optional<String> userLog = jwtService.restoreAccount(token);
         UserApi user = userService.validateUsuario(userLog);
         if(user.getName().equals(""))
-            throw new UserApiException("Dados inválidos, por favor tente novamente");
+            throw new UserApiException("Invalidate data, please try again");
         this.postRepository.save(post);
         return new PostDTO(post);
     }

@@ -21,7 +21,7 @@ public class JWTService {
     private UserService userService;
 
     public String autentication(UserLoginDTO user) throws UserApiException, TokenException {
-        String errorMessage = "Login failed, please try again";
+        String errorMessage = "Falha ao tentar efetuar o login, verifique os dados e tente novamente";
         UserApi userFinder = userService.findByEmail(user.getEmail());
         if (!user.getPassword().equals(userFinder.getPassword()))
             throw new TokenException(errorMessage);
@@ -37,12 +37,12 @@ public class JWTService {
 
     public Optional<String> restoreAccount(String headerAuthorization) throws UserApiException, TokenException {
         if (headerAuthorization.equals(null) || !headerAuthorization.startsWith("eyJhbGciOiJIUzUxMiJ9"))
-            throw new TokenInvalidException("Invalidate token, verify data and try again");
+            throw new TokenInvalidException("Token não validado, verifique os dados e tente novamente");
         String subject = "";
         try {
             subject = Jwts.parser().setSigningKey(NOTHING).parseClaimsJws(headerAuthorization).getBody().getSubject(); // subject return email
         } catch (SignatureException | ExpiredJwtException ex) {
-            throw new TokenInvalidException("Expired token or signature not found, please remake login and try again");
+            throw new TokenInvalidException("Token expirado ou assinatura não encontrada, por favor refaça login e tente novamente");
         }
         return Optional.of(subject);
     }

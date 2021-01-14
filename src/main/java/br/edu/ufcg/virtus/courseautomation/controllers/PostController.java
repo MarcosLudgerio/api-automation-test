@@ -1,6 +1,8 @@
 package br.edu.ufcg.virtus.courseautomation.controllers;
 
+import br.edu.ufcg.virtus.courseautomation.dtos.PostCreateDTO;
 import br.edu.ufcg.virtus.courseautomation.dtos.PostDTO;
+import br.edu.ufcg.virtus.courseautomation.dtos.PostUpdataDTO;
 import br.edu.ufcg.virtus.courseautomation.models.Post;
 import br.edu.ufcg.virtus.courseautomation.services.PostService;
 import io.swagger.annotations.Api;
@@ -10,6 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping(value = "/posts", produces = "application/json")
@@ -34,13 +38,13 @@ public class PostController {
 
     @PostMapping(value = "", produces = "application/json")
     @ApiOperation(value = "Cadastra um novo post")
-    public ResponseEntity<?> createNewPost(@RequestHeader("Authorization") String token, @RequestBody PostDTO post) {
-        return new ResponseEntity<>(this.postService.createNewPost(token, postService.fromDTO(post)), HttpStatus.CREATED);
+    public ResponseEntity<?> createNewPost(@RequestHeader("Authorization") String token, @RequestBody @Valid PostCreateDTO post) {
+        return new ResponseEntity<>(this.postService.createNewPost(token, post), HttpStatus.CREATED);
     }
 
     @PutMapping(value = "{id}", produces = "application/json")
     @ApiOperation(value = "Atualiza post")
-    public ResponseEntity<?> updatePost(@RequestHeader("Authorization") String token, @PathVariable Long id, @RequestBody Post post) {
+    public ResponseEntity<?> updatePost(@RequestHeader("Authorization") String token, @PathVariable Long id, @RequestBody @Valid PostUpdataDTO post) {
         return new ResponseEntity<>(this.postService.updatePost(token, id, post), HttpStatus.OK);
     }
 

@@ -1,9 +1,7 @@
 package br.edu.ufcg.virtus.courseautomation.services;
 
 
-import br.edu.ufcg.virtus.courseautomation.dtos.PostDTO;
-import br.edu.ufcg.virtus.courseautomation.dtos.PostIdTituloDTO;
-import br.edu.ufcg.virtus.courseautomation.dtos.PostTituloDataTextoDTO;
+import br.edu.ufcg.virtus.courseautomation.dtos.*;
 import br.edu.ufcg.virtus.courseautomation.exceptions.PostException;
 import br.edu.ufcg.virtus.courseautomation.exceptions.TokenException;
 import br.edu.ufcg.virtus.courseautomation.exceptions.UserApiException;
@@ -13,6 +11,8 @@ import br.edu.ufcg.virtus.courseautomation.repositories.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.DateFormat;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -33,7 +33,7 @@ public class PostService {
         Optional<String> userLog = jwtService.restoreAccount(token);
         UserApi user = userService.validateUsuario(userLog);
         if (user.getName().equals(""))
-            throw new UserApiException("Invalidate data, please try again");
+            throw new UserApiException("Dados inválidos");
         List<Post> posts = this.postRepository.findAll();
         return posts.stream().map((post) -> new PostTituloDataTextoDTO(post)).collect(Collectors.toList());
     }
@@ -45,39 +45,39 @@ public class PostService {
     private Post findOne(String token, Long id) throws PostException, UserApiException, TokenException {
         Optional<String> userLog = jwtService.restoreAccount(token);
         UserApi user = userService.validateUsuario(userLog);
-        if (user.getName().equals(""))
-            throw new UserApiException("Invalidate data, please try again");
+        if (user.getName().equals("")) {
+            throw new UserApiException("Dados inválidos");
+        }
         Optional<Post> postFind = this.postRepository.findById(id);
-        return postFind.orElseThrow(() -> new PostException());
+        if(!postFind.isPresent())
+            throw new PostException("Post não encontrado, tente novamente");
+        postFind.get().setAutor(user);
+        return postFind.get();
     }
     public PostDTO findOneController(String token, Long id) throws PostException, UserApiException, TokenException {
         Post post = this.findOne(token, id);
         return new PostDTO(post);
     }
 
-    public PostDTO createNewPost(String token, Post post) throws UserApiException, TokenException {
+    public PostDTO createNewPost(String token, PostCreateDTO post) throws UserApiException, TokenException {
         Optional<String> userLog = jwtService.restoreAccount(token);
         UserApi user = userService.validateUsuario(userLog);
         if (user.getName().equals(""))
-            throw new UserApiException("Invalidate data, please try again");
-        this.postRepository.save(post);
-        return new PostDTO(post);
+            throw new UserApiException("Dados inválidos");
+        Post postReturn = this.fromDTO(post);
+        postReturn.setAutor(user);
+        this.postRepository.save(postReturn);
+        return new PostDTO(postReturn);
     }
 
-    public Post updatePost(String token, Long id, Post post) throws PostException, UserApiException, TokenException {
-
+    public PostDTO updatePost(String token, Long id, PostUpdataDTO post) throws PostException, UserApiException, TokenException {
         Post postFinder = this.findOne(token, id);
-        if (!post.getAutor().equals(null))
-            postFinder.setAutor(post.getAutor());
-        if (post.getData() != null)
-            postFinder.setData(post.getData());
-        if (!post.getTitulo().equals(""))
-            postFinder.setTitulo(post.getTitulo());
-        if (!post.getTexto().equals(""))
-            postFinder.setTexto(post.getTexto());
-
-        this.createNewPost(token, postFinder);
-        return postFinder;
+        if (post.getTitulo().isPresent() && !post.getTitulo().get().equals(""))
+            postFinder.setTitulo(post.getTitulo().get());
+        if (post.getTexto().isPresent() && !post.getTexto().get().equals(""))
+            postFinder.setTexto(post.getTexto().get());
+        this.postRepository.save(postFinder);
+        return new PostDTO(postFinder);
     }
 
     public Post deletePost(String token, Long id) throws PostException, UserApiException, TokenException {
@@ -87,9 +87,9 @@ public class PostService {
     }
 
     public Post fromDTO(PostDTO postDTO) {
-        //Long id, String titulo, UserApi autor, LocalDate data, String texto
         return new Post(null, postDTO.getTitulo(), userService.fromDTO(postDTO.getAutor()), postDTO.getData(), postDTO.getTexto());
     }
-
-
+    public Post fromDTO(PostCreateDTO postDTO) {
+        return new Post(null, postDTO.getTitulo(), null, LocalDate.now(), postDTO.getTexto());
+    }
 }

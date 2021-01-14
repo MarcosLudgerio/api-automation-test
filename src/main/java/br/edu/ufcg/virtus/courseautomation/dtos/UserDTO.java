@@ -3,6 +3,7 @@ package br.edu.ufcg.virtus.courseautomation.dtos;
 
 import br.edu.ufcg.virtus.courseautomation.models.UserApi;
 import lombok.Data;
+import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -21,6 +22,7 @@ public class UserDTO {
     private String email;
 
     @NotEmpty(message = "Campo senha é obrigatório")
+    @Length(min = 8, max = 64, message = "A senha deve ter entre 8 e 64 caracteres")
     private String password;
 
     public UserDTO(Long id, String name, String email, String password) {

@@ -3,9 +3,6 @@ package br.edu.ufcg.virtus.courseautomation.controllers;
 
 import br.edu.ufcg.virtus.courseautomation.dtos.UserDTO;
 import br.edu.ufcg.virtus.courseautomation.dtos.UserWithoutPassDTO;
-import br.edu.ufcg.virtus.courseautomation.exceptions.TokenException;
-import br.edu.ufcg.virtus.courseautomation.exceptions.UserAlreadyExistsException;
-import br.edu.ufcg.virtus.courseautomation.exceptions.UserApiException;
 import br.edu.ufcg.virtus.courseautomation.services.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -37,36 +34,19 @@ public class UserController {
     @GetMapping(value = "details", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(value = "Retorna detalhes de um único usuário")
     public ResponseEntity<?> getUser(@RequestHeader("Authorization") String token) {
-        try {
-            return new ResponseEntity<>(this.userService.findOne(token), HttpStatus.OK);
-        } catch (UserApiException exception) {
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        } catch (TokenException e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
+        return new ResponseEntity<>(this.userService.findOne(token), HttpStatus.OK);
     }
 
     @PostMapping(value = "", produces = "application/json")
     @ApiOperation(value = "Cadastra um novo usuário")
-    public ResponseEntity<?> createNewUser(@RequestBody @Valid UserDTO userApi) {
-        System.out.println("user: " + userApi);
-        return new ResponseEntity<>(this.userService.createNewUser(userService.fromDTO(userApi)), HttpStatus.CREATED);
-
-
+    public ResponseEntity<?> createNewUser(@RequestBody @Valid UserDTO userDto) {
+        return new ResponseEntity<>(this.userService.createNewUser(userService.fromDTO(userDto)), HttpStatus.CREATED);
     }
 
     @PutMapping(value = "", produces = "application/json")
     @ApiOperation(value = "Atualiza dados do usuário")
     public ResponseEntity<?> updateUserApi(@RequestHeader("Authorization") String token, @RequestBody @Valid UserDTO userDto) {
-        try {
-            return new ResponseEntity<>(this.userService.updateUser(token, userService.fromDTO(userDto)), HttpStatus.OK);
-        } catch (UserAlreadyExistsException e) {
-            return new ResponseEntity<>(HttpStatus.CONFLICT);
-        } catch (UserApiException exception) {
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        } catch (TokenException e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
+        return new ResponseEntity<>(this.userService.updateUser(token, userService.fromDTO(userDto)), HttpStatus.OK);
     }
 
 }

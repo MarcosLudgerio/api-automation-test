@@ -1,8 +1,6 @@
 package br.edu.ufcg.virtus.courseautomation.controllers;
 
 import br.edu.ufcg.virtus.courseautomation.dtos.UserLoginDTO;
-import br.edu.ufcg.virtus.courseautomation.exceptions.TokenException;
-import br.edu.ufcg.virtus.courseautomation.exceptions.UserApiException;
 import br.edu.ufcg.virtus.courseautomation.services.JWTService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

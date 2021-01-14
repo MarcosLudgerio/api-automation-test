@@ -1,14 +1,12 @@
 package br.edu.ufcg.virtus.courseautomation.services;
 
+import br.edu.ufcg.virtus.courseautomation.dtos.UserDTO;
 import br.edu.ufcg.virtus.courseautomation.dtos.UserLoginDTO;
 import br.edu.ufcg.virtus.courseautomation.exceptions.TokenException;
 import br.edu.ufcg.virtus.courseautomation.exceptions.TokenInvalidException;
 import br.edu.ufcg.virtus.courseautomation.exceptions.UserApiException;
 import br.edu.ufcg.virtus.courseautomation.models.UserApi;
-import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.SignatureException;
+import io.jsonwebtoken.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

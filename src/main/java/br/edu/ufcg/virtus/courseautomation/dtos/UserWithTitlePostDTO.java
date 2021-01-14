@@ -1,23 +1,20 @@
 package br.edu.ufcg.virtus.courseautomation.dtos;
 
-import br.edu.ufcg.virtus.courseautomation.models.Post;
 import br.edu.ufcg.virtus.courseautomation.models.UserApi;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.util.List;
 
-
 @Data
 @AllArgsConstructor
-public class UserWithPostDTO {
+public class UserWithTitlePostDTO {
     private Long id;
     private String name;
     private String email;
-    private List<Post> posts;
+    private List<String> posts;
 
-    public UserWithPostDTO(UserApi userApi){
-        this(userApi.getId(), userApi.getName(), userApi.getEmail(), userApi.getPosts());
+    public UserWithTitlePostDTO(UserApi user, List<String> posts) {
+        this(user.getId(), user.getName(), user.getEmail(), posts);
     }
-
 }

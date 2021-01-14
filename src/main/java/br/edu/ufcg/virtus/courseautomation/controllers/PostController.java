@@ -29,7 +29,7 @@ public class PostController {
     @GetMapping(value = "{id}", produces = "application/json")
     @ApiOperation(value = "Retorna um post específico")
     public ResponseEntity<?> getPost(@RequestHeader("Authorization") String token, @PathVariable Long id) {
-        return new ResponseEntity<>(this.postService.findOne(token, id), HttpStatus.OK);
+        return new ResponseEntity<>(this.postService.findOneController(token, id), HttpStatus.OK);
     }
 
     @PostMapping(value = "", produces = "application/json")

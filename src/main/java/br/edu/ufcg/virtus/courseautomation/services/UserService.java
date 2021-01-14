@@ -1,9 +1,8 @@
 package br.edu.ufcg.virtus.courseautomation.services;
 
-import br.edu.ufcg.virtus.courseautomation.dtos.UserDTO;
-import br.edu.ufcg.virtus.courseautomation.dtos.UserWithPostDTO;
-import br.edu.ufcg.virtus.courseautomation.dtos.UserWithoutPassDTO;
+import br.edu.ufcg.virtus.courseautomation.dtos.*;
 import br.edu.ufcg.virtus.courseautomation.exceptions.*;
+import br.edu.ufcg.virtus.courseautomation.models.Post;
 import br.edu.ufcg.virtus.courseautomation.models.UserApi;
 import br.edu.ufcg.virtus.courseautomation.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +19,9 @@ public class UserService {
     UserRepository userRepository;
 
     @Autowired
+    PostService postService;
+
+    @Autowired
     JWTService jwtService;
 
     public List<UserWithoutPassDTO> findAllUsers() {
@@ -29,12 +31,14 @@ public class UserService {
         return usersDTO;
     }
 
-    public UserWithPostDTO findOne(String token) throws UserApiException, TokenException {
+    public UserWithTitlePostDTO findOne(String token) throws UserApiException, TokenException {
         if (token.equals(null) || token.equals(""))
             throw new TokenInvalidException("Validation token error.");
         Optional<String> userLog = jwtService.restoreAccount(token);
         UserApi userFinder = this.validateUsuario(userLog);
-        return new UserWithPostDTO(userFinder);
+        List<String> posts = this.postService.findPostByCreator(userFinder);
+        UserWithTitlePostDTO userReturn = new UserWithTitlePostDTO(userFinder, posts);
+        return userReturn;
     }
 
     public UserApi findByEmail(String email) throws UserApiException {

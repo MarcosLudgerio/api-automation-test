@@ -2,6 +2,7 @@ package br.edu.ufcg.virtus.courseautomation.services;
 
 
 import br.edu.ufcg.virtus.courseautomation.dtos.PostDTO;
+import br.edu.ufcg.virtus.courseautomation.dtos.PostIdTituloDTO;
 import br.edu.ufcg.virtus.courseautomation.dtos.PostTituloDataTextoDTO;
 import br.edu.ufcg.virtus.courseautomation.exceptions.PostException;
 import br.edu.ufcg.virtus.courseautomation.exceptions.TokenException;
@@ -35,16 +36,23 @@ public class PostService {
             throw new UserApiException("Invalidate data, please try again");
         List<Post> posts = this.postRepository.findAll();
         return posts.stream().map((post) -> new PostTituloDataTextoDTO(post)).collect(Collectors.toList());
-
     }
 
-    public Post findOne(String token, Long id) throws PostException, UserApiException, TokenException {
+    public List<String> findPostByCreator(UserApi user){
+        return this.postRepository.findPostsByAutor(user.getId());
+    }
+
+    private Post findOne(String token, Long id) throws PostException, UserApiException, TokenException {
         Optional<String> userLog = jwtService.restoreAccount(token);
         UserApi user = userService.validateUsuario(userLog);
         if (user.getName().equals(""))
             throw new UserApiException("Invalidate data, please try again");
         Optional<Post> postFind = this.postRepository.findById(id);
         return postFind.orElseThrow(() -> new PostException());
+    }
+    public PostDTO findOneController(String token, Long id) throws PostException, UserApiException, TokenException {
+        Post post = this.findOne(token, id);
+        return new PostDTO(post);
     }
 
     public PostDTO createNewPost(String token, Post post) throws UserApiException, TokenException {

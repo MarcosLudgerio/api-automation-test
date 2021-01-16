@@ -1,5 +1,6 @@
-package br.edu.ufcg.virtus.courseautomation.dtos;
+package br.edu.ufcg.virtus.courseautomation.dtos.usersDTO;
 
+import br.edu.ufcg.virtus.courseautomation.dtos.postsDTO.PostIdTituloDTO;
 import br.edu.ufcg.virtus.courseautomation.models.UserApi;
 import lombok.AllArgsConstructor;
 import lombok.Data;

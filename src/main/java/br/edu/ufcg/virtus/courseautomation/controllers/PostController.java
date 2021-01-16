@@ -1,9 +1,7 @@
 package br.edu.ufcg.virtus.courseautomation.controllers;
 
-import br.edu.ufcg.virtus.courseautomation.dtos.PostCreateDTO;
-import br.edu.ufcg.virtus.courseautomation.dtos.PostDTO;
-import br.edu.ufcg.virtus.courseautomation.dtos.PostUpdataDTO;
-import br.edu.ufcg.virtus.courseautomation.models.Post;
+import br.edu.ufcg.virtus.courseautomation.dtos.postsDTO.PostCreateDTO;
+import br.edu.ufcg.virtus.courseautomation.dtos.postsDTO.PostUpdateDTO;
 import br.edu.ufcg.virtus.courseautomation.services.PostService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -44,7 +42,7 @@ public class PostController {
 
     @PutMapping(value = "{id}", produces = "application/json")
     @ApiOperation(value = "Atualiza post")
-    public ResponseEntity<?> updatePost(@RequestHeader("Authorization") String token, @PathVariable Long id, @RequestBody @Valid PostUpdataDTO post) {
+    public ResponseEntity<?> updatePost(@RequestHeader("Authorization") String token, @PathVariable Long id, @RequestBody @Valid PostUpdateDTO post) {
         return new ResponseEntity<>(this.postService.updatePost(token, id, post), HttpStatus.OK);
     }
 

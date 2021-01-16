@@ -1,7 +1,10 @@
 package br.edu.ufcg.virtus.courseautomation.services;
 
 
-import br.edu.ufcg.virtus.courseautomation.dtos.*;
+import br.edu.ufcg.virtus.courseautomation.dtos.postsDTO.PostCreateDTO;
+import br.edu.ufcg.virtus.courseautomation.dtos.postsDTO.PostDTO;
+import br.edu.ufcg.virtus.courseautomation.dtos.postsDTO.PostTituloDataTextoDTO;
+import br.edu.ufcg.virtus.courseautomation.dtos.postsDTO.PostUpdateDTO;
 import br.edu.ufcg.virtus.courseautomation.exceptions.PostException;
 import br.edu.ufcg.virtus.courseautomation.exceptions.TokenException;
 import br.edu.ufcg.virtus.courseautomation.exceptions.UserApiException;
@@ -11,7 +14,6 @@ import br.edu.ufcg.virtus.courseautomation.repositories.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.DateFormat;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -70,7 +72,7 @@ public class PostService {
         return new PostDTO(postReturn);
     }
 
-    public PostDTO updatePost(String token, Long id, PostUpdataDTO post) throws PostException, UserApiException, TokenException {
+    public PostDTO updatePost(String token, Long id, PostUpdateDTO post) throws PostException, UserApiException, TokenException {
         Post postFinder = this.findOne(token, id);
         if (post.getTitulo().isPresent() && !post.getTitulo().get().equals(""))
             postFinder.setTitulo(post.getTitulo().get());

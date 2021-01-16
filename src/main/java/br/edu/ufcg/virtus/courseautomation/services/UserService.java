@@ -1,8 +1,9 @@
 package br.edu.ufcg.virtus.courseautomation.services;
 
-import br.edu.ufcg.virtus.courseautomation.dtos.UserDTO;
-import br.edu.ufcg.virtus.courseautomation.dtos.UserWithTitlePostDTO;
-import br.edu.ufcg.virtus.courseautomation.dtos.UserWithoutPassDTO;
+import br.edu.ufcg.virtus.courseautomation.dtos.usersDTO.UserDTO;
+import br.edu.ufcg.virtus.courseautomation.dtos.usersDTO.UserUpdateDTO;
+import br.edu.ufcg.virtus.courseautomation.dtos.usersDTO.UserWithTitlePostDTO;
+import br.edu.ufcg.virtus.courseautomation.dtos.usersDTO.UserWithoutPassDTO;
 import br.edu.ufcg.virtus.courseautomation.exceptions.*;
 import br.edu.ufcg.virtus.courseautomation.models.UserApi;
 import br.edu.ufcg.virtus.courseautomation.repositories.UserRepository;
@@ -63,16 +64,21 @@ public class UserService {
         return new UserApi(userDTO.getId(), userDTO.getName(), userDTO.getEmail(), null, null);
     }
 
-    public UserWithoutPassDTO updateUser(String token, UserApi user) throws UserAlreadyExistsException, UserApiException, TokenException {
+    public UserApi fromDTO(UserUpdateDTO userDTO){
+        return new UserApi(null, userDTO.getName().get(), userDTO.getEmail().get(), null, null);
+    }
+
+    public UserWithoutPassDTO updateUser(String token, UserUpdateDTO user) throws UserAlreadyExistsException, UserApiException, TokenException {
         Optional<String> userLog = jwtService.restoreAccount(token);
         UserApi userFinder = this.validateUsuario(userLog);
-        if (!user.getName().equals(""))
-            userFinder.setName(user.getName());
-        if (!user.getPassword().equals(""))
-            userFinder.setPassword(user.getPassword());
-        if (!user.getEmail().equals(""))
-            userFinder.setEmail(user.getEmail());
-        this.createNewUser(userFinder);
+        if (user.getName().isPresent())
+            userFinder.setName(user.getName().get());
+        if (user.getEmail().isPresent()){
+            userFinder.setEmail(user.getEmail().get());
+            this.createNewUser(userFinder);
+        }
+
+        this.userRepository.save(userFinder);
         return new UserWithoutPassDTO(userFinder);
     }
 

@@ -1,7 +1,6 @@
 package br.edu.ufcg.virtus.courseautomation.services;
 
-import br.edu.ufcg.virtus.courseautomation.dtos.UserDTO;
-import br.edu.ufcg.virtus.courseautomation.dtos.UserLoginDTO;
+import br.edu.ufcg.virtus.courseautomation.dtos.usersDTO.UserLoginDTO;
 import br.edu.ufcg.virtus.courseautomation.exceptions.TokenException;
 import br.edu.ufcg.virtus.courseautomation.exceptions.TokenInvalidException;
 import br.edu.ufcg.virtus.courseautomation.exceptions.UserApiException;

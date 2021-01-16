@@ -1,14 +1,13 @@
-package br.edu.ufcg.virtus.courseautomation.dtos;
+package br.edu.ufcg.virtus.courseautomation.dtos.postsDTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import javax.validation.constraints.NotNull;
 import java.util.Optional;
 
 @Data
 @AllArgsConstructor
-public class PostUpdataDTO {
+public class PostUpdateDTO {
     private Optional<String> titulo;
 
     private Optional<String> texto;

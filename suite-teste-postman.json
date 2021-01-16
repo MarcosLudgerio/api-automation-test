@@ -18,8 +18,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhbHRlcmFkb0BnbWFpbC5jb20uYnIiLCJleHAiOjE2MDk3ODQ3Nzd9.wA-g58xsXCczbsWTs6leBI_tlktZ8AGeA_qsZch17WzQVb9Rxx8PlvymgzTLS7cw227CxQWVQuq2k3o-Ajtt_A",
-								"description": "Bearer 1234",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBkY3guY29tLmJyIiwiZXhwIjoxNjEwNjQzNzUzfQ.gehZCMO7LdFI18EwfRIrEhe2meRtJw7WBGM331g4dW7fyAKEdraWT-w9WTbk9ORM644BL9ANPkAYYtWP2vSZyQ",
 								"type": "text"
 							}
 						],
@@ -135,7 +134,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": " {\n    \"email\": \"admin@gmail.com.br\",\n    \"password\": \"admin\"\n}",
+							"raw": " {\n    \"email\": \"admin@dcx.com.br\",\n    \"password\": \"12345689\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -196,7 +195,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{{userAdmin}}",
+							"raw": "{\n    \"name\": \"Marcos\",\n    \"email\": \"marcos@admin.com\",\n    \"password\": \"1234\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -219,13 +218,13 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20uYnIiLCJleHAiOjE2MDk3ODM1OTR9.0mryAGGb8SV8tptmGGEU9LL27xEvqN6B3sO3yqqWbU2gJRky4-PBqd3vdJ6u0EaeyaqYNkgGiCdesD4nQCMf0Q",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBkY3guY29tLmJyIiwiZXhwIjoxNjEwNjM0NTc0fQ.zLZ5FYYs9EhT1hZ6nUd3HtiWFFfq4QD0GcpXZVs9ynVI4BgpGrIezYa0YY1refHuw00AfTR0bCNR20HQdV-fzw",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"id\": 20,\n    \"name\": \"alterad0\",\n    \"email\": \"alterado@gmail.com.br\",\n    \"password\": \"1234\"\n}",
+							"raw": "{\n    \"id\": 18,\n    \"name\": \"a\",\n    \"email\": \"admin@dcx.com.br\",\n    \"password\": \"12345689\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -248,35 +247,6 @@
 						}
 					},
 					"response": []
-				},
-				{
-					"name": "Deletar usuário",
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20uYnIiLCJleHAiOjE2MDk3ODM1OTR9.0mryAGGb8SV8tptmGGEU9LL27xEvqN6B3sO3yqqWbU2gJRky4-PBqd3vdJ6u0EaeyaqYNkgGiCdesD4nQCMf0Q",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "http://127.0.0.1:8080/users/delete",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8080",
-							"path": [
-								"users",
-								"delete"
-							]
-						}
-					},
-					"response": []
 				}
 			]
 		},
@@ -290,13 +260,13 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20uYnIiLCJleHAiOjE2MDk4MDcwMTN9.PWO1yQwvj7wahZZByK8mPmqD4T2q25JK-oHb5tjFuVRvxJeerl54_Gsu0ZB97Ur1JLyu0Go2QfI9aC9CU__6Ew",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBkY3guY29tLmJyIiwiZXhwIjoxNjEwNjQzNzUzfQ.gehZCMO7LdFI18EwfRIrEhe2meRtJw7WBGM331g4dW7fyAKEdraWT-w9WTbk9ORM644BL9ANPkAYYtWP2vSZyQ",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{{post2}}",
+							"raw": "{\n    \"titulo\": \"pos1t legal\",\n    \"texto\": \"aqui vai o texto\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -330,7 +300,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20uYnIiLCJleHAiOjE2MDk4MDUxMzl9.dCbRlpi41WRPPj006qcIAgrLIxqVljxyEKAaeMWmmxcWblSHCfMMoJKXYWPvEjMu8acwaoBXci1MKRvA820uwA",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBkY3guY29tLmJyIiwiZXhwIjoxNjEwNjQzNzUzfQ.gehZCMO7LdFI18EwfRIrEhe2meRtJw7WBGM331g4dW7fyAKEdraWT-w9WTbk9ORM644BL9ANPkAYYtWP2vSZyQ",
 								"type": "text"
 							}
 						],
@@ -367,13 +337,13 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20uYnIiLCJleHAiOjE2MDk4MDc4MzV9.BCfUOd3vOQwuBEc9H5nU_A6FoIndNbs37WY1mg0O9EHUPsqiCqmHF8t6lvaxqPIqgOfOigS9qdiNDNFWdwPWXQ",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBkY3guY29tLmJyIiwiZXhwIjoxNjEwNjQ1NTY0fQ.XptEIbXQNW6amr_ti9-M5lC3_MXgUwmeEUdZnzXqvEurMuZ4INCL6LOWaDOg1wTbpHtHfdQcm6llbHI_0P7QzQ",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{{post1}}",
+							"raw": "{\n    \"titulo\": \"\",\n    \"texto\": \"\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -381,7 +351,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8080/posts/26",
+							"raw": "http://127.0.0.1:8080/posts/31",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -392,7 +362,7 @@
 							"port": "8080",
 							"path": [
 								"posts",
-								"26"
+								"31"
 							]
 						}
 					},
@@ -431,9 +401,26 @@
 					"name": "One post",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYXJjb3NAbWFyY29zLmNvbSIsImV4cCI6MTYxMDYyOTIyM30.xPmuWKmO7d4VOJ00JFvYODuE_aSrp6VaNf8dzeMnmgwpk8flJv56T1sSMFuUCbsqj6NPn9PZeG2WdToEl6A5dg",
+								"type": "text"
+							}
+						],
 						"url": {
-							"raw": ""
+							"raw": "http://127.0.0.1:8080/posts",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"posts"
+							]
 						}
 					},
 					"response": []
@@ -453,9 +440,39 @@
 									"listen": "test",
 									"script": {
 										"exec": [
+											"/**",
+											" * Generate a token for user",
+											" * @param email",
+											" * @param password",
+											" * @returns String",
+											" */",
+											"// const userLogged = {",
+											"//     \"email\": \"marcos@marcos.com\",",
+											"//     \"password\": \"admin\"",
+											"// }",
+											"",
+											"// pm.sendRequest({",
+											"//     url: \"http://127.0.0.1:8080/auth/login\",",
+											"//     method: 'POST',",
+											"//     header: 'headername1:value1',",
+											"//     body: {",
+											"//         mode: 'raw',",
+											"//         raw: JSON.stringify(pm.environment.get('usserLogged'))",
+											"//     }",
+											"// }, function (err, res) {",
+											"//     console.log(res);",
+											"// });",
+											"",
+											"",
 											"pm.test('Sucesso', () => {",
-											"    pm.expect(pm.response.code).to.be.eqls(200);",
-											"});"
+											"    pm.expect(pm.response.code).to.be.eqls(200); // se retornar 200 é porque deu certo",
+											"});",
+											"",
+											"// pm.test('Pegar dados do Github', function(){",
+											"//     pm.sendRequest(baseUrl + \"usersass\", (error, res) => {",
+											"//         console.log(res.json());",
+											"//     });",
+											"// });"
 										],
 										"type": "text/javascript"
 									}
@@ -466,7 +483,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": " {\n    \"email\": \"admin@gmail.com.br\",\n    \"password\": \"admin\"\n}",
+									"raw": " {\n    \"email\": \"marcos@marcos.com.br\",\n    \"password\": \"admin\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -505,8 +522,8 @@
 											"// Objeto utilizado para a validação dos dados",
 											"const userCreated = {",
 											"    \"name\": \"name1\",",
-											"    \"email\": \"email123@name.com.br\",",
-											"    \"password\": \"1234\"",
+											"    \"email\": \"marcos@raimundo.dcx.ufpb.com.br\",",
+											"    \"password\": \"12345677801010\"",
 											"}",
 											"/**",
 											" * Create a new user in API",
@@ -530,7 +547,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"name\": \"name1\",\n    \"email\": \"email123@name.com.br\",\n    \"password\": \"1234\"\n}",
+									"raw": "{\n    \"name\": \"name1\",\n    \"email\": \"marcos@raimundo.dcx.ufpb.com.br\",\n    \"password\": \"12345677801010\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -547,7 +564,7 @@
 							"response": []
 						},
 						{
-							"name": "Find user automatized",
+							"name": "Find users automatized",
 							"event": [
 								{
 									"listen": "test",
@@ -586,9 +603,12 @@
 									"listen": "prerequest",
 									"script": {
 										"exec": [
+											"/**",
+											" * Adocionando o cabeçalho na requisição",
+											" */",
 											"pm.request.headers.add({",
 											"    key: \"Authorization\",",
-											"    value: \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlbWFpbDEyM0BuYW1lLmNvbS5iciIsImV4cCI6MTYwOTg1MzM0OX0.U_Qzw_JQnuVimYfLSRbdLSYobEWSwjlQnYgodeg8SFFkPN1FGLgPTB1l8b1lv1mVgLHXMQP6IhbRSwxrzvyU7Q\"",
+											"    value: \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYXJjb3NAbWFyY29zLmNvbS5iciIsImV4cCI6MTYxMDcxNTU0MX0.vCfxT7bKcmzO22yXtwz-vRF8m3wTTeliLrNGr-GxAsGDrU8_LH-4xP4w2N1aBE5a41btN4TCK7lA2mjKo2h7aQ\"",
 											"});",
 											""
 										],
@@ -599,19 +619,26 @@
 									"listen": "test",
 									"script": {
 										"exec": [
+											"/**",
+											" * Retorna detalhes de um único usuário",
+											" * @augments authorizatiom ",
+											" * @returns JSON",
+											" */",
+											"",
 											"pm.test('Sucesso', () => {",
-											"    pm.expect(pm.response.code).to.be.eqls(200);",
+											"    pm.expect(pm.response.code).to.be.eqls(200); // requisição realizada com sucesso",
 											"});",
+											"",
+											"// variável usada para verificar se os dados irão ser retornados com sucesso",
 											"const userLogged = {",
-											"    \"id\": 51,",
-											"    \"name\": \"name1\",",
-											"    \"email\": \"email123@name.com.br\"",
+											"    \"name\": \"admin\",",
+											"    \"email\": \"marcos@marcos.com.br\",",
+											"    \"posts\": []",
 											"}",
+											"const responseJson = pm.response.json() // resposta recebida da requisição",
 											"",
-											"const responseJson = pm.response.json()",
-											"",
+											"// verificando se os dados retornados são os corretos",
 											"pm.test('comparando os dados', () => {",
-											"    pm.expect(responseJson.id).eqls(userLogged.id);",
 											"    pm.expect(responseJson.name).eqls(userLogged.name);",
 											"    pm.expect(responseJson.email).eqls(userLogged.email);",
 											"});"
@@ -634,70 +661,6 @@
 								}
 							},
 							"response": []
-						},
-						{
-							"name": "Updata user automatized",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											"pm.request.headers.add({",
-											"    key: \"Authorization\",",
-											"    value: \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlbWFpbDEyM0BuYW1lLmNvbS5iciIsImV4cCI6MTYwOTg1MzM0OX0.U_Qzw_JQnuVimYfLSRbdLSYobEWSwjlQnYgodeg8SFFkPN1FGLgPTB1l8b1lv1mVgLHXMQP6IhbRSwxrzvyU7Q\"",
-											"});",
-											""
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test('Sucesso', () => {",
-											"    pm.expect(pm.response.code).to.be.eqls(200);",
-											"});",
-											"",
-											"const userLogged = {",
-											"    \"id\": 51,",
-											"    \"name\": \"name1\",",
-											"    \"email\": \"marcos@admin.com.br\",",
-											"    \"password\": \"\"",
-											"}",
-											"",
-											"const responseJson = pm.response.json()",
-											"",
-											"pm.test('comparando os dados', () => {",
-											"    pm.expect(responseJson.id).eqls(userLogged.id);",
-											"    pm.expect(responseJson.name).eqls(userLogged.name);",
-											"    pm.expect(responseJson.email).eqls(userLogged.email);",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "PUT",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"id\": 51,\n    \"name\": \"name1\",\n    \"email\": \"marcos@admin.com.br\",\n    \"password\": \"\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{urlUser}}",
-									"host": [
-										"{{urlUser}}"
-									]
-								}
-							},
-							"response": []
 						}
 					]
 				},
@@ -711,10 +674,7 @@
 									"listen": "prerequest",
 									"script": {
 										"exec": [
-											"pm.request.headers.add({",
-											"    key: \"Authorization\",",
-											"    value: \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20uYnIiLCJleHAiOjE2MDk4MDcwMTN9.PWO1yQwvj7wahZZByK8mPmqD4T2q25JK-oHb5tjFuVRvxJeerl54_Gsu0ZB97Ur1JLyu0Go2QfI9aC9CU__6Ew\"",
-											"})"
+											""
 										],
 										"type": "text/javascript"
 									}
@@ -723,8 +683,16 @@
 									"listen": "test",
 									"script": {
 										"exec": [
+											"/**",
+											" * Retorna todos os posts cadastrados ",
+											" * ",
+											" * @param none",
+											" * ",
+											" * @returns JSON",
+											" */",
+											"",
 											"pm.test('Sucesso', () => {",
-											"    pm.expect(pm.response.code).to.be.eqls(200);",
+											"    pm.expect(pm.response.code).to.be.eqls(200); // se retornar 200 deu certo",
 											"});"
 										],
 										"type": "text/javascript"
@@ -758,20 +726,41 @@
 									"listen": "test",
 									"script": {
 										"exec": [
-											"pm.test('Sucesso', () => {",
-											"    pm.expect(pm.response.code).to.be.eqls(200);",
-											"});",
+											"/**",
+											" * Retorna detalhes de um único post",
+											" * ",
+											" * @param id",
+											" * ",
+											" * @returns JSON",
+											" */",
 											"",
+											"pm.test('Sucesso', () => {",
+											"    pm.expect(pm.response.code).to.be.eqls(200); // status 200 ok",
+											"});",
+											"// variável para validação",
+											"const postValidate = {",
+											"    \"titulo\": \"post 1\",",
+											"    \"autor\": {",
+											"        \"id\": 19,",
+											"        \"email\": \"marcos@marcos.com.br\",",
+											"        \"name\": \"admin\"",
+											"    },",
+											"    \"data\": \"12-10-2012\",",
+											"    \"texto\": \"texto\"",
+											"};",
+											"",
+											"//resposta retornada da requisição",
 											"const responseJSON = pm.response.json();",
 											"",
+											"// verificando os dados",
 											"pm.test('Verificando os dados', () => {",
-											"    pm.expect(responseJSON.id).to.be.eqls(23);",
-											"    pm.expect(responseJSON.titulo).to.be.eqls(\"post 2\");",
-											"    pm.expect(responseJSON.autor.id).to.be.eqls(18);",
-											"    pm.expect(responseJSON.autor.name).to.be.eqls(\"admin\");",
-											"    pm.expect(responseJSON.autor.email).to.be.eqls(\"marcos@marcos.com\");",
-											"    pm.expect(responseJSON.data).to.be.eqls(\"12-12-2012\");",
-											"    pm.expect(responseJSON.texto).to.be.eqls(\"texto\");",
+											"    pm.expect(responseJSON.id).to.be.eqls(postValidate.id);",
+											"    pm.expect(responseJSON.titulo).to.be.eqls(postValidate.titulo);",
+											"    pm.expect(responseJSON.autor.id).to.be.eqls(postValidate.autor.id);",
+											"    pm.expect(responseJSON.autor.name).to.be.eqls(postValidate.autor.name);",
+											"    pm.expect(responseJSON.autor.email).to.be.eqls(postValidate.autor.email);",
+											"    pm.expect(responseJSON.data).to.be.eqls(postValidate.data);",
+											"    pm.expect(responseJSON.texto).to.be.eqls(postValidate.texto);",
 											"});",
 											""
 										],
@@ -782,10 +771,7 @@
 									"listen": "prerequest",
 									"script": {
 										"exec": [
-											"pm.request.headers.add({",
-											"    key: \"Authorization\",",
-											"    value: \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20uYnIiLCJleHAiOjE2MDk4MDcwMTN9.PWO1yQwvj7wahZZByK8mPmqD4T2q25JK-oHb5tjFuVRvxJeerl54_Gsu0ZB97Ur1JLyu0Go2QfI9aC9CU__6Ew\"",
-											"})"
+											""
 										],
 										"type": "text/javascript"
 									}
@@ -819,10 +805,7 @@
 									"listen": "prerequest",
 									"script": {
 										"exec": [
-											"pm.request.headers.add({",
-											"    key: \"Authorization\",",
-											"    value: \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20uYnIiLCJleHAiOjE2MDk4MDcwMTN9.PWO1yQwvj7wahZZByK8mPmqD4T2q25JK-oHb5tjFuVRvxJeerl54_Gsu0ZB97Ur1JLyu0Go2QfI9aC9CU__6Ew\"",
-											"})"
+											""
 										],
 										"type": "text/javascript"
 									}
@@ -831,9 +814,6 @@
 									"listen": "test",
 									"script": {
 										"exec": [
-											"pm.test('Sucesso', () => {",
-											"    pm.expect(pm.response.code).to.be.eqls(200);",
-											"});",
 											""
 										],
 										"type": "text/javascript"
@@ -844,7 +824,7 @@
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "http://127.0.0.1:8080/posts/24",
+									"raw": "http://127.0.0.1:8080/posts/25",
 									"protocol": "http",
 									"host": [
 										"127",
@@ -855,7 +835,7 @@
 									"port": "8080",
 									"path": [
 										"posts",
-										"24"
+										"25"
 									]
 								}
 							},
@@ -868,10 +848,6 @@
 									"listen": "prerequest",
 									"script": {
 										"exec": [
-											"pm.request.headers.add({",
-											"    key: \"Authorization\",",
-											"    value: \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20uYnIiLCJleHAiOjE2MDk4MDc4MzV9.BCfUOd3vOQwuBEc9H5nU_A6FoIndNbs37WY1mg0O9EHUPsqiCqmHF8t6lvaxqPIqgOfOigS9qdiNDNFWdwPWXQ\"",
-											"});",
 											""
 										],
 										"type": "text/javascript"
@@ -881,20 +857,43 @@
 									"listen": "test",
 									"script": {
 										"exec": [
+											"/**",
+											" * Retorna detalhes de um único post",
+											" * ",
+											" * @param id",
+											" * @param titulo",
+											" * @param autor",
+											" * @param data",
+											" * @param texto",
+											" * ",
+											" * @returns JSON",
+											" */",
 											"pm.test('Sucesso', () => {",
 											"    pm.expect(pm.response.code).to.be.eqls(200);",
 											"});",
 											"",
-											"const responseJSON = pm.response.json();",
+											"// Variável utilizadao para validação dos dados",
+											"const postValidate = {",
+											"    \"titulo\": \"Automatização com postman\",",
+											"    \"autor\": {",
+											"        \"id\": 19,",
+											"        \"email\": \"marcos@marcos.com.br\",",
+											"        \"name\": \"admin\"",
+											"    },",
+											"    \"data\": \"14-01-2021\",",
+											"    \"texto\": \"Esse post foi alterado com teste automatizado do postman para explicar teste automatizado com postman\"",
+											"};",
 											"",
+											"// Verificando se os dados retornados funcionam",
 											"pm.test('Verificando os dados', () => {",
-											"    pm.expect(responseJSON.id).to.be.eqls(23);",
-											"    pm.expect(responseJSON.titulo).to.be.eqls(\"post 1\");",
-											"    pm.expect(responseJSON.autor.id).to.be.eqls(18);",
-											"    pm.expect(responseJSON.autor.name).to.be.eqls(\"admin\");",
-											"    pm.expect(responseJSON.autor.email).to.be.eqls(\"marcos@marcos.com\");",
-											"    pm.expect(responseJSON.data).to.be.eqls(\"12-10-2012\");",
-											"    pm.expect(responseJSON.texto).to.be.eqls(\"texto\");",
+											"    const responseJSON = pm.response.json(); // variável retornada na resposta da requisição",
+											"    pm.expect(responseJSON.id).to.be.eqls(postValidate.id);",
+											"    pm.expect(responseJSON.titulo).to.be.eqls(postValidate.titulo);",
+											"    pm.expect(responseJSON.autor.id).to.be.eqls(postValidate.autor.id);",
+											"    pm.expect(responseJSON.autor.name).to.be.eqls(postValidate.autor.name);",
+											"    pm.expect(responseJSON.autor.email).to.be.eqls(postValidate.autor.email);",
+											"    pm.expect(responseJSON.data).to.be.eqls(postValidate.data);",
+											"    pm.expect(responseJSON.texto).to.be.eqls(postValidate.texto);",
 											"});"
 										],
 										"type": "text/javascript"
@@ -906,7 +905,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{{user1}}",
+									"raw": "{\n    \"titulo\": \"Automatização com postman\",\n    \"texto\": \"Esse post foi alterado com teste automatizado do postman para explicar teste automatizado com postman\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -914,7 +913,7 @@
 									}
 								},
 								"url": {
-									"raw": "http://127.0.0.1:8080/posts/23",
+									"raw": "http://127.0.0.1:8080/posts/64",
 									"protocol": "http",
 									"host": [
 										"127",
@@ -925,7 +924,7 @@
 									"port": "8080",
 									"path": [
 										"posts",
-										"23"
+										"64"
 									]
 								}
 							},
@@ -938,10 +937,6 @@
 									"listen": "prerequest",
 									"script": {
 										"exec": [
-											"pm.request.headers.add({",
-											"    key: \"Authorization\",",
-											"    value: \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20uYnIiLCJleHAiOjE2MDk4MDc4MzV9.BCfUOd3vOQwuBEc9H5nU_A6FoIndNbs37WY1mg0O9EHUPsqiCqmHF8t6lvaxqPIqgOfOigS9qdiNDNFWdwPWXQ\"",
-											"});",
 											""
 										],
 										"type": "text/javascript"
@@ -951,20 +946,43 @@
 									"listen": "test",
 									"script": {
 										"exec": [
+											"/**",
+											" * Retorna detalhes de um único post",
+											" * ",
+											" * @param id",
+											" * @param titulo",
+											" * @param autor",
+											" * @param data",
+											" * @param texto",
+											" * ",
+											" * @returns JSON",
+											" */",
 											"pm.test('Sucesso', () => {",
-											"    pm.expect(pm.response.code).to.be.eqls(200);",
+											"    pm.expect(pm.response.code).to.be.eqls(201); // status 201 - created",
 											"});",
 											"",
-											"const responseJSON = pm.response.json();",
+											"// Variável utilizadao para validação dos dados",
+											"const postValidate = {",
+											"    \"titulo\": \"post 1\",",
+											"    \"autor\": {",
+											"        \"id\": 19,",
+											"        \"email\": \"marcos@marcos.com.br\",",
+											"        \"name\": \"admin\"",
+											"    },",
+											"    \"data\": \"15-01-2021\",",
+											"    \"texto\": \"texto\"",
+											"};",
 											"",
 											"pm.test('Verificando os dados', () => {",
-											"    pm.expect(responseJSON.id).to.be.eqls(23);",
-											"    pm.expect(responseJSON.titulo).to.be.eqls(\"post 1\");",
-											"    pm.expect(responseJSON.autor.id).to.be.eqls(18);",
-											"    pm.expect(responseJSON.autor.name).to.be.eqls(\"admin\");",
-											"    pm.expect(responseJSON.autor.email).to.be.eqls(\"marcos@marcos.com\");",
-											"    pm.expect(responseJSON.data).to.be.eqls(\"12-10-2012\");",
-											"    pm.expect(responseJSON.texto).to.be.eqls(\"texto\");",
+											"    const responseJSON = pm.response.json();",
+											"    console.log(responseJSON);",
+											"    pm.expect(responseJSON.titulo).to.be.eqls(postValidate.titulo);",
+											"    pm.expect(responseJSON.autor.id).to.be.eqls(postValidate.autor.id);",
+											"    pm.expect(responseJSON.autor.name).to.be.eqls(postValidate.autor.name);",
+											"    pm.expect(responseJSON.autor.email).to.be.eqls(postValidate.autor.email);",
+											"    pm.expect(responseJSON.data).to.be.eqls(postValidate.data);",
+											"    pm.expect(responseJSON.texto).to.be.eqls(postValidate.texto);",
+											"",
 											"});"
 										],
 										"type": "text/javascript"
@@ -976,7 +994,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{{post2}}",
+									"raw": "{\n    \"titulo\": \"post 1\",\n    \"texto\": \"texto\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -999,6 +1017,29 @@
 								}
 							},
 							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"pm.request.headers.add({",
+									"    key: \"Authorization\",",
+									"    value: \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYXJjb3NAbWFyY29zLmNvbS5iciIsImV4cCI6MTYxMDcxNTU0MX0.vCfxT7bKcmzO22yXtwz-vRF8m3wTTeliLrNGr-GxAsGDrU8_LH-4xP4w2N1aBE5a41btN4TCK7lA2mjKo2h7aQ\"",
+									"})"
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
 						}
 					]
 				}

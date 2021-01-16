@@ -1,8 +1,9 @@
 package br.edu.ufcg.virtus.courseautomation.controllers;
 
 
-import br.edu.ufcg.virtus.courseautomation.dtos.UserDTO;
-import br.edu.ufcg.virtus.courseautomation.dtos.UserWithoutPassDTO;
+import br.edu.ufcg.virtus.courseautomation.dtos.usersDTO.UserDTO;
+import br.edu.ufcg.virtus.courseautomation.dtos.usersDTO.UserUpdateDTO;
+import br.edu.ufcg.virtus.courseautomation.dtos.usersDTO.UserWithoutPassDTO;
 import br.edu.ufcg.virtus.courseautomation.services.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -45,8 +46,8 @@ public class UserController {
 
     @PutMapping(value = "", produces = "application/json")
     @ApiOperation(value = "Atualiza dados do usuário")
-    public ResponseEntity<?> updateUserApi(@RequestHeader("Authorization") String token, @RequestBody @Valid UserDTO userDto) {
-        return new ResponseEntity<>(this.userService.updateUser(token, userService.fromDTO(userDto)), HttpStatus.OK);
+    public ResponseEntity<?> updateUserApi(@RequestHeader("Authorization") String token, @RequestBody UserUpdateDTO userDto) {
+        return new ResponseEntity<>(this.userService.updateUser(token, userDto), HttpStatus.OK);
     }
 
 }

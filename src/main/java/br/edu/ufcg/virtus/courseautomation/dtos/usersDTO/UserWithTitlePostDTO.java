@@ -1,4 +1,4 @@
-package br.edu.ufcg.virtus.courseautomation.dtos;
+package br.edu.ufcg.virtus.courseautomation.dtos.usersDTO;
 
 import br.edu.ufcg.virtus.courseautomation.models.UserApi;
 import lombok.AllArgsConstructor;

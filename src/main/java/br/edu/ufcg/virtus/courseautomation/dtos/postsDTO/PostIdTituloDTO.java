@@ -1,4 +1,4 @@
-package br.edu.ufcg.virtus.courseautomation.dtos;
+package br.edu.ufcg.virtus.courseautomation.dtos.postsDTO;
 
 import br.edu.ufcg.virtus.courseautomation.models.Post;
 import lombok.AllArgsConstructor;

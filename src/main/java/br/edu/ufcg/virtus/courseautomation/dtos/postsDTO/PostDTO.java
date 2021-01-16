@@ -1,5 +1,6 @@
-package br.edu.ufcg.virtus.courseautomation.dtos;
+package br.edu.ufcg.virtus.courseautomation.dtos.postsDTO;
 
+import br.edu.ufcg.virtus.courseautomation.dtos.usersDTO.UserWithoutPassDTO;
 import br.edu.ufcg.virtus.courseautomation.models.Post;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;

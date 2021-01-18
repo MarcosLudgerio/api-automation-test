@@ -10,5 +10,5 @@ import java.util.Optional;
 public class UserUpdateDTO {
     private Optional<String> name;
 
-    private Optional<String> email;
+    private Optional<String> password;
 }

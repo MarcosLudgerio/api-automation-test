@@ -1,10 +1,7 @@
 package br.edu.ufcg.virtus.courseautomation.services;
 
 
-import br.edu.ufcg.virtus.courseautomation.dtos.postsDTO.PostCreateDTO;
-import br.edu.ufcg.virtus.courseautomation.dtos.postsDTO.PostDTO;
-import br.edu.ufcg.virtus.courseautomation.dtos.postsDTO.PostTituloDataTextoDTO;
-import br.edu.ufcg.virtus.courseautomation.dtos.postsDTO.PostUpdateDTO;
+import br.edu.ufcg.virtus.courseautomation.dtos.postsDTO.*;
 import br.edu.ufcg.virtus.courseautomation.exceptions.PostException;
 import br.edu.ufcg.virtus.courseautomation.exceptions.TokenException;
 import br.edu.ufcg.virtus.courseautomation.exceptions.UserApiException;
@@ -31,13 +28,13 @@ public class PostService {
     @Autowired
     private JWTService jwtService;
 
-    public List<PostTituloDataTextoDTO> findAllPosts(String token) throws UserApiException, TokenException {
+    public List<PostIdTituloDTO> findAllPosts(String token) throws UserApiException, TokenException {
         Optional<String> userLog = jwtService.restoreAccount(token);
         UserApi user = userService.validateUsuario(userLog);
         if (user.getName().equals(""))
             throw new UserApiException("Dados inválidos");
         List<Post> posts = this.postRepository.findAll();
-        return posts.stream().map((post) -> new PostTituloDataTextoDTO(post)).collect(Collectors.toList());
+        return posts.stream().map((post) -> new PostIdTituloDTO(post)).collect(Collectors.toList());
     }
 
     public List<String> findPostByCreator(UserApi user){

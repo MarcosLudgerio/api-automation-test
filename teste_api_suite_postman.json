@@ -1,0 +1,1059 @@
+{
+	"info": {
+		"_postman_id": "ecd3a3be-66e0-4cc2-9bd9-918a99a27afd",
+		"name": "Oficina Testes de API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Usuarios",
+			"item": [
+				{
+					"name": "Pegar todos os usuários",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8080/users",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pegar um usuário",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBhZG1pbi5jb20iLCJleHAiOjE2MTA5NzkyMzF9.X7FNQjPMigpG4V0E7KjvK23S33BakeIajqJCtIoyUAy55Xw_Li38nT5OcTLzIddh7Tj4sl31Cmjgsc-3WYby8w",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8080/users/details",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"details"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastrar usuário",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"\",\n    \"email\": \"\",\n    \"password\": \"\" \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8080/users/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editar usuário",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBhZG1pbi5jb20iLCJleHAiOjE2MTA5Nzc5MDJ9.9cmSoH9_0yShoa8IwQestTcbrelPfQW5SG9hdNcwl2UildrRJ91TEjjfvcWjGzDrvGxqnDbI9Zd3flbVFWO5FQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Administrador editado\", \n    \"password\": \"12345678\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8080/users",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\n   \"email\": \"admin@admin.com\",\n    \"password\": \"admin\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8080/auth/login",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Posts",
+			"item": [
+				{
+					"name": "Pegar todos os posts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBhZG1pbi5jb20iLCJleHAiOjE2MTA5NzgzMjd9.-oGuk0WkDwlg3Av0yLe9gOjV380DZ0mpSOUNPKNjdxVbvIpPalR6KTJMMAbTMh63oAZmGxJprcJEuaFTJuZTTQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8080/posts",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pegar um post",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBhZG1pbi5jb20iLCJleHAiOjE2MTA4MDIzNjh9.GuGixYTJ9gMDpw4Yt5VYf98cHBLp6E-1i88etsfAnlydZp7NEiILC9UH5HIEfplzXa5DmMQ78Dur73px4wAWdQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8080/posts/2",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"posts",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastrar post",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBhZG1pbi5jb20iLCJleHAiOjE2MTA5NzgzMjd9.-oGuk0WkDwlg3Av0yLe9gOjV380DZ0mpSOUNPKNjdxVbvIpPalR6KTJMMAbTMh63oAZmGxJprcJEuaFTJuZTTQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"titulo\": \"post 1\",\n    \"autor\": {\n        \"id\": 19,\n        \"email\": \"marcos@marcos.com.br\",\n        \"name\": \"admin\"\n    },\n    \"data\": \"12-10-2012\",\n    \"texto\": \"texto\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8080/posts",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editar post",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBhZG1pbi5jb20iLCJleHAiOjE2MTA5NzgzMjd9.-oGuk0WkDwlg3Av0yLe9gOjV380DZ0mpSOUNPKNjdxVbvIpPalR6KTJMMAbTMh63oAZmGxJprcJEuaFTJuZTTQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"texto\": \"orxx, deu certo olha?\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8080/posts/78",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"posts",
+								"78"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Excluir post",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBhZG1pbi5jb20iLCJleHAiOjE2MTA5Nzg3NTJ9.3Aw3JFPYotLfoI6bZXW90SWAxoNK2lLUQN2EQhieAE1wzGJNHRrkMs3cYv4a1vgwphogYpTwV6V-8CHFh6fv2w",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8080/posts/78",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"posts",
+								"78"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Automatizados",
+			"item": [
+				{
+					"name": "Usuarios",
+					"item": [
+						{
+							"name": "Pegar todos os usuário auto",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"/**",
+											" * retorna todos os usuários cadastrados no sistema",
+											" * @param null ",
+											" * @returns JSON",
+											" */",
+											"pm.test('Sucesso', () => {",
+											"    pm.expect(pm.response.code).to.be.eqls(200); // status 200 OK",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8080/users",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8080",
+									"path": [
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Pegar um usuário Auto",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"/**",
+											" * Adocionando o cabeçalho na requisição",
+											" */",
+											"pm.request.headers.add({",
+											"    key: \"Authorization\",",
+											"    value: \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBhZG1pbi5jb20iLCJleHAiOjE2MTA5NzkyMzF9.X7FNQjPMigpG4V0E7KjvK23S33BakeIajqJCtIoyUAy55Xw_Li38nT5OcTLzIddh7Tj4sl31Cmjgsc-3WYby8w\"",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"/**",
+											" * Retorna detalhes de um único usuário",
+											" * @augments authorizatiom ",
+											" * @returns JSON",
+											" */",
+											"",
+											"pm.test('Sucesso', () => {",
+											"    pm.expect(pm.response.code).to.be.eqls(200); // requisição realizada com sucesso",
+											"});",
+											"",
+											"// variável usada para verificar se os dados irão ser retornados com sucesso",
+											"const userLogged = {",
+											"    \"id\": 19,",
+											"    \"name\": \"Administrador\",",
+											"    \"email\": \"admin@admin.com\",",
+											"    \"posts\": [",
+											"        \"Titulo do post cadastrado por um usuário\"",
+											"    ]",
+											"}",
+											"const responseJson = pm.response.json() // resposta recebida da requisição",
+											"",
+											"// verificando se os dados retornados são os corretos",
+											"pm.test('comparando os dados', () => {",
+											"    pm.expect(responseJson.name).eqls(userLogged.name);",
+											"    pm.expect(responseJson.email).eqls(userLogged.email);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "http://127.0.0.1:8080/users/details",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8080",
+									"path": [
+										"users",
+										"details"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastrar usuário Auto",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"/**",
+											" * Create a new user in API",
+											" * @param name",
+											" * @param email unique",
+											" * @param password",
+											" * @returns JSON",
+											" */",
+											"",
+											"// Objeto utilizado para a validação dos dados",
+											"const userCreated = {",
+											"    \"name\": \"name1\",",
+											"    \"email\": \"marcos@raimundo.dcx.ufpb.com.br\",",
+											"    \"password\": \"12345677801010\"",
+											"}",
+											"",
+											"pm.test('Sucesso', () => {",
+											"    pm.expect(pm.response.code).to.be.eqls(201); // se retornar 201 o usuário foi cllicardo",
+											"});",
+											"",
+											"pm.test('Compare resultados', () => {",
+											"    const responseJson = pm.response.json(); // Recupera o JSON de retorno e armazena na variável",
+											"    pm.expect(responseJson.name).to.be.eqls(userCreated.name); // verificando se o nome está igual",
+											"    pm.expect(responseJson.email).to.be.eqls(userCreated.email); // verificando se o email está igual",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Raimundo Marcos\",\n    \"email\": \"marcos@raimundo.dcx.ufpb.com.br\",\n    \"password\": \"12345677801010\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8080/users",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8080",
+									"path": [
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Editar usuário Auto",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"/**",
+											" * Adocionando o cabeçalho na requisição",
+											" */",
+											"pm.request.headers.add({",
+											"    key: \"Authorization\",",
+											"    value: \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBhZG1pbi5jb20iLCJleHAiOjE2MTA5NzkyMzF9.X7FNQjPMigpG4V0E7KjvK23S33BakeIajqJCtIoyUAy55Xw_Li38nT5OcTLzIddh7Tj4sl31Cmjgsc-3WYby8w\"",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"/**",
+											" * retorna todos os usuários cadastrados no sistema",
+											" * @param name",
+											" * @param email unique",
+											" * @returns JSON",
+											" * ",
+											" */",
+											"",
+											"const userLogged = {",
+											"     \"id\": 19,",
+											"    \"name\": \"Administrador editado\"",
+											"}",
+											"",
+											"const responseJSON = pm.response.json()",
+											"",
+											"pm.test(\"Teste retorno da requisição\", function(){",
+											"    pm.expect(pm.response.code).eqls(200);",
+											"});",
+											"",
+											"pm.test(\"Validando os dados\", () => {",
+											"    pm.expect(responseJSON.id).to.be.eqls(userLogged.id);",
+											"    pm.expect(responseJSON.name).to.be.eqls(userLogged.name);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "",
+										"value": "",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n   \"name\": \"Administrador editado\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8080/users",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8080",
+									"path": [
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Login",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"/**",
+											" * Generate a token for user",
+											" * @param email",
+											" * @param password",
+											" * @returns String",
+											" */",
+											"pm.test('Sucesso', () => {",
+											"    pm.expect(pm.response.code).to.be.eqls(200); // se retornar 200 é porque deu certo",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"admin@admin.com\",\n    \"password\": \"admin\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8080/auth/login",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8080",
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Posts",
+					"item": [
+						{
+							"name": "Pegar todos os posts Auto",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"/**",
+											" * Retorna todos os posts cadastrados ",
+											" * ",
+											" * @param none",
+											" * ",
+											" * @returns JSON",
+											" */",
+											"",
+											"const responseJSON = pm.response.json();",
+											"pm.test('Sucesso', () => {",
+											"    pm.expect(pm.response.code).to.be.eqls(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8080/posts",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8080",
+									"path": [
+										"posts"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Pegar um post Auto",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"/**",
+											" * Retorna detalhes de um único post",
+											" * ",
+											" * @param id",
+											" * ",
+											" * @returns JSON",
+											" */",
+											"",
+											"// variável para validação",
+											"const postValidate = {",
+											"    \"titulo\": \"post 1\",",
+											"    \"autor\": {",
+											"        \"id\": 19,",
+											"        \"email\": \"admin@admin.com\",",
+											"        \"name\": \"Administrador editado\"",
+											"    },",
+											"    \"data\": \"18-01-2021\",",
+											"    \"texto\": \"texto\"",
+											"};",
+											"",
+											"//resposta retornada da requisição",
+											"const responseJSON = pm.response.json();",
+											"",
+											"// verificando os dados",
+											"pm.test('Sucesso', () => {",
+											"    pm.expect(pm.response.code).to.be.eqls(200); // status 200 ok",
+											"});",
+											"",
+											"pm.test('Verificando os dados', () => {",
+											"    pm.expect(responseJSON.id).to.be.eqls(postValidate.id);",
+											"    pm.expect(responseJSON.titulo).to.be.eqls(postValidate.titulo);",
+											"    pm.expect(responseJSON.autor.id).to.be.eqls(postValidate.autor.id);",
+											"    pm.expect(responseJSON.autor.name).to.be.eqls(postValidate.autor.name);",
+											"    pm.expect(responseJSON.autor.email).to.be.eqls(postValidate.autor.email);",
+											"    pm.expect(responseJSON.data).to.be.eqls(postValidate.data);",
+											"    pm.expect(responseJSON.texto).to.be.eqls(postValidate.texto);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8080/posts/85",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8080",
+									"path": [
+										"posts",
+										"85"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cadastrar post Auto",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"/**",
+											" * Retorna detalhes de um único post",
+											" * ",
+											" * @param id",
+											" * @param titulo",
+											" * @param autor",
+											" * @param data",
+											" * @param texto",
+											" * ",
+											" * @returns JSON",
+											" */",
+											"",
+											"// Variável utilizadao para validação dos dados",
+											"const postValidate = {",
+											"    \"titulo\": \"post 1\",",
+											"    \"autor\": {",
+											"        \"id\": 19,",
+											"        \"email\": \"admin@admin.com\",",
+											"        \"name\": \"Administrador editado\"",
+											"    },",
+											"    \"data\": \"18-01-2021\",",
+											"    \"texto\": \"texto\"",
+											"};",
+											"",
+											"pm.test('Verificando o status', () => {",
+											"    pm.expect(pm.response.code).to.be.eqls(201); // status 201 - created",
+											"});",
+											"",
+											"pm.test('Verificando os dados', () => {",
+											"    const responseJSON = pm.response.json();",
+											"    pm.expect(responseJSON.titulo).to.be.eqls(postValidate.titulo);",
+											"    pm.expect(responseJSON.autor.id).to.be.eqls(postValidate.autor.id);",
+											"    pm.expect(responseJSON.autor.name).to.be.eqls(postValidate.autor.name);",
+											"    pm.expect(responseJSON.autor.email).to.be.eqls(postValidate.autor.email);",
+											"    pm.expect(responseJSON.texto).to.be.eqls(postValidate.texto);",
+											"",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": " {\n    \"titulo\": \"post 1\",\n    \"texto\": \"texto\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8080/posts",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8080",
+									"path": [
+										"posts"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Excluir post Auto",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"/**",
+											" * Retorna detalhes de um único post",
+											" * ",
+											" * @param id",
+											" * ",
+											" * @returns JSON",
+											" */",
+											"",
+											"const validation = {",
+											"    \"id\": 85,",
+											"    \"titulo\": \"post 1\",",
+											"    \"autor\": {",
+											"        \"id\": 19,",
+											"        \"email\": \"admin@admin.com\",",
+											"        \"name\": \"Administrador editado\"",
+											"    },",
+											"    \"data\": \"18-01-2021\",",
+											"    \"texto\": \"texto\"",
+											"}",
+											"",
+											"const responseJSON = pm.response.json();",
+											"",
+											"pm.test(\"Testar o código de retorno\", () => {",
+											"    pm.expect(pm.response.code).to.eqls(200);",
+											"});",
+											"",
+											"pm.test(\"Resposta é a esperada\", () => {",
+											"    pm.expect(responseJSON.id).to.eqls(validation.id);",
+											"    pm.expect(responseJSON.autor.email).to.eqls(validation.autor.email);",
+											"})",
+											"",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:8080/posts/85",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8080",
+									"path": [
+										"posts",
+										"85"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Editar post Auto",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"/**",
+											" * Retorna detalhes de um único post",
+											" * ",
+											" * @param id",
+											" * @param titulo",
+											" * @param autor",
+											" * @param data",
+											" * @param texto",
+											" * ",
+											" * @returns JSON",
+											" */",
+											"// Variável utilizadao para validação dos dados",
+											"const postValidate = {",
+											"    \"titulo\": \"Automatização com postman\",",
+											"    \"autor\": {",
+											"        \"id\": 19,",
+											"        \"email\": \"marcos@marcos.com.br\",",
+											"        \"name\": \"admin\"",
+											"    },",
+											"    \"data\": \"14-01-2021\",",
+											"    \"texto\": \"Esse post foi alterado com teste automatizado do postman para explicar teste automatizado com postman\"",
+											"};",
+											"",
+											"const responseJSON = pm.response.json();",
+											"",
+											"pm.test('Sucesso', () => {",
+											"    pm.expect(pm.response.code).to.be.eqls(200);",
+											"});",
+											"",
+											"// Verificando se os dados retornados funcionam",
+											"pm.test('Verificando os dados', () => {",
+											"     // variável retornada na resposta da requisição",
+											"    pm.expect(responseJSON.id).to.be.eqls(postValidate.id);",
+											"    pm.expect(responseJSON.titulo).to.be.eqls(postValidate.titulo);",
+											"    pm.expect(responseJSON.autor.id).to.be.eqls(postValidate.autor.id);",
+											"    pm.expect(responseJSON.autor.name).to.be.eqls(postValidate.autor.name);",
+											"    pm.expect(responseJSON.autor.email).to.be.eqls(postValidate.autor.email);",
+											"    pm.expect(responseJSON.data).to.be.eqls(postValidate.data);",
+											"    pm.expect(responseJSON.texto).to.be.eqls(postValidate.texto);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"titulo\": \"Automatização com postman\",\n    \"autor\": {\n        \"id\": 19,\n        \"email\": \"admin@admin.com\",\n        \"name\": \"Administrador editado\"\n    },\n    \"data\": \"18-01-2021\",\n    \"texto\": \"Esse post foi alterado com teste automatizado do postman para explicar teste automatizado com postman\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:8080/posts/86",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "8080",
+									"path": [
+										"posts",
+										"86"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"/**",
+									" * Adocionando o cabeçalho na requisição",
+									" */",
+									"pm.request.headers.add({",
+									"    key: \"Authorization\",",
+									"    value: \"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBhZG1pbi5jb20iLCJleHAiOjE2MTA5Nzk3MjN9.Fb1dQUO1cHSffzFNm8iXI8gDVfqqTdkU6I5KxTDzvLpRy3c2nrJJ40AHDbXxSGcYnZKBmZlX-XXl7W8-gzPOEA\"",
+									"});",
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				}
+			]
+		}
+	]
+}

@@ -65,19 +65,16 @@ public class UserService {
     }
 
     public UserApi fromDTO(UserUpdateDTO userDTO){
-        return new UserApi(null, userDTO.getName().get(), userDTO.getEmail().get(), null, null);
+        return new UserApi(null, userDTO.getName().get(), null, userDTO.getPassword().get(), null);
     }
 
     public UserWithoutPassDTO updateUser(String token, UserUpdateDTO user) throws UserAlreadyExistsException, UserApiException, TokenException {
         Optional<String> userLog = jwtService.restoreAccount(token);
         UserApi userFinder = this.validateUsuario(userLog);
-        if (user.getName().isPresent())
+        if (user.getName().isPresent() && !user.getName().get().equals(""))
             userFinder.setName(user.getName().get());
-        if (user.getEmail().isPresent()){
-            userFinder.setEmail(user.getEmail().get());
-            this.createNewUser(userFinder);
-        }
-
+        if (user.getPassword().isPresent() && !user.getPassword().get().equals(""))
+            userFinder.setPassword(user.getPassword().get());
         this.userRepository.save(userFinder);
         return new UserWithoutPassDTO(userFinder);
     }

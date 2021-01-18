@@ -4,7 +4,4 @@ public class PostException extends RuntimeException {
     public PostException(String s) {
         super(s);
     }
-
-    public PostException() {
-    }
 }

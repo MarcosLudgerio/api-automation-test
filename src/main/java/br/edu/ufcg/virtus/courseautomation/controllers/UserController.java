@@ -4,6 +4,7 @@ package br.edu.ufcg.virtus.courseautomation.controllers;
 import br.edu.ufcg.virtus.courseautomation.dtos.usersDTO.UserDTO;
 import br.edu.ufcg.virtus.courseautomation.dtos.usersDTO.UserUpdateDTO;
 import br.edu.ufcg.virtus.courseautomation.dtos.usersDTO.UserWithoutPassDTO;
+import br.edu.ufcg.virtus.courseautomation.models.UserApi;
 import br.edu.ufcg.virtus.courseautomation.services.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -13,6 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -30,6 +32,23 @@ public class UserController {
     @ApiOperation(value = "Retorna todos os usuários cadastrados")
     public ResponseEntity<List<UserWithoutPassDTO>> getAllUsers() {
         return new ResponseEntity<>(userService.findAllUsers(), HttpStatus.OK);
+    }
+
+
+    @GetMapping(value = "allUsers", produces = "text/html")
+    public ModelAndView getAllUsersView() {
+        ModelAndView mv = new ModelAndView("viewUsers");
+        List<UserWithoutPassDTO> userServiceAllUsers = this.userService.findAllUsers();
+        mv.addObject("users", userServiceAllUsers);
+        return mv;
+    }
+
+    @GetMapping(value = "oneUser", produces = "text/html")
+    public ModelAndView getOneUserView() {
+        ModelAndView mv = new ModelAndView("viewUsers");
+        UserApi userServiceAllUsers = this.userService.findByEmail("raimundo@dcx.ufpb.br");
+        mv.addObject("user", userServiceAllUsers);
+        return mv;
     }
 
     @GetMapping(value = "details", produces = MediaType.APPLICATION_JSON_VALUE)

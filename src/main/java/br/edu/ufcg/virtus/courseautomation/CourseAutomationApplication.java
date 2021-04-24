@@ -13,7 +13,6 @@ public class CourseAutomationApplication {
         SpringApplication.run(CourseAutomationApplication.class, args);
     }
 
-    @GetMapping(value = "/", produces = "text/html")
     public String index() {
         return "post.html";
     }

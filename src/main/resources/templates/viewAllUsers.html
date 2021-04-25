@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+1<head>
+    <title>Usuários - CTA</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!--<link rel="stylesheet" href="style/styleCss.css"/>-->
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap');
+        body {
+            background-color: #F2FBFF;
+            padding: 5%;
+            color: #eee;
+            margin: 0;
+            font-family: "Nunito", sans-serif;
+        }
+        nav {
+            border: 1px solid black;
+            background-color: #77919E;
+        }
+
+        span {
+            font-size: 20px;
+        }
+
+        div.card-body a {
+            text-decoration: none;
+        }
+
+        .titulo-principal {
+            background-color: #9E8567;
+            text-decoration: none;
+            color: #eee;
+            font-size: 20pt;
+        }
+
+        .titulo-principal:hover {
+            color: #EBDBC7;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container conteudo">
+        <div class="row">
+            <nav class="navbar w-100">
+                <div class="col">
+                    <span class="navbar-brand"> Usuários </span>
+                </div>
+                <div class="col-4"></div>
+                <div class="col"></div>
+                <div class="col-3"> 
+                        <a href="/users/newuser" class="titulo-principal badge " role="button">Cadastrar usuário</a>
+                </div>
+            </nav>
+        </div>
+        <div class="row">
+            <div class="col">
+            </div>
+            <div class="col-12">
+                <div class="card shadow-sm bg-white rounded" th:each="user : ${posts}">
+                    <div class="card-body">
+                        <a href="viewUniqueUser.html">
+                            <p class="card-subtitle mb-2 text-muted" >
+                                <span th:text="${post.autor}">Username</span>
+                            </p>
+                        </a>
+                        <h4 class="card-title" ><span th:text="${post.titulo}">bio</span></h4>
+                        <p class="card-text"><span th:utext="${#strings.abbreviate(post.texto,400)} ">email</span></p>
+                        <!--<a th:href="${(#mvc.url('BC#getPostDetails').arg(0, post.id)).build()}" class="card-link">Acessar</a>-->
+                    </div> 
+            </div>
+            <div class="col"></div>
+            
+        </div>
+    </div>
+</body>
+</html>

@@ -12,9 +12,14 @@ public class UserApi {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
+    private String lastname;
     @Column(unique = true)
     private String email;
     private String password;
+    private String bio;
+    private String site;
+    private String urlImageProfile;
+
 
     @OneToMany
     private List<Post> posts;
@@ -22,24 +27,17 @@ public class UserApi {
     public UserApi() {
     }
 
-    public UserApi(Long id, String name, String email, String password, List<Post> posts) {
+    public UserApi(Long id, String name, String lastname, String email, String password, String bio, String site, String urlImageProfile) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
-        this.posts = posts;
+        this.bio = bio;
+        this.site = site;
+        this.lastname = lastname;
+        this.urlImageProfile = urlImageProfile;
     }
-
-    @Override
-    public String toString() {
-        return "UserApi{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                '}';
-    }
-
+    
     public Long getId() {
         return id;
     }
@@ -76,7 +74,27 @@ public class UserApi {
         return posts;
     }
 
-    public void setPosts(List<Post> posts) {
-        this.posts = posts;
+    public String getSite() {
+        return site;
+    }
+
+    public void setSite(String site) {
+        this.site = site;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public String getUrlImageProfile() {
+        return urlImageProfile;
+    }
+
+    public void setUrlImageProfile(String urlImageProfile) {
+        this.urlImageProfile = urlImageProfile;
     }
 }

@@ -14,6 +14,6 @@ public class CourseAutomationApplication {
     }
 
     public String index() {
-        return "post.html";
+        return "index.html";
     }
 }

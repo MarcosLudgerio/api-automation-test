@@ -20,7 +20,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = "/users", produces = "application/json")
+@RequestMapping(value = "/api/users", produces = "application/json")
 @Api(value = "API Rest Curso Automação")
 @CrossOrigin(origins = "*")
 public class UserController {
@@ -32,23 +32,6 @@ public class UserController {
     @ApiOperation(value = "Retorna todos os usuários cadastrados")
     public ResponseEntity<List<UserWithoutPassDTO>> getAllUsers() {
         return new ResponseEntity<>(userService.findAllUsers(), HttpStatus.OK);
-    }
-
-
-    @GetMapping(value = "allUsers", produces = "text/html")
-    public ModelAndView getAllUsersView() {
-        ModelAndView mv = new ModelAndView("viewUsers");
-        List<UserWithoutPassDTO> userServiceAllUsers = this.userService.findAllUsers();
-        mv.addObject("users", userServiceAllUsers);
-        return mv;
-    }
-
-    @GetMapping(value = "oneUser", produces = "text/html")
-    public ModelAndView getOneUserView() {
-        ModelAndView mv = new ModelAndView("viewUsers");
-        UserApi userServiceAllUsers = this.userService.findByEmail("raimundo@dcx.ufpb.br");
-        mv.addObject("user", userServiceAllUsers);
-        return mv;
     }
 
     @GetMapping(value = "details", produces = MediaType.APPLICATION_JSON_VALUE)

@@ -4,8 +4,10 @@ import br.edu.ufcg.virtus.courseautomation.exceptions.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.stream.Collectors;
 
@@ -53,5 +55,6 @@ public class ApplicationAdviceController {
     public ApiErros handleUserApiException(UserApiException ex) {
         return new ApiErros(ex.getMessage());
     }
+
 
 }

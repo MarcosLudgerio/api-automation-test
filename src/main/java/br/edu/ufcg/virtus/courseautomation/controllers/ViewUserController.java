@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -29,11 +30,14 @@ public class ViewUserController {
         return mv;
     }
 
-    @GetMapping(value = "oneUser", produces = "text/html")
-    public ModelAndView getOneUserView() {
-        ModelAndView mv = new ModelAndView("erros");
-        UserApi userServiceAllUsers = this.userService.findByEmail("raimundo@dcx.ufpb.br");
-        mv.addObject("user", userServiceAllUsers);
+    @GetMapping(value = "details/{email}", produces = "text/html")
+    public ModelAndView getOneUserView(@PathVariable String email) {
+        ModelAndView mv = new ModelAndView("viewUniqueUser");
+        UserApi userApi = this.userService.findByEmail(email);
+        String src = userApi.getUrlImageProfile();
+        mv.addObject("user", userApi);
+        mv.addObject("src", src);
+        mv.addObject("website", userApi.getEmail());
         return mv;
     }
 

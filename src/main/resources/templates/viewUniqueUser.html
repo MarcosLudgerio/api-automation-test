@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
 <head>
     <title>Usuário - CTA</title>
     <meta charset="UTF-8">
@@ -88,8 +90,9 @@
         <div class="row">
             <nav class="navbar w-100">
                 <div class="col-4"></div>
+        mv.addObject("email", userServiceAllUsers);
                 <div class="col-4">
-                    <span class="navbar-brand"> MarcosLudgerio </span>
+                    <span class="navbar-brand" th:text="${user.name}"></span>
                 </div>
                 <div class="col"></div>
             </nav>
@@ -97,19 +100,18 @@
         <div class="row">
             <div class="col-4">
                 <div class="card w-100 profile">    
-                <img src="https://avatars.githubusercontent.com/u/43012976?v=4" alt="profile" class="img-thumbnail card-img-top rounded-circle">
-                <p class="card-subtitle text-muted details-profile">
-                    <span class="detailsName ">Raimundo Marcos </span>
-                    <span class="detailsName">Gonçalves Ludgério</span>
-                    <span class="profile-details">
-                        <p class="card-title"><span  class="profile-details">Analista de QA na Virtus - UFCG</span></p>
-                        <p class="card-text"><span   class="profile-details"> <a href="site" class=" text-lg-left badge badge-light "> website </a> </span></p>
-                        <p class="card-text"><span  class="profile-details">123.456.789-00</span></p>
-                        <p class="card-text"><span  class="profile-details">raimundo.marcos@dcx.ufpb.br </span></p>  
-                    </span>
-                </p>
-                
+                    <img th:src="@{${src}}" alt="profile" class="img-thumbnail card-img-top rounded-circle">
+                    <p class="card-subtitle text-muted details-profile">
+                        <span class="detailsName " th:text="${user.name}"></span>
+                        <span class="detailsName" th:text="${user.lastname}"></span>
+                        <div class="profile-details">
+                            <p class="card-title"><span class="profile-details" th:text="${user.bio}"></span></p>
+                            <p class="card-text"><span  class="profile-details"> <a th:href="@{${website}}" target="_blank" class=" text-lg-left badge badge-light "> website </a> </span></p>
+                            <p class="card-text">E-mail: <span class="profile-details" th:text="${user.email}"></span></p>
+                        </div>
+                    </p>
                 </div>
+            </div>
             </div>
             <div class="col-8">
                 <div class="card shadow-sm profile" style="margin-top: 20px;" th:each="post : ${posts}">

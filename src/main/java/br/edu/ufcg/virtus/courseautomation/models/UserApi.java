@@ -97,4 +97,12 @@ public class UserApi {
     public void setUrlImageProfile(String urlImageProfile) {
         this.urlImageProfile = urlImageProfile;
     }
+
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
 }

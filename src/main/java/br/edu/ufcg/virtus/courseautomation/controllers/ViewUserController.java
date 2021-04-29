@@ -1,5 +1,6 @@
 package br.edu.ufcg.virtus.courseautomation.controllers;
 
+import br.edu.ufcg.virtus.courseautomation.dtos.userViewDTO.UserViewDTO;
 import br.edu.ufcg.virtus.courseautomation.dtos.usersDTO.UserWithoutPassDTO;
 import br.edu.ufcg.virtus.courseautomation.models.UserApi;
 import br.edu.ufcg.virtus.courseautomation.services.UserService;
@@ -31,11 +32,11 @@ public class ViewUserController {
     @GetMapping(value = "details/{email}", produces = "text/html")
     public ModelAndView getOneUserView(@PathVariable String email) {
         ModelAndView mv = new ModelAndView("viewUniqueUser");
-        UserApi userApi = this.userService.findByEmail(email);
-        String src = userApi.getUrlImageProfile();
-        mv.addObject("user", userApi);
+        UserViewDTO userViewDTO = new UserViewDTO(this.userService.findByEmail(email));
+        String src = userViewDTO.getUrlImage();
+        mv.addObject("userView", userViewDTO);
         mv.addObject("src", src);
-        mv.addObject("website", userApi.getEmail());
+        mv.addObject("website", userViewDTO.getEmail());
         return mv;
     }
 

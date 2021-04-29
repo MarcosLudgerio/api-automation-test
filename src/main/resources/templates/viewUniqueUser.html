@@ -90,9 +90,8 @@
         <div class="row">
             <nav class="navbar w-100">
                 <div class="col-4"></div>
-        mv.addObject("email", userServiceAllUsers);
                 <div class="col-4">
-                    <span class="navbar-brand" th:text="${user.name}"></span>
+                    <span class="navbar-brand" th:text="${userView.name}"></span>
                 </div>
                 <div class="col"></div>
             </nav>
@@ -102,12 +101,12 @@
                 <div class="card w-100 profile">    
                     <img th:src="@{${src}}" alt="profile" class="img-thumbnail card-img-top rounded-circle">
                     <p class="card-subtitle text-muted details-profile">
-                        <span class="detailsName " th:text="${user.name}"></span>
-                        <span class="detailsName" th:text="${user.lastname}"></span>
+                        <span class="detailsName " th:text="${userView.name}"></span>
+                        <span class="detailsName" th:text="${userView.lastname}"></span>
                         <div class="profile-details">
-                            <p class="card-title"><span class="profile-details" th:text="${user.bio}"></span></p>
-                            <p class="card-text"><span  class="profile-details"> <a th:href="@{${website}}" target="_blank" class=" text-lg-left badge badge-light "> website </a> </span></p>
-                            <p class="card-text">E-mail: <span class="profile-details" th:text="${user.email}"></span></p>
+                            <p class="card-title"><span class="profile-details" th:text="${userView.bio}"></span></p>
+                            <p class="card-text"><span  class="profile-details"> <a th:href="@{${userView.site}}" target="_blank" class=" text-lg-left badge badge-light "> website </a> </span></p>
+                            <p class="card-text">E-mail: <span class="profile-details" th:text="${userView.email}"></span></p>
                         </div>
                     </p>
                 </div>

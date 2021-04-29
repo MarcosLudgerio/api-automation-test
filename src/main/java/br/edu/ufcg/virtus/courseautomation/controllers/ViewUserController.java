@@ -29,8 +29,8 @@ public class ViewUserController {
         return mv;
     }
 
-    @GetMapping(value = "details/{email}", produces = "text/html")
-    public ModelAndView getOneUserView(@PathVariable String email) {
+    @GetMapping(value = "details", produces = "text/html")
+    public ModelAndView getOneUserView(@RequestParam(value="email") String email) {
         ModelAndView mv = new ModelAndView("viewUniqueUser");
         UserViewDTO userViewDTO = new UserViewDTO(this.userService.findByEmail(email));
         String src = userViewDTO.getUrlImage();

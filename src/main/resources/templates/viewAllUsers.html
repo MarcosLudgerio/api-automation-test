@@ -66,7 +66,7 @@
                 <div class="card shadow-sm bg-white rounded" th:each="u : ${users}">
 
                     <div class="card-body">
-                        <a href="/users/details" th:href="@{/users/details/${u.email}}">
+                        <a href="/users/details" th:href="@{/users/details(email=${u.email})}">
                             <p class="card-subtitle mb-2 text-muted">
                                 <span th:text="${u.name}"></span>
                             </p>

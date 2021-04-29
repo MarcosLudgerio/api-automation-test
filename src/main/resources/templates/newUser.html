@@ -107,11 +107,8 @@
             <form action="#" th:action="@{/users/newpost}" th:object="${userData}" method="post">
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="inlineFormInput">Nome</label>
-                        <input type="text" th:field="*{name}" class="form-control" id="inputEmail4"
-                               placeholder="Insira seu Nome">
-                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
-                            else.</small>
+                        <label>Nome</label>
+                        <input th:field="*{name}" class="form-control" type="text" placeholder="Insira seu nome" />
                     </div>
                     <div class="form-group col-md-6">
                         <label for="inputPassword4">Sobrenome</label>
@@ -120,7 +117,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="inputAddress">E-mail</label>
+                    <label for="inputEmail4">E-mail</label>
                     <input type="email" th:field="*{email}" class="form-control" id="exampleInputEmail1"
                            aria-describedby="emailHelp" placeholder="Insira seu email">
                 </div>

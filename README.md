@@ -1,4 +1,4 @@
-# 📝 API Restful para treinamento de testes de APIs
+# :books: API Restful para treinamento de testes de APIs
 <div align="center" display="flex" style="justify-content:flex-start;">
       <img align="center" alt="js" height="60" width="60" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original-wordmark.svg" />
 </div>
@@ -92,8 +92,8 @@ Para executar localmente, siga os passos:
 ```sh
 $ git clone https://github.com/MarcosLudgerio/api-automation-test.git
 $ cd api-automation-test
-$ mvnw install
-$ mvnw spring-boot:run
+$ ./mvnw install
+$ ./mvnw spring-boot:run
 ```
 
 <div id="autor" />

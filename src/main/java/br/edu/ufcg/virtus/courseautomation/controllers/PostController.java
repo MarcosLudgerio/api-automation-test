@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping(value = "/posts", produces = "application/json")
+@RequestMapping(value = "/api/posts", produces = "application/json")
 @Api(value = "API Rest Curso Automação")
 @CrossOrigin(origins = "*")
 public class PostController {

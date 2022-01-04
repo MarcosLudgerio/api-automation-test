@@ -9,10 +9,10 @@ import javax.validation.constraints.NotBlank;
 @Data
 @AllArgsConstructor
 public class PostCreateDTO {
-    @NotBlank(message = "Título do post é obrigatório")
+    @NotBlank(message = "Campo título do post é obrigatório")
     private String titulo;
 
-    @NotBlank(message = "Título do post é obrigatório")
+    @NotBlank(message = "Campo texto é obrigatório")
     private String texto;
 
     public PostCreateDTO(Post post) {

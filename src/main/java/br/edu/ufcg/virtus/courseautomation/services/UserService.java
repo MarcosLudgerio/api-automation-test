@@ -57,8 +57,10 @@ public class UserService {
     }
 
     public UserApi fromDTO(UserDTO userDTO){
-        return new UserApi(userDTO.getId(), userDTO.getName(), userDTO.getEmail(), userDTO.getPassword(), null, null, null, null); // Long id, String name, String email, String password, String cpf, String bio, String username, String site
+        return new UserApi(userDTO.getId(), userDTO.getName(), null, userDTO.getEmail(), userDTO.getPassword(), null, null, null);
+        //String lastname, String email, String password, String bio, String site, String urlImageProfile
     }
+
 
     public UserApi fromDTO(UserWithoutPassDTO userDTO){
         return new UserApi(userDTO.getId(), userDTO.getName(), userDTO.getEmail(), null, null, null, null, null);

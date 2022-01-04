@@ -33,11 +33,15 @@ Para cadastrar uma publicação é necessário ter: titulo e texto <br>
 <div id="exemplos"/>
 
 ## 📑 Exemplos
-Assim que souber como faz: colocar uma imagem do JSON para criar usuário e post
+##### JSON para criação de usuário: <br>
+![User](user_create.png)
+
+##### JSON para criação de post: <br>
+![Post](post_create.png)
 
 <div id="rotas" />
 
-## ✔️ Rotas
+## :busstop: Rotas
 #### Login
 - [ ] POST /auth/login
 #### Usuário

@@ -13,15 +13,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
-@Controller
-@RequestMapping(value = "/users", produces = "application/json")
-@Api(value = "API Rest Curso Automação")
-@CrossOrigin(origins = "*")
+
 public class ViewUserController {
-    @Autowired
     UserService userService;
 
-    @GetMapping(value = "", produces = "text/html")
+
     public ModelAndView getAllUsersView() {
         ModelAndView mv = new ModelAndView("viewAllUsers");
         List<UserWithoutPassDTO> userServiceAllUsers = this.userService.findAllUsers();
@@ -29,7 +25,7 @@ public class ViewUserController {
         return mv;
     }
 
-    @GetMapping(value = "details", produces = "text/html")
+
     public ModelAndView getOneUserView(@RequestParam(value="email") String email) {
         ModelAndView mv = new ModelAndView("viewUniqueUser");
         UserViewDTO userViewDTO = new UserViewDTO(this.userService.findByEmail(email));
@@ -40,14 +36,14 @@ public class ViewUserController {
         return mv;
     }
 
-    @GetMapping(value = "new", produces = "text/html")
+
     public ModelAndView createNewUser() {
         ModelAndView mv = new ModelAndView("newUser");
         mv.addObject("userData", new UserApi());
         return mv;
     }
 
-    @RequestMapping(value = "/newpost",method = RequestMethod.POST)
+
     public ModelAndView createNewUser(UserApi user) {
         ModelAndView mv = new ModelAndView("newUser");
         mv.addObject("userData", new UserApi());

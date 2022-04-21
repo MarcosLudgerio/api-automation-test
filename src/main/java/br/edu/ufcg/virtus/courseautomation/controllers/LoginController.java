@@ -17,7 +17,7 @@ public class LoginController {
     @Autowired
     private JWTService jwtService;
 
-    @PostMapping(value = "/auth/login", produces = "application/json")
+    @PostMapping(value = "api/auth/login", produces = "application/json")
     public ResponseEntity<?> authentication(@RequestBody @Valid UserLoginDTO userDTO) {
         return new ResponseEntity<>(jwtService.autentication(userDTO), HttpStatus.OK);
     }

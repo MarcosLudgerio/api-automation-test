@@ -34,10 +34,25 @@ Para cadastrar uma publicação é necessário ter: titulo e texto <br>
 
 ## 📑 Exemplos
 ##### JSON para criação de usuário: <br>
-![User](user_create.png)
+```json
+{
+   "name": "Raimundo",
+   "lastname": "Lugério",
+   "email": "raimundo@dcx.ufpb.br",
+   "password": "umasenhadificil",
+   "bio": "a litle nice guy",
+   "site": "http://github.com/MarosLudgerio",
+   "urlImage": "http://github.com/MarosLudgerio.png"
+}
+```
 
 ##### JSON para criação de post: <br>
-![Post](post_create.png)
+```json
+{
+   "titulo": "post 1",
+   "texto": "texto"
+}
+```
 
 <div id="rotas" />
 

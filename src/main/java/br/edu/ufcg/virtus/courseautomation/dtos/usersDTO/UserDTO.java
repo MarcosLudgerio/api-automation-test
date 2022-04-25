@@ -25,7 +25,7 @@ public class UserDTO {
     private String lastname;
 
     @Email(message = "O E-mail precisa ser válido")
-    @NotBlank(message = "Campo email é obrigatório")g
+    @NotBlank(message = "Campo email é obrigatório")
     private String email;
 
     @NotEmpty(message = "Campo senha é obrigatório")

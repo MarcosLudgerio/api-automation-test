@@ -28,16 +28,12 @@ public class PostService {
     @Autowired
     private JWTService jwtService;
 
-    public List<PostIdTituloDTO> findAllPosts(String token) throws UserApiException, TokenException {
-        Optional<String> userLog = jwtService.restoreAccount(token);
-        UserApi user = userService.validateUsuario(userLog);
-        if (user.getName().equals(""))
-            throw new UserApiException("Dados inválidos");
+    public List<PostIdTituloDTO> findAllPosts() throws UserApiException, TokenException {
         List<Post> posts = this.postRepository.findAll();
         return posts.stream().map((post) -> new PostIdTituloDTO(post)).collect(Collectors.toList());
     }
 
-    public List<String> findPostByCreator(UserApi user){
+    public List<String> findPostByCreator(UserApi user) {
         return this.postRepository.findPostsByAutor(user.getId());
     }
 
@@ -48,11 +44,19 @@ public class PostService {
             throw new UserApiException("Dados inválidos");
         }
         Optional<Post> postFind = this.postRepository.findById(id);
-        if(!postFind.isPresent())
+        if (!postFind.isPresent())
             throw new PostException("Post não encontrado, tente novamente");
         postFind.get().setAutor(user);
         return postFind.get();
     }
+
+    public PostTituloDataTextoDTO findPost(Long id) {
+        Optional<Post> postFind = this.postRepository.findById(id);
+        if (!postFind.isPresent())
+            throw new PostException("Post não encontrado, tente novamente");
+        return new PostTituloDataTextoDTO(postFind.get());
+    }
+
     public PostDTO findOneController(String token, Long id) throws PostException, UserApiException, TokenException {
         Post post = this.findOne(token, id);
         return new PostDTO(post);
@@ -88,6 +92,7 @@ public class PostService {
     public Post fromDTO(PostDTO postDTO) {
         return new Post(null, postDTO.getTitulo(), userService.fromDTO(postDTO.getAutor()), postDTO.getData(), postDTO.getTexto());
     }
+
     public Post fromDTO(PostCreateDTO postDTO) {
         return new Post(null, postDTO.getTitulo(), null, LocalDate.now(), postDTO.getTexto());
     }

@@ -24,14 +24,20 @@ public class PostController {
 
     @GetMapping(value = "", produces = "application/json")
     @ApiOperation(value = "Retorna todos os posts cadastrados")
-    public ResponseEntity<?> findAll(@RequestHeader("Authorization") String token) {
-        return new ResponseEntity<>(this.postService.findAllPosts(token), HttpStatus.OK);
+    public ResponseEntity<?> findAll() {
+        return new ResponseEntity<>(this.postService.findAllPosts(), HttpStatus.OK);
     }
 
     @GetMapping(value = "{id}", produces = "application/json")
-    @ApiOperation(value = "Retorna um post específico")
+    @ApiOperation(value = "Retorna que o usuário cadastrou")
     public ResponseEntity<?> getPost(@RequestHeader("Authorization") String token, @PathVariable Long id) {
         return new ResponseEntity<>(this.postService.findOneController(token, id), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "{id}/details", produces = "application/json")
+    @ApiOperation(value = "Retorna detalhes de um post específico")
+    public ResponseEntity<?> getPost(@PathVariable Long id) {
+        return new ResponseEntity<>(this.postService.findPost(id), HttpStatus.OK);
     }
 
     @PostMapping(value = "", produces = "application/json")

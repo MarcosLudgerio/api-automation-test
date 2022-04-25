@@ -5,6 +5,7 @@ import br.edu.ufcg.virtus.courseautomation.models.UserApi;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.URL;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -20,11 +21,11 @@ public class UserDTO {
     @NotEmpty(message = "Campo nome é obrigatório")
     private String name;
 
-    @NotEmpty(message = "Campo sobreonme é obrigatório")
+    @NotEmpty(message = "Campo sobrenome é obrigatório")
     private String lastname;
 
-    @Email(message = "Email inválido")
-    @NotBlank(message = "Campo email é obrigatório")
+    @Email(message = "O E-mail precisa ser válido")
+    @NotBlank(message = "Campo email é obrigatório")g
     private String email;
 
     @NotEmpty(message = "Campo senha é obrigatório")
@@ -33,7 +34,8 @@ public class UserDTO {
 
     private Optional<String> bio;
 
-    private Optional<String> site;
+    @URL(message = "O site precisa ser válido")
+    private String site;
 
     private Optional<String> urlImage;
 

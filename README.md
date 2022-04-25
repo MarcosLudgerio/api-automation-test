@@ -1,6 +1,6 @@
 # :books: API Restful para treinamento de testes de APIs
 <div align="center" display="flex" style="justify-content:flex-start;">
-      <img align="center" alt="js" height="60" width="60" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original-wordmark.svg" />
+      <img align="center" alt="js" height="200" width="200" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original-wordmark.svg" />
 </div>
 
 <p align="center">

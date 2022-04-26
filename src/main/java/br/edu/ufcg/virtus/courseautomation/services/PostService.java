@@ -83,10 +83,10 @@ public class PostService {
         return new PostDTO(postFinder);
     }
 
-    public Post deletePost(String token, Long id) throws PostException, UserApiException, TokenException {
+    public PostDTO deletePost(String token, Long id) throws PostException, UserApiException, TokenException {
         Post post = this.findOne(token, id);
         this.postRepository.delete(post);
-        return post;
+        return new PostDTO(post);
     }
 
     public Post fromDTO(PostDTO postDTO) {

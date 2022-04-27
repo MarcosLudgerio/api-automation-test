@@ -26,7 +26,7 @@ A documentação SWAGGER da aplicação está disponível nesse [link](https://a
 
 ## ⚙️ O que a API faz?
 A API Restful da suporte a aplicações de postagens. <br>
-Consiste em dois módulos: usuário e publicações (posts), onde um usuário cria pode criar uma ou várias publicações <br>
+Consiste em dois módulos: usuário e publicações (posters), onde um usuário cria pode criar uma ou várias publicações <br>
 Para cadastrar um usuário é necessário ter: nome, email e senha como campos obrigatórios e, caso deseje, biografia, site e imagem de perfil (url)<br>
 Para cadastrar uma publicação é necessário ter: titulo e texto <br>
 
@@ -65,11 +65,11 @@ Para cadastrar uma publicação é necessário ter: titulo e texto <br>
 - [ ] GET /api/users/details
 - [ ] PUT /api/users
 #### Publicações
-- [ ] GET /api/posts
-- [ ] GET /api/posts/id
-- [ ] POST /api/posts
-- [ ] PUT /api/posts/id
-- [ ] DELETE /api/posts/id
+- [ ] GET /api/posters
+- [ ] GET /api/posters/id
+- [ ] POST /api/posters
+- [ ] PUT /api/posters/id
+- [ ] DELETE /api/posters/id
 
 
 <div id="tecnologias"/>

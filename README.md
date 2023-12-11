@@ -93,7 +93,7 @@ Para cadastrar uma publicação é necessário ter: titulo e texto <br>
 
 Para executar o projeto localmente, é necessário ter:
 1. PostgreSQL instalado
-2. Banco criado
+2. Banco criado (para perfil Dev)
 3. Java 11
 4. Arquivo `application.properties` selecione o perfil que deseja ativar para API
    1. `spring.profiles.active=` 

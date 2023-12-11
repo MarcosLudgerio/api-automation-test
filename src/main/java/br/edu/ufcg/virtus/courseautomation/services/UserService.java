@@ -32,13 +32,12 @@ public class UserService {
     }
 
     public UserDetailsDTO findOne(String token) throws UserApiException, TokenException {
-        if (token.equals(null) || token.equals(""))
+        if (token == null || token.equals(""))
             throw new TokenInvalidException("Erro de validação do token");
         Optional<String> userLog = jwtService.restoreAccount(token);
         UserApi userFinder = this.validateUsuario(userLog);
         List<String> posts = this.postService.findPostByCreator(userFinder);
-        UserDetailsDTO userReturn = new UserDetailsDTO(userFinder, posts);
-        return userReturn;
+        return new UserDetailsDTO(userFinder, posts);
     }
 
     public UserApi findByEmail(String email) throws UserApiException {

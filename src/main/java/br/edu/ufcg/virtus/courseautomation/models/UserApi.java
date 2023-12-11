@@ -26,7 +26,11 @@ public class UserApi {
 
     public UserApi() {
     }
-
+    public UserApi(String name, String email, String password) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+    }
     public UserApi(Long id, String name, String lastname, String email, String password, String bio, String site, String urlImageProfile) {
         this.id = id;
         this.name = name;

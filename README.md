@@ -46,7 +46,7 @@ Para cadastrar uma publicação é necessário ter: titulo e texto <br>
 }
 ```
 
-##### JSON para criação de post: <br>
+##### JSON para criação de poster: <br>
 ```json
 {
    "titulo": "post 1",
@@ -95,11 +95,14 @@ Para executar o projeto localmente, é necessário ter:
 1. PostgreSQL instalado
 2. Banco criado
 3. Java 11
-4. Arquivo `application.properties` alterado com credenciais corretas
-   1. `spring.datasource.url=` nome do banco criado
-   2. `spring.datasource.username=` usuário do administrador do banco de dados
-   3. `spring.datasource.password=` senha do administrador
-  
+4. Arquivo `application.properties` selecione o perfil que deseja ativar para API
+   1. `spring.profiles.active=` 
+
+   2. Opções de perfis: dev e test.
+      1. O perfil `dev` precisa ser configurado corretamente no arquivo `application-dev.properties`
+      2. O perfil `test` a aplicação irá executar em um banco em memória, todos os dados serão excluídos quando a aplicação parar a execução
+ 
+
 <div id="executando" />
 
 ## ▶️ Executando o projeto

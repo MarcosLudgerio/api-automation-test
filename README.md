@@ -17,17 +17,17 @@
 <div id="desc"/>
 
 ## 📝 Descrição
-Este projeto é uma API Restful desenvolvida utilizando o framework Spring Boot, na linguagem de programação java. <br>
+Este projeto é uma API restful desenvolvida utilizando o framework Spring Boot, na linguagem de programação java. <br>
 O intuito de sua produção é para que fique disponível para que sejam efetuados testes de API Restful. <br>
-O link de acesso ao Heroku pode ser acessado [aqui](https://api-course-test-automatized.herokuapp.com) <br>
-A documentação SWAGGER da aplicação está disponível nesse [link](https://api-course-test-automatized.herokuapp.com/swagger-ui.html)
+O link de acesso ao Heroku pode ser acessado [aqui](https://api-course-test-automatized.herokuapp.com) (temporariamente indisponível para manutenção) <br>
+A documentação SWAGGER da aplicação está disponível nesse [link](https://api-course-test-automatized.herokuapp.com/swagger-ui.html) (temporariamente indisponível para manutenção)
 
 <div id="about"/>
 
 ## ⚙️ O que a API faz?
 A API Restful da suporte a aplicações de postagens. <br>
 Consiste em dois módulos: usuário e publicações (posters), onde um usuário cria pode criar uma ou várias publicações <br>
-Para cadastrar um usuário é necessário ter: nome, email e senha como campos obrigatórios e, caso deseje, biografia, site e imagem de perfil (url)<br>
+Para cadastrar um usuário é necessário ter: nome, email e senha como campos obrigatórios e, caso deseje, biografia, site e url da imagem de perfil<br>
 Para cadastrar uma publicação é necessário ter: titulo e texto <br>
 
 <div id="exemplos"/>

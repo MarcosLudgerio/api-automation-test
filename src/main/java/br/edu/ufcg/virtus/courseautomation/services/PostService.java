@@ -30,7 +30,7 @@ public class PostService {
 
     public List<PostIdTituloDTO> findAllPosts() throws UserApiException, TokenException {
         List<Post> posts = this.postRepository.findAll();
-        return posts.stream().map((post) -> new PostIdTituloDTO(post)).collect(Collectors.toList());
+        return posts.stream().map(PostIdTituloDTO::new).collect(Collectors.toList());
     }
 
     public List<String> findPostByCreator(UserApi user) {

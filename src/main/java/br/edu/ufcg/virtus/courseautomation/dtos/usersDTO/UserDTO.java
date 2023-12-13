@@ -39,6 +39,12 @@ public class UserDTO {
 
     private Optional<String> urlImage;
 
-
+    public UserDTO(UserApi userApi){
+        this.id = userApi.getId();
+        this.name = userApi.getName();
+        this.lastname = userApi.getLastname();
+        this.password = userApi.getPassword();
+        this.email = userApi.getEmail();
+    }
 
 }

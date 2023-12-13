@@ -4,7 +4,6 @@ import br.edu.ufcg.virtus.courseautomation.dtos.usersDTO.*;
 import br.edu.ufcg.virtus.courseautomation.exceptions.*;
 import br.edu.ufcg.virtus.courseautomation.models.UserApi;
 import br.edu.ufcg.virtus.courseautomation.repositories.UserRepository;
-import org.h2.engine.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +30,10 @@ public class UserService {
         return usersDTO;
     }
 
+    public List<UserApi> findAllUsersApi() {
+        return this.userRepository.findAll();
+    }
+
     public UserDetailsDTO findOne(String token) throws UserApiException, TokenException {
         if (token == null || token.equals(""))
             throw new TokenInvalidException("Erro de validação do token");
@@ -38,6 +41,10 @@ public class UserService {
         UserApi userFinder = this.validateUsuario(userLog);
         List<String> posts = this.postService.findPostByCreator(userFinder);
         return new UserDetailsDTO(userFinder, posts);
+    }
+    public UserApi findOne(Long id) throws UserApiException, TokenException {
+        if(!this.userRepository.findById(id).isPresent()) throw new UserApiException("Usuário não encontrado!");
+        return (UserApi) this.userRepository.findById(id).get();
     }
 
     public UserApi findByEmail(String email) throws UserApiException {
@@ -51,6 +58,14 @@ public class UserService {
 
         this.userRepository.save(user);
         return new UserDetailsDTO(user, new ArrayList<>());
+    }
+
+    public UserDTO createNewUserApi(UserApi user) {
+        Optional userFind = this.userRepository.findByEmail(user.getEmail());
+        if (userFind.isPresent()) throw new UserAlreadyExistsException("Usuário com este email ja foi cadastrado");
+
+        this.userRepository.save(user);
+        return new UserDTO(user);
     }
 
     public UserApi fromDTO(UserDTO userDTO) {
@@ -72,9 +87,9 @@ public class UserService {
     public UserDetailsDTO updateUser(String token, UserUpdateDTO userUpdateDTO) throws UserAlreadyExistsException, UserApiException, TokenException {
         Optional<String> userLog = jwtService.restoreAccount(token);
         UserApi userFinder = this.validateUsuario(userLog);
-        if (userUpdateDTO.getName().isPresent() && !userUpdateDTO.getName().get().equals(""))
+        if (userUpdateDTO.getName().isPresent() && !userUpdateDTO.getName().get().isEmpty())
             userFinder.setName(userUpdateDTO.getName().get());
-        if (userUpdateDTO.getPassword().isPresent() && !userUpdateDTO.getPassword().get().equals(""))
+        if (userUpdateDTO.getPassword().isPresent() && !userUpdateDTO.getPassword().get().isEmpty())
             userFinder.setPassword(userUpdateDTO.getPassword().get());
         if (userUpdateDTO.getBio().isPresent())
             userFinder.setBio(userUpdateDTO.getBio().get());

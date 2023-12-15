@@ -39,7 +39,7 @@ public class PostService {
 
     private Post findOne(String token, Long id) throws PostException, UserApiException, TokenException {
         Optional<String> userLog = jwtService.restoreAccount(token);
-        UserApi user = userService.validateUsuario(userLog);
+        UserApi user = userService.validateUser(userLog);
         if (user.getName().equals("")) {
             throw new UserApiException("Dados inválidos");
         }
@@ -64,7 +64,7 @@ public class PostService {
 
     public PostDTO createNewPost(String token, PostCreateDTO post) throws UserApiException, TokenException {
         Optional<String> userLog = jwtService.restoreAccount(token);
-        UserApi user = userService.validateUsuario(userLog);
+        UserApi user = userService.validateUser(userLog);
         if (user.getName().equals(""))
             throw new UserApiException("Dados inválidos");
         Post postReturn = this.fromDTO(post);

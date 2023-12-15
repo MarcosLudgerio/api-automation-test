@@ -7,6 +7,7 @@ import br.edu.ufcg.virtus.courseautomation.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -38,12 +39,13 @@ public class UserService {
         if (token == null || token.equals(""))
             throw new TokenInvalidException("Erro de validação do token");
         Optional<String> userLog = jwtService.restoreAccount(token);
-        UserApi userFinder = this.validateUsuario(userLog);
+        UserApi userFinder = this.validateUser(userLog);
         List<String> posts = this.postService.findPostByCreator(userFinder);
         return new UserDetailsDTO(userFinder, posts);
     }
+
     public UserApi findOne(Long id) throws UserApiException, TokenException {
-        if(!this.userRepository.findById(id).isPresent()) throw new UserApiException("Usuário não encontrado!");
+        if (!this.userRepository.findById(id).isPresent()) throw new UserApiException("Usuário não encontrado!");
         return (UserApi) this.userRepository.findById(id).get();
     }
 
@@ -63,7 +65,6 @@ public class UserService {
     public UserDTO createNewUserApi(UserApi user) {
         Optional userFind = this.userRepository.findByEmail(user.getEmail());
         if (userFind.isPresent()) throw new UserAlreadyExistsException("Usuário com este email ja foi cadastrado");
-
         this.userRepository.save(user);
         return new UserDTO(user);
     }
@@ -86,7 +87,7 @@ public class UserService {
 
     public UserDetailsDTO updateUser(String token, UserUpdateDTO userUpdateDTO) throws UserAlreadyExistsException, UserApiException, TokenException {
         Optional<String> userLog = jwtService.restoreAccount(token);
-        UserApi userFinder = this.validateUsuario(userLog);
+        UserApi userFinder = this.validateUser(userLog);
         if (userUpdateDTO.getName().isPresent() && !userUpdateDTO.getName().get().isEmpty())
             userFinder.setName(userUpdateDTO.getName().get());
         if (userUpdateDTO.getPassword().isPresent() && !userUpdateDTO.getPassword().get().isEmpty())
@@ -103,7 +104,19 @@ public class UserService {
         return new UserDetailsDTO(userFinder, new ArrayList<>());
     }
 
-    public UserApi validateUsuario(Optional<String> id) throws UserApiException {
+
+    public Object updateUser(String id, UserDTO user) throws UserNotFoundException {
+        if (id.isEmpty())
+            throw new UserNotFoundException("Usuário não encontrado, verifique os dados e tente novamente!");
+        Optional<UserApi> user1 = this.userRepository.findByEmail(id);
+        if (!user1.isPresent()) throw new UserApiException("Dados invalidos");
+        user1.get().setEmail(user.getEmail());
+        user1.get().setName(user.getName());
+        System.out.println("PASSEI AQUIIIII!!!!!");
+        return this.userRepository.save(user1.get());
+    }
+
+    public UserApi validateUser(Optional<String> id) throws UserApiException {
         if (!id.isPresent())
             throw new UserNotFoundException("Usuário não encontrado, verifique os dados e tente novamente ");
         Optional<UserApi> user = this.userRepository.findByEmail(id.get());
@@ -111,4 +124,5 @@ public class UserService {
             throw new UserApiException("Dados invalidos");
         return user.get();
     }
+
 }

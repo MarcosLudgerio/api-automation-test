@@ -62,7 +62,7 @@ public class UserService {
         return new UserDetailsDTO(user, new ArrayList<>());
     }
 
-    public UserDTO createNewUserApi(UserApi user) {
+    public UserDTO createNewUserApi(UserApi user) throws UserAlreadyExistsException{
         Optional userFind = this.userRepository.findByEmail(user.getEmail());
         if (userFind.isPresent()) throw new UserAlreadyExistsException("Usuário com este email ja foi cadastrado");
         this.userRepository.save(user);
@@ -70,8 +70,8 @@ public class UserService {
     }
 
     public UserApi fromDTO(UserDTO userDTO) {
-        UserApi userApi = new UserApi(userDTO.getId(), userDTO.getName(), userDTO.getLastname(), userDTO.getEmail(), userDTO.getPassword(), null, userDTO.getSite(), null);
-        if (userDTO.getBio().isPresent()) userApi.setBio(userDTO.getBio().get());
+        UserApi userApi = new UserApi(userDTO.getId(), userDTO.getName(), userDTO.getLastname(), userDTO.getEmail(), userDTO.getPassword(), "Sem bio", userDTO.getSite(), null);
+        if (userDTO.getBio() != null || userDTO.getBio().isPresent()) userApi.setBio(userDTO.getBio().get());
         if (userDTO.getUrlImage().isPresent()) userApi.setUrlImageProfile(userDTO.getUrlImage().get());
         return userApi;
     }
@@ -81,9 +81,6 @@ public class UserService {
         return new UserApi(userDTO.getId(), userDTO.getName(), userDTO.getEmail(), null, null, null, null, null);
     }
 
-    public UserApi fromDTO(UserUpdateDTO userDTO) {
-        return new UserApi(null, userDTO.getName().get(), null, userDTO.getPassword().get(), null, null, null, null);
-    }
 
     public UserDetailsDTO updateUser(String token, UserUpdateDTO userUpdateDTO) throws UserAlreadyExistsException, UserApiException, TokenException {
         Optional<String> userLog = jwtService.restoreAccount(token);
@@ -112,12 +109,11 @@ public class UserService {
         if (!user1.isPresent()) throw new UserApiException("Dados invalidos");
         user1.get().setEmail(user.getEmail());
         user1.get().setName(user.getName());
-        System.out.println("PASSEI AQUIIIII!!!!!");
         return this.userRepository.save(user1.get());
     }
 
     public UserApi validateUser(Optional<String> id) throws UserApiException {
-        if (!id.isPresent())
+        if (id == null || !id.isPresent())
             throw new UserNotFoundException("Usuário não encontrado, verifique os dados e tente novamente ");
         Optional<UserApi> user = this.userRepository.findByEmail(id.get());
         if (!user.isPresent())

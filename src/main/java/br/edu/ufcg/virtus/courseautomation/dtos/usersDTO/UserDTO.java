@@ -45,6 +45,8 @@ public class UserDTO {
         this.lastname = userApi.getLastname();
         this.password = userApi.getPassword();
         this.email = userApi.getEmail();
+        this.bio = Optional.of("Sem Biográfia");
+        this.urlImage = Optional.of("Sem foto");
     }
 
 }

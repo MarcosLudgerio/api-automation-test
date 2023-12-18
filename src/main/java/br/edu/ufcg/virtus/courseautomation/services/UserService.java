@@ -62,19 +62,14 @@ public class UserService {
         return new UserDetailsDTO(user, new ArrayList<>());
     }
 
-    public UserDTO createNewUserApi(UserApi user) throws UserAlreadyExistsException{
-        Optional userFind = this.userRepository.findByEmail(user.getEmail());
-        if (userFind.isPresent()) throw new UserAlreadyExistsException("Usuário com este email ja foi cadastrado");
-        this.userRepository.save(user);
-        return new UserDTO(user);
-    }
-
     public UserApi fromDTO(UserDTO userDTO) {
         UserApi userApi = new UserApi(userDTO.getId(), userDTO.getName(), userDTO.getLastname(), userDTO.getEmail(), userDTO.getPassword(), "Sem bio", userDTO.getSite(), null);
         if (userDTO.getBio() != null || userDTO.getBio().isPresent()) userApi.setBio(userDTO.getBio().get());
         if (userDTO.getUrlImage().isPresent()) userApi.setUrlImageProfile(userDTO.getUrlImage().get());
         return userApi;
     }
+
+
 
 
     public UserApi fromDTO(UserWithoutPassDTO userDTO) {
@@ -102,7 +97,7 @@ public class UserService {
     }
 
 
-    public Object updateUser(String id, UserDTO user) throws UserNotFoundException {
+    public Object updateUser(String id, UserDetailsDTO user) throws UserNotFoundException {
         if (id.isEmpty())
             throw new UserNotFoundException("Usuário não encontrado, verifique os dados e tente novamente!");
         Optional<UserApi> user1 = this.userRepository.findByEmail(id);

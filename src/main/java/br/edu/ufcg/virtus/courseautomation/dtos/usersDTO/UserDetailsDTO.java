@@ -8,6 +8,8 @@ import java.util.List;
 @Data
 public class UserDetailsDTO {
 
+    private Long id;
+
     private String name;
     private String lastname;
     private String bio;
@@ -34,4 +36,5 @@ public class UserDetailsDTO {
         this(userApi.getName(), userApi.getLastname(), userApi.getBio(), userApi.getSite(), userApi.getEmail(), userApi.getUrlImageProfile());
         this.posts = posts;
     }
+
 }

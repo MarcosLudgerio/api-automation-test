@@ -70,8 +70,6 @@ public class UserService {
     }
 
 
-
-
     public UserApi fromDTO(UserWithoutPassDTO userDTO) {
         return new UserApi(userDTO.getId(), userDTO.getName(), userDTO.getEmail(), null, null, null, null, null);
     }

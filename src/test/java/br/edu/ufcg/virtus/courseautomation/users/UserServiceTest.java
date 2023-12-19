@@ -2,6 +2,7 @@ package br.edu.ufcg.virtus.courseautomation.users;
 
 import br.edu.ufcg.virtus.courseautomation.dtos.usersDTO.UserDetailsDTO;
 import br.edu.ufcg.virtus.courseautomation.dtos.usersDTO.UserLoginDTO;
+import br.edu.ufcg.virtus.courseautomation.dtos.usersDTO.UserUpdateDTO;
 import br.edu.ufcg.virtus.courseautomation.exceptions.TokenInvalidException;
 import br.edu.ufcg.virtus.courseautomation.exceptions.UserAlreadyExistsException;
 import br.edu.ufcg.virtus.courseautomation.exceptions.UserApiException;
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Optional;
+import java.util.OptionalInt;
 
 @SpringBootTest
 public class UserServiceTest {
@@ -54,14 +56,6 @@ public class UserServiceTest {
         Assertions.assertEquals(user.getName(), userReturned.getName());
     }
 
-    @Test
-    public void shouldUpdateUserTest() {
-        UserDetailsDTO user = this.userService.createNewUser(new UserApi("Mark", "mark2weq@email.com"));
-        user.setName("Name updated");
-        UserApi userReturned = (UserApi) this.userService.updateUser(user.getEmail(), user);
-        Assertions.assertEquals(user.getName(), userReturned.getName());
-    }
-
 
     @Test
     public void shouldValidateUser() {
@@ -74,6 +68,20 @@ public class UserServiceTest {
         Optional<String> id = this.jwtService.restoreAccount(token);
         UserApi userReturned = this.userService.validateUser(id);
         Assertions.assertEquals(userReturned.getName(), userCrete.getName());
+    }
+
+    @Test
+    public void shouldUpdateUserUsingAToken() {
+        UserApi userCrete = new UserApi("Mark", "markTestLogin@email.com", "Test@123");
+        UserDetailsDTO user = this.userService.createNewUser(userCrete);
+        UserLoginDTO userLoginDTO = new UserLoginDTO();
+        userLoginDTO.setEmail(user.getEmail());
+        userLoginDTO.setPassword(userCrete.getPassword());
+        String token = this.jwtService.autentication(userLoginDTO);
+        UserUpdateDTO userUpdateDTO = new UserUpdateDTO(Optional.of("Tobias"), Optional.of("t0bias"), Optional.of("madison"), Optional.of("Não tem"),
+                Optional.of("não tem"), Optional.of("tobias@email.com"), Optional.of("nãotem"));
+        UserDetailsDTO userReturned = this.userService.updateUser(token, userUpdateDTO);
+        Assertions.assertEquals(userReturned.getName(), userUpdateDTO.getName().get());
     }
 
     @Test
@@ -128,20 +136,27 @@ public class UserServiceTest {
     @Test
     public void shouldThrowUserNotFoundExceptionWhenUpdateUserWithEmailNullTest() {
         try {
-            UserDetailsDTO user = this.userService.createNewUser(new UserApi("Mark", null));
-            user.setName("Name updated");
-            this.userService.updateUser("", user);
+            UserUpdateDTO userUpdateDTO = new UserUpdateDTO(Optional.of("Tobias"), Optional.of("t0bias"), Optional.of("madison"), Optional.of("Não tem"),
+                    Optional.of("não tem"), Optional.of("tobias@email.com"), Optional.of("nãotem"));
+            this.userService.updateUser("", userUpdateDTO);
             Assertions.fail("Id empty");
-        } catch (UserNotFoundException ignored) {
+        } catch (TokenInvalidException ignored) {
         }
     }
 
     @Test
     public void shouldThrowUserNotFoundExceptionWhenUpdateUserWithEmailNotFoundTest() {
         try {
-            UserDetailsDTO user = this.userService.createNewUser(new UserApi("Mark", "mark.mail@mail.com"));
-            user.setName("Name updated");
-            this.userService.updateUser(user.getEmail() + "User updated", user);
+            UserApi userApi = new UserApi("Mark", "markTestLogin@email.com", "Test@123");
+            UserDetailsDTO user = this.userService.createNewUser(userApi);
+            this.userService.createNewUser(new UserApi("Mark", "email2024@email.com", "Test@123"));
+            UserUpdateDTO userUpdateDTO = new UserUpdateDTO(Optional.of("Tobias"), Optional.of("t0bias"), Optional.of("madison"), Optional.of("Não tem"),
+                    Optional.of("não tem"), Optional.empty(), Optional.of("nãotem"));
+            UserLoginDTO userLoginDTO = new UserLoginDTO();
+            userLoginDTO.setEmail(user.getEmail());
+            userLoginDTO.setPassword(userApi.getPassword());
+            String token = this.jwtService.autentication(userLoginDTO);
+            this.userService.updateUser(token, userUpdateDTO);
             Assertions.fail("Email not found");
         } catch (UserApiException ignored) {
         }

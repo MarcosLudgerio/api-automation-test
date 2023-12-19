@@ -94,17 +94,6 @@ public class UserService {
         return new UserDetailsDTO(userFinder, new ArrayList<>());
     }
 
-
-    public Object updateUser(String id, UserDetailsDTO user) throws UserNotFoundException {
-        if (id.isEmpty())
-            throw new UserNotFoundException("Usuário não encontrado, verifique os dados e tente novamente!");
-        Optional<UserApi> user1 = this.userRepository.findByEmail(id);
-        if (!user1.isPresent()) throw new UserApiException("Dados invalidos");
-        user1.get().setEmail(user.getEmail());
-        user1.get().setName(user.getName());
-        return this.userRepository.save(user1.get());
-    }
-
     public UserApi validateUser(Optional<String> id) throws UserApiException {
         if (id == null || !id.isPresent())
             throw new UserNotFoundException("Usuário não encontrado, verifique os dados e tente novamente ");

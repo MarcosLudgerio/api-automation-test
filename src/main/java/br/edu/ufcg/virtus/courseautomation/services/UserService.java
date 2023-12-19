@@ -64,8 +64,8 @@ public class UserService {
 
     public UserApi fromDTO(UserDTO userDTO) {
         UserApi userApi = new UserApi(userDTO.getId(), userDTO.getName(), userDTO.getLastname(), userDTO.getEmail(), userDTO.getPassword(), "Sem bio", userDTO.getSite(), null);
-        if (userDTO.getBio() != null || userDTO.getBio().isPresent()) userApi.setBio(userDTO.getBio().get());
-        if (userDTO.getUrlImage().isPresent()) userApi.setUrlImageProfile(userDTO.getUrlImage().get());
+        userDTO.getBio().ifPresent((obj) -> userApi.setBio(userDTO.getBio().get()));
+        userDTO.getUrlImage().ifPresent((obj) -> userApi.setUrlImageProfile(userDTO.getUrlImage().get()));
         return userApi;
     }
 

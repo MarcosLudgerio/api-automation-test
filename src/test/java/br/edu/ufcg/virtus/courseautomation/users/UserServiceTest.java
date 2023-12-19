@@ -194,14 +194,20 @@ public class UserServiceTest {
 
     @Test
     public void shouldParserUserDTOTest() {
-        UserApi userCrete = new UserApi("Mark", "markTestLoginToken@gmail.email.com.br", "Test@123");
-        this.userService.fromDTO(new UserDTO(userCrete));
+        UserApi userCreated = new UserApi("Mark", "markTestLoginToken@gmail.email.com.br", "Test@123");
+        UserDTO userDTO = new UserDTO(userCreated);
+        userDTO.setBio(Optional.empty());
+        userDTO.setUrlImage(Optional.empty());
+        UserApi user = this.userService.fromDTO(userDTO);
+        Assertions.assertEquals(user.getName(), userCreated.getName());
     }
 
     @Test
     public void shouldParserUserWithoutPassDTOOTest() {
-        UserApi userCrete = new UserApi("Mark", "markTestLoginToken@gmail.email.com.br", "Test@123");
-        this.userService.fromDTO(new UserWithoutPassDTO(userCrete));
+        UserApi userCreated = new UserApi("Mark", "markTestLoginToken@gmail.email.com.br", "Test@123");
+        UserApi user = this.userService.fromDTO(new UserWithoutPassDTO(userCreated));
+        Assertions.assertEquals(user.getName(), userCreated.getName());
     }
+
 
 }

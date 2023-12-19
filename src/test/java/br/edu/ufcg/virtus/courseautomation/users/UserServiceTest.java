@@ -1,8 +1,6 @@
 package br.edu.ufcg.virtus.courseautomation.users;
 
-import br.edu.ufcg.virtus.courseautomation.dtos.usersDTO.UserDetailsDTO;
-import br.edu.ufcg.virtus.courseautomation.dtos.usersDTO.UserLoginDTO;
-import br.edu.ufcg.virtus.courseautomation.dtos.usersDTO.UserUpdateDTO;
+import br.edu.ufcg.virtus.courseautomation.dtos.usersDTO.*;
 import br.edu.ufcg.virtus.courseautomation.exceptions.TokenInvalidException;
 import br.edu.ufcg.virtus.courseautomation.exceptions.UserAlreadyExistsException;
 import br.edu.ufcg.virtus.courseautomation.exceptions.UserApiException;
@@ -16,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Optional;
-import java.util.OptionalInt;
 
 @SpringBootTest
 public class UserServiceTest {
@@ -71,8 +68,8 @@ public class UserServiceTest {
     }
 
     @Test
-    public void shouldUpdateUserUsingAToken() {
-        UserApi userCrete = new UserApi("Mark", "markTestLogin@email.com", "Test@123");
+    public void shouldUpdateUserUsingATokenTest() {
+        UserApi userCrete = new UserApi("Mark", "markTestLoginToken@email.com", "Test@123");
         UserDetailsDTO user = this.userService.createNewUser(userCrete);
         UserLoginDTO userLoginDTO = new UserLoginDTO();
         userLoginDTO.setEmail(user.getEmail());
@@ -145,24 +142,6 @@ public class UserServiceTest {
     }
 
     @Test
-    public void shouldThrowUserNotFoundExceptionWhenUpdateUserWithEmailNotFoundTest() {
-        try {
-            UserApi userApi = new UserApi("Mark", "markTestLogin@email.com", "Test@123");
-            UserDetailsDTO user = this.userService.createNewUser(userApi);
-            this.userService.createNewUser(new UserApi("Mark", "email2024@email.com", "Test@123"));
-            UserUpdateDTO userUpdateDTO = new UserUpdateDTO(Optional.of("Tobias"), Optional.of("t0bias"), Optional.of("madison"), Optional.of("Não tem"),
-                    Optional.of("não tem"), Optional.empty(), Optional.of("nãotem"));
-            UserLoginDTO userLoginDTO = new UserLoginDTO();
-            userLoginDTO.setEmail(user.getEmail());
-            userLoginDTO.setPassword(userApi.getPassword());
-            String token = this.jwtService.autentication(userLoginDTO);
-            this.userService.updateUser(token, userUpdateDTO);
-            Assertions.fail("Email not found");
-        } catch (UserApiException ignored) {
-        }
-    }
-
-    @Test
     public void shouldThrownExceptionUserNotFoundWhenValidateUserAndIdIsNull() {
         try {
             this.userService.validateUser(null);
@@ -187,6 +166,42 @@ public class UserServiceTest {
             Assertions.fail("Id null");
         } catch (UserNotFoundException ignored) {
         }
+    }
+
+    @Test
+    public void shouldUpdateUserUsingWithFields() {
+        UserApi userCrete = new UserApi("Mark", "markTestLoginToken@email.com.br", "Test@123");
+        UserDetailsDTO user = this.userService.createNewUser(userCrete);
+        UserLoginDTO userLoginDTO = new UserLoginDTO();
+        userLoginDTO.setEmail(user.getEmail());
+        userLoginDTO.setPassword(userCrete.getPassword());
+        String token = this.jwtService.autentication(userLoginDTO);
+        this.userService.updateUser(token, new UserUpdateDTO(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(),
+                Optional.empty(), Optional.empty(), Optional.empty()));
+    }
+
+    @Test
+    public void shouldUpdateUserUsingWithFieldNameLastnameTest() {
+        UserApi userCrete = new UserApi("Mark", "markTestLoginToken@gmail.email.com.br", "Test@123");
+        UserDetailsDTO user = this.userService.createNewUser(userCrete);
+        UserLoginDTO userLoginDTO = new UserLoginDTO();
+        userLoginDTO.setEmail(user.getEmail());
+        userLoginDTO.setPassword(userCrete.getPassword());
+        String token = this.jwtService.autentication(userLoginDTO);
+        this.userService.updateUser(token, new UserUpdateDTO(Optional.of(user.getName()), Optional.of("Updated Pass"), Optional.empty(), Optional.empty(),
+                Optional.empty(), Optional.empty(), Optional.empty()));
+    }
+
+    @Test
+    public void shouldParserUserDTOTest() {
+        UserApi userCrete = new UserApi("Mark", "markTestLoginToken@gmail.email.com.br", "Test@123");
+        this.userService.fromDTO(new UserDTO(userCrete));
+    }
+
+    @Test
+    public void shouldParserUserWithoutPassDTOOTest() {
+        UserApi userCrete = new UserApi("Mark", "markTestLoginToken@gmail.email.com.br", "Test@123");
+        this.userService.fromDTO(new UserWithoutPassDTO(userCrete));
     }
 
 }

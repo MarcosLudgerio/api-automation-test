@@ -78,9 +78,9 @@ public class UserService {
     public UserDetailsDTO updateUser(String token, UserUpdateDTO userUpdateDTO) throws UserAlreadyExistsException, UserApiException, TokenException {
         Optional<String> userLog = jwtService.restoreAccount(token);
         UserApi userFinder = this.validateUser(userLog);
-        if (userUpdateDTO.getName().isPresent() && !userUpdateDTO.getName().get().isEmpty())
+        if (userUpdateDTO.getName().isPresent())
             userFinder.setName(userUpdateDTO.getName().get());
-        if (userUpdateDTO.getPassword().isPresent() && !userUpdateDTO.getPassword().get().isEmpty())
+        if (userUpdateDTO.getPassword().isPresent())
             userFinder.setPassword(userUpdateDTO.getPassword().get());
         if (userUpdateDTO.getBio().isPresent())
             userFinder.setBio(userUpdateDTO.getBio().get());

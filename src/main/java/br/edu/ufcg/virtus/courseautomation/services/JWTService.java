@@ -35,7 +35,7 @@ public class JWTService {
     }
 
     public Optional<String> restoreAccount(String headerAuthorization) throws UserApiException, TokenException {
-        if (headerAuthorization.equals(null) || !headerAuthorization.startsWith("eyJhbGciOiJIUzUxMiJ9"))
+        if (headerAuthorization == null || !headerAuthorization.startsWith("eyJhbGciOiJIUzUxMiJ9"))
             throw new TokenInvalidException("Token não validado, verifique os dados e tente novamente");
         String subject = "";
         try {

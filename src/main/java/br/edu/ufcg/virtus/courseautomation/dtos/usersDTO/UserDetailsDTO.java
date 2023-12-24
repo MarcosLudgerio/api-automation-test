@@ -8,6 +8,8 @@ import java.util.List;
 @Data
 public class UserDetailsDTO {
 
+    private Long id;
+
     private String name;
     private String lastname;
     private String bio;
@@ -17,7 +19,8 @@ public class UserDetailsDTO {
     private List<String> posts;
 
 
-    public UserDetailsDTO(String name, String lastname, String bio, String site, String email, String urlImage) {
+    public UserDetailsDTO(Long id, String name, String lastname, String bio, String site, String email, String urlImage) {
+        this.id = id;
         this.name = name;
         this.lastname = lastname;
         this.bio = bio;
@@ -27,11 +30,12 @@ public class UserDetailsDTO {
 
     }
     public UserDetailsDTO(UserApi userApi) {
-        this(userApi.getName(), userApi.getLastname(), userApi.getBio(), userApi.getSite(), userApi.getEmail(), userApi.getUrlImageProfile());
+        this(userApi.getId(), userApi.getName(), userApi.getLastname(), userApi.getBio(), userApi.getSite(), userApi.getEmail(), userApi.getUrlImageProfile());
     }
 
     public UserDetailsDTO(UserApi userApi, List<String> posts) {
-        this(userApi.getName(), userApi.getLastname(), userApi.getBio(), userApi.getSite(), userApi.getEmail(), userApi.getUrlImageProfile());
+        this(userApi.getId(), userApi.getName(), userApi.getLastname(), userApi.getBio(), userApi.getSite(), userApi.getEmail(), userApi.getUrlImageProfile());
         this.posts = posts;
     }
+
 }

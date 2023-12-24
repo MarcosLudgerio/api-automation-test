@@ -102,7 +102,13 @@ public class UserService {
         this.userRepository.save(userFinder);
         return new UserDetailsDTO(userFinder, new ArrayList<>());
     }
-
+    public UserDTO updateUser(UserApi userFinder, UserDTO userUpdateDTO) {
+        if (!userUpdateDTO.getName().isEmpty()) userFinder.setName(userUpdateDTO.getName());
+        if (!userUpdateDTO.getLastname().isEmpty()) userFinder.setLastname(userUpdateDTO.getLastname());
+        if (!userUpdateDTO.getSite().isEmpty()) userFinder.setSite(userUpdateDTO.getSite());
+        this.userRepository.save(userFinder);
+        return new UserDTO(userFinder);
+    }
     public UserApi validateUsuario(Optional<String> id) throws UserApiException {
         if (!id.isPresent())
             throw new UserNotFoundException("Usuário não encontrado, verifique os dados e tente novamente ");

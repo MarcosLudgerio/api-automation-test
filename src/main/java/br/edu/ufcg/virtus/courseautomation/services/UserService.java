@@ -7,7 +7,6 @@ import br.edu.ufcg.virtus.courseautomation.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -46,7 +45,9 @@ public class UserService {
 
     public UserApi findOne(Long id) throws UserApiException, TokenException {
         if (!this.userRepository.findById(id).isPresent()) throw new UserApiException("Usuário não encontrado!");
-        return (UserApi) this.userRepository.findById(id).get();
+        UserApi userApi = (UserApi) this.userRepository.findById(id).get();
+        userApi.setPassword("");
+        return userApi;
     }
 
     public UserApi findByEmail(String email) throws UserApiException {
@@ -57,7 +58,7 @@ public class UserService {
     public UserDetailsDTO createNewUser(UserApi user) throws UserAlreadyExistsException {
         Optional<UserApi> userFind = this.userRepository.findByEmail(user.getEmail());
         if (userFind.isPresent()) throw new UserAlreadyExistsException("Usuário com este email ja foi cadastrado");
-
+        if(user.getBio().length() > 255) throw new UserApiException("Biográfia não pode ultrapassar 255 caracteres");
         this.userRepository.save(user);
         return new UserDetailsDTO(user, new ArrayList<>());
     }

@@ -40,6 +40,13 @@ public class UserController {
         return new ResponseEntity<>(this.userService.findOne(token), HttpStatus.OK);
     }
 
+    @GetMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(value = "Retorna detalhes de um único usuário")
+    public ResponseEntity<?> getUser(@PathVariable("id") Long id) {
+        return new ResponseEntity<>(this.userService.findOne(id), HttpStatus.OK);
+    }
+
+
     @PostMapping(value = "", produces = "application/json")
     @ApiOperation(value = "Cadastra um novo usuário")
     public ResponseEntity<?> createNewUser(@RequestBody @Valid UserDTO userDto) {

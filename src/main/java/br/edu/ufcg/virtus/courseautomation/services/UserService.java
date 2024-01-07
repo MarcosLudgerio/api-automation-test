@@ -58,7 +58,7 @@ public class UserService {
     public UserDetailsDTO createNewUser(UserApi user) throws UserAlreadyExistsException {
         Optional<UserApi> userFind = this.userRepository.findByEmail(user.getEmail());
         if (userFind.isPresent()) throw new UserAlreadyExistsException("Usuário com este email ja foi cadastrado");
-        if(user.getBio().length() > 255) throw new UserApiException("Biográfia não pode ultrapassar 255 caracteres");
+        //if(user.getBio().length() > 255) throw new UserApiException("Biográfia não pode ultrapassar 255 caracteres");
         this.userRepository.save(user);
         return new UserDetailsDTO(user, new ArrayList<>());
     }
@@ -93,13 +93,6 @@ public class UserService {
             userFinder.setUrlImageProfile(userUpdateDTO.getUrlImage().get());
         this.userRepository.save(userFinder);
         return new UserDetailsDTO(userFinder, new ArrayList<>());
-    }
-    public UserDTO updateUser(UserApi userFinder, UserDTO userUpdateDTO) {
-        if (!userUpdateDTO.getName().isEmpty()) userFinder.setName(userUpdateDTO.getName());
-        if (!userUpdateDTO.getLastname().isEmpty()) userFinder.setLastname(userUpdateDTO.getLastname());
-        if (!userUpdateDTO.getSite().isEmpty()) userFinder.setSite(userUpdateDTO.getSite());
-        this.userRepository.save(userFinder);
-        return new UserDTO(userFinder);
     }
 
     public UserApi validateUser(Optional<String> id) throws UserApiException {

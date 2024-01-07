@@ -30,51 +30,20 @@ public class UserServiceTest {
     @Autowired
     private JWTService jwtService;
 
-    @Test
-    public void shouldCreateANewUserSuccessfulTest() {
-        UserApi userApi = new UserApi("Mark", "email@email.com");
-        UserDetailsDTO userDetailsDTO = this.userService.createNewUser(userApi);
-        Assertions.assertEquals(userDetailsDTO.getEmail(), userApi.getEmail());
-    }
 
-    @Test
-    public void shouldFindAllUsersTest() {
-        this.userService.createNewUser(new UserApi("Mark", "mark1@email.com"));
-        this.userService.createNewUser(new UserApi("Mario", "mario@email.com"));
-        this.userService.createNewUser(new UserApi("Clark", "clark@email.com"));
-        Assertions.assertEquals(this.userService.findAllUsers().size(), this.userService.findAllUsersApi().size());
-    }
+
+
 
     @Test
     public void shouldFindOneUserTest() {
-        UserDetailsDTO user = this.userService.createNewUser(new UserApi("Mark", "mark123@email.com"));
+        UserDetailsDTO user = this.userService.createNewUser(new UserApi("Giovanna", "Giovanna12@email.com"));
         UserApi userReturned = this.userService.findOne(user.getId());
         Assertions.assertEquals(user.getName(), userReturned.getName());
     }
 
     @Test
-    public void shouldReturnUserByEmailTest() {
-        UserDetailsDTO user = this.userService.createNewUser(new UserApi("Mark", "mark2@email.com"));
-        UserApi userReturned = this.userService.findByEmail(user.getEmail());
-        Assertions.assertEquals(user.getName(), userReturned.getName());
-    }
-
-    @Test
-    public void shouldValidateUser() {
-        UserApi userCrete = new UserApi("Mark", "markTestLogin@email.com", "Test@123");
-        UserDetailsDTO user = this.userService.createNewUser(userCrete);
-        UserLoginDTO userLoginDTO = new UserLoginDTO();
-        userLoginDTO.setEmail(user.getEmail());
-        userLoginDTO.setPassword(userCrete.getPassword());
-        String token = this.jwtService.autentication(userLoginDTO);
-        Optional<String> id = this.jwtService.restoreAccount(token);
-        UserApi userReturned = this.userService.validateUser(id);
-        Assertions.assertEquals(userReturned.getName(), userCrete.getName());
-    }
-
-    @Test
     public void shouldUpdateUserUsingATokenTest() {
-        UserApi userCrete = new UserApi("Mark", "markTestLoginToken@email.com", "Test@123");
+        UserApi userCrete = new UserApi("Daniel", "Daniel@email.com", "Daniel@123");
         UserDetailsDTO user = this.userService.createNewUser(userCrete);
         UserLoginDTO userLoginDTO = new UserLoginDTO();
         userLoginDTO.setEmail(user.getEmail());
@@ -87,26 +56,13 @@ public class UserServiceTest {
     }
 
     @Test
-    public void shouldCreateAndRecoveryAUser() {
-        UserApi userApi = new UserApi("Mark", "markTestLoginqqweqweqwe@email.com", "Test@123");
-        UserDetailsDTO user = this.userService.createNewUser(userApi);
-        UserLoginDTO userLoginDTO = new UserLoginDTO();
-        userLoginDTO.setEmail(user.getEmail());
-        userLoginDTO.setPassword(userApi.getPassword());
-        String token = this.jwtService.autentication(userLoginDTO);
-        UserDetailsDTO userReturned = this.userService.findOne(token);
-        Assertions.assertEquals(userReturned.getName(), user.getName());
+    public void shouldReturnUserByEmailTest() {
+        UserDetailsDTO user = this.userService.createNewUser(new UserApi("Helena", "HelenaMeuAmor@email.com"));
+        UserApi userReturned = this.userService.findByEmail(user.getEmail());
+        Assertions.assertEquals(user.getName(), userReturned.getName());
     }
 
-    @Test
-    public void shouldThrowUserAlreadyExistsExceptionTest() {
-        UserDetailsDTO user = this.userService.createNewUser(new UserApi("Mark", "emailjacadastrado@email.com"));
-        try {
-            this.userService.createNewUser(new UserApi("Mark", "emailjacadastrado@email.com"));
-            Assertions.fail("Cannot create a new user with the same e-mail");
-        } catch (UserAlreadyExistsException ignored) {
-        }
-    }
+
 
     @Test
     public void shouldThrowTokenInvalidExceptionTest() {
@@ -135,16 +91,7 @@ public class UserServiceTest {
         }
     }
 
-    @Test
-    public void shouldThrowUserNotFoundExceptionWhenUpdateUserWithEmailNullTest() {
-        try {
-            UserUpdateDTO userUpdateDTO = new UserUpdateDTO(Optional.of("Tobias"), Optional.of("t0bias"), Optional.of("madison"), Optional.of("Não tem"),
-                    Optional.of("não tem"), Optional.of("tobias@email.com"), Optional.of("nãotem"));
-            this.userService.updateUser("", userUpdateDTO);
-            Assertions.fail("Id empty");
-        } catch (TokenInvalidException ignored) {
-        }
-    }
+
 
     @Test
     public void shouldThrownExceptionUserNotFoundWhenValidateUserAndIdIsNull() {
@@ -175,7 +122,7 @@ public class UserServiceTest {
 
     @Test
     public void shouldUpdateUserUsingWithFields() {
-        UserApi userCrete = new UserApi("Mark", "markTestLoginToken@email.com.br", "Test@123");
+        UserApi userCrete = new UserApi("Rodrigo", "Rodrigo@email.com.br", "Rodrigo@123");
         UserDetailsDTO user = this.userService.createNewUser(userCrete);
         UserLoginDTO userLoginDTO = new UserLoginDTO();
         userLoginDTO.setEmail(user.getEmail());
@@ -187,7 +134,7 @@ public class UserServiceTest {
 
     @Test
     public void shouldUpdateUserUsingWithFieldNameLastnameTest() {
-        UserApi userCrete = new UserApi("Mark", "markTestLoginToken@gmail.email.com.br", "Test@123");
+        UserApi userCrete = new UserApi("Emanuel", "Emanuel@gmail.email.com.br", "Emanuel@123");
         UserDetailsDTO user = this.userService.createNewUser(userCrete);
         UserLoginDTO userLoginDTO = new UserLoginDTO();
         userLoginDTO.setEmail(user.getEmail());
@@ -199,19 +146,86 @@ public class UserServiceTest {
 
     @Test
     public void shouldParserUserDTOTest() {
-        UserApi userCreated = new UserApi("Mark", "markTestLoginToken@gmail.email.com.br", "Test@123");
+        UserApi userCreated = new UserApi("Lucas", "Lucas@gmail.email.com.br", "Test@123");
         UserDTO userDTO = new UserDTO(userCreated);
         userDTO.setBio(Optional.empty());
         userDTO.setUrlImage(Optional.empty());
         UserApi user = this.userService.fromDTO(userDTO);
-        Assertions.assertEquals(user.getName(), userCreated.getName());
+
+        Assertions.assertEquals(userCreated.getName(), user.getName());
+
     }
 
     @Test
     public void shouldParserUserWithoutPassDTOOTest() {
-        UserApi userCreated = new UserApi("Mark", "markTestLoginToken@gmail.email.com.br", "Test@123");
+        UserApi userCreated = new UserApi("Thiago", "Thiago@gmail.email.com.br", "Test@123");
         UserApi user = this.userService.fromDTO(new UserWithoutPassDTO(userCreated));
-        Assertions.assertEquals(user.getName(), userCreated.getName());
+        Assertions.assertEquals(userCreated.getName(), user.getName());
+    }
+
+
+
+
+    @Test
+    public void shouldValidateUser() {
+        UserApi userCrete = new UserApi("Mariana", "Mariana@email.com", "Mariana@123");
+        UserDetailsDTO user = this.userService.createNewUser(userCrete);
+        UserLoginDTO userLoginDTO = new UserLoginDTO();
+        userLoginDTO.setEmail(user.getEmail());
+        userLoginDTO.setPassword(userCrete.getPassword());
+        String token = this.jwtService.autentication(userLoginDTO);
+        Optional<String> id = this.jwtService.restoreAccount(token);
+        UserApi userReturned = this.userService.validateUser(id);
+        Assertions.assertEquals(userReturned.getName(), userCrete.getName());
+    }
+
+    @Test
+    public void shouldCreateANewUserSuccessfulTest() {
+        UserApi userApi = new UserApi("Miguel", "miguel@gmail.com");
+        UserDetailsDTO userDetailsDTO = this.userService.createNewUser(userApi);
+        Assertions.assertEquals(userDetailsDTO.getEmail(), userApi.getEmail());
+    }
+
+    @Test
+    public void shouldFindAllUsersTest() {
+        this.userService.createNewUser(new UserApi("Julia", "Julia12@email.com"));
+        this.userService.createNewUser(new UserApi("Isabella", "Isabella23@email.com"));
+        this.userService.createNewUser(new UserApi("Lucas", "Lucas@email.com"));
+        Assertions.assertEquals(this.userService.findAllUsers().size(), this.userService.findAllUsersApi().size());
+    }
+
+    @Test
+    public void shouldThrowUserAlreadyExistsExceptionTest() {
+        UserDetailsDTO user = this.userService.createNewUser(new UserApi("Letícia", "let@email.com"));
+        try {
+            this.userService.createNewUser(new UserApi("Melissa", "let@email.com"));
+            Assertions.fail("Cannot create a new user with the same e-mail");
+        } catch (UserAlreadyExistsException ignored) {
+        }
+    }
+
+    @Test
+    public void shouldThrowUserNotFoundExceptionWhenUpdateUserWithEmailNullTest() {
+        try {
+            UserUpdateDTO userUpdateDTO = new UserUpdateDTO(Optional.of("Bianca"), Optional.of("t0bias"), Optional.of("Bianca"), Optional.of("Não tem"),
+                    Optional.of("não tem"), Optional.of("Bianca@email.com"), Optional.of("nãotem"));
+            this.userService.updateUser("", userUpdateDTO);
+            Assertions.fail("Id empty");
+        } catch (TokenInvalidException ignored) {
+        }
+    }
+
+
+    @Test
+    public void shouldCreateAndRecoveryAUser() {
+        UserApi userApi = new UserApi("Leonardo", "Leonardo@email.com", "Leonardo@123");
+        UserDetailsDTO user = this.userService.createNewUser(userApi);
+        UserLoginDTO userLoginDTO = new UserLoginDTO();
+        userLoginDTO.setEmail(user.getEmail());
+        userLoginDTO.setPassword(userApi.getPassword());
+        String token = this.jwtService.autentication(userLoginDTO);
+        UserDetailsDTO userReturned = this.userService.findOne(token);
+        Assertions.assertEquals(userReturned.getName(), user.getName());
     }
 
 

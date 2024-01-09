@@ -31,9 +31,6 @@ public class UserServiceTest {
     private JWTService jwtService;
 
 
-
-
-
     @Test
     public void shouldFindOneUserTest() {
         UserDetailsDTO user = this.userService.createNewUser(new UserApi("Giovanna", "Giovanna12@email.com"));
@@ -63,7 +60,6 @@ public class UserServiceTest {
     }
 
 
-
     @Test
     public void shouldThrowTokenInvalidExceptionTest() {
         try {
@@ -90,8 +86,6 @@ public class UserServiceTest {
         } catch (UserApiException ignored) {
         }
     }
-
-
 
     @Test
     public void shouldThrownExceptionUserNotFoundWhenValidateUserAndIdIsNull() {
@@ -162,8 +156,6 @@ public class UserServiceTest {
         UserApi user = this.userService.fromDTO(new UserWithoutPassDTO(userCreated));
         Assertions.assertEquals(userCreated.getName(), user.getName());
     }
-
-
 
 
     @Test

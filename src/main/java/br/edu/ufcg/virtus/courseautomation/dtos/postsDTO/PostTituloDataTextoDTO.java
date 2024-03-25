@@ -1,6 +1,6 @@
 package br.edu.ufcg.virtus.courseautomation.dtos.postsDTO;
 
-import br.edu.ufcg.virtus.courseautomation.models.Post;
+import br.edu.ufcg.virtus.courseautomation.models.Poster;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,8 +22,8 @@ public class PostTituloDataTextoDTO {
     @NotBlank(message = "Título do post é obrigatório")
     private String texto;
 
-    public PostTituloDataTextoDTO(Post post) {
-        this(post.getTitulo(), post.getData(), post.getTexto());
+    public PostTituloDataTextoDTO(Poster poster) {
+        this(poster.getTitulo(), poster.getData(), poster.getTexto());
     }
     public PostTituloDataTextoDTO(String titulo, LocalDate data, String texto){
         this.texto = texto;

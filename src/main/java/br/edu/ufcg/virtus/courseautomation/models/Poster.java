@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity(name = "post")
-public class Post {
+public class Poster {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,10 +23,10 @@ public class Post {
     @Lob
     private String texto;
 
-    public Post() {
+    public Poster() {
     }
 
-    public Post(Long id, String titulo, UserApi autor, LocalDate data, String texto) {
+    public Poster(Long id, String titulo, UserApi autor, LocalDate data, String texto) {
         this.id = id;
         this.titulo = titulo;
         this.autor = autor;

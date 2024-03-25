@@ -1,6 +1,6 @@
 package br.edu.ufcg.virtus.courseautomation.dtos.postsDTO;
 
-import br.edu.ufcg.virtus.courseautomation.models.Post;
+import br.edu.ufcg.virtus.courseautomation.models.Poster;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -15,8 +15,8 @@ public class PostCreateDTO {
     @NotBlank(message = "Campo texto é obrigatório")
     private String texto;
 
-    public PostCreateDTO(Post post) {
-      this(post.getTitulo(), post.getTexto());
+    public PostCreateDTO(Poster poster) {
+      this(poster.getTitulo(), poster.getTexto());
     }
 
 }

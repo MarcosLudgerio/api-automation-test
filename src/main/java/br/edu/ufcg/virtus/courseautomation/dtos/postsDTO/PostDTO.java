@@ -1,7 +1,7 @@
 package br.edu.ufcg.virtus.courseautomation.dtos.postsDTO;
 
 import br.edu.ufcg.virtus.courseautomation.dtos.usersDTO.UserWithoutPassDTO;
-import br.edu.ufcg.virtus.courseautomation.models.Post;
+import br.edu.ufcg.virtus.courseautomation.models.Poster;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
@@ -25,10 +25,10 @@ public class PostDTO {
     @NotBlank(message = "Título do post é obrigatório")
     private String texto;
 
-    public PostDTO(Post post) {
-        this.titulo = post.getTitulo();
-        this.autor = new UserWithoutPassDTO(post.getAutor());
-        this.data = post.getData();
-        this.texto = post.getTexto();
+    public PostDTO(Poster poster) {
+        this.titulo = poster.getTitulo();
+        this.autor = new UserWithoutPassDTO(poster.getAutor());
+        this.data = poster.getData();
+        this.texto = poster.getTexto();
     }
 }

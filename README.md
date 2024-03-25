@@ -49,7 +49,7 @@ Para cadastrar uma publicação é necessário ter: titulo e texto <br>
 ##### JSON para criação de poster: <br>
 ```json
 {
-   "titulo": "post 1",
+   "titulo": "poster 1",
    "texto": "texto"
 }
 ```

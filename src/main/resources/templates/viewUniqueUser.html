@@ -113,11 +113,11 @@
             </div>
             </div>
             <div class="col-8">
-                <div class="card shadow-sm profile" style="margin-top: 20px;" th:each="post : ${posts}">
+                <div class="card shadow-sm profile" style="margin-top: 20px;" th:each="poster : ${posters}">
                     <div class="card-body">
                         <h4 class="card-title"><span>Titulo</span></h4>
                         <p class="card-text details"><span>Description</span></p>
-                        <!--<a th:href="${(#mvc.url('BC#getPostDetails').arg(0, post.id)).build()}" class="card-link">Acessar</a>-->
+                        <!--<a th:href="${(#mvc.url('BC#getPostDetails').arg(0, poster.id)).build()}" class="card-link">Acessar</a>-->
                     </div> 
             </div>
             <div class="col"></div>

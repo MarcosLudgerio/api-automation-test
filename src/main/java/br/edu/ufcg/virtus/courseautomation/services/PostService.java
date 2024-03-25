@@ -5,7 +5,7 @@ import br.edu.ufcg.virtus.courseautomation.dtos.postsDTO.*;
 import br.edu.ufcg.virtus.courseautomation.exceptions.PostException;
 import br.edu.ufcg.virtus.courseautomation.exceptions.TokenException;
 import br.edu.ufcg.virtus.courseautomation.exceptions.UserApiException;
-import br.edu.ufcg.virtus.courseautomation.models.Post;
+import br.edu.ufcg.virtus.courseautomation.models.Poster;
 import br.edu.ufcg.virtus.courseautomation.models.UserApi;
 import br.edu.ufcg.virtus.courseautomation.repositories.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,21 +29,21 @@ public class PostService {
     private JWTService jwtService;
 
     public List<PostIdTituloDTO> findAllPosts() throws UserApiException, TokenException {
-        List<Post> posts = this.postRepository.findAll();
-        return posts.stream().map(PostIdTituloDTO::new).collect(Collectors.toList());
+        List<Poster> posters = this.postRepository.findAll();
+        return posters.stream().map(PostIdTituloDTO::new).collect(Collectors.toList());
     }
 
     public List<String> findPostByCreator(UserApi user) {
         return this.postRepository.findPostsByAutor(user.getId());
     }
 
-    private Post findOne(String token, Long id) throws PostException, UserApiException, TokenException {
+    private Poster findOne(String token, Long id) throws PostException, UserApiException, TokenException {
         Optional<String> userLog = jwtService.restoreAccount(token);
         UserApi user = userService.validateUser(userLog);
         if (user.getName().equals("")) {
             throw new UserApiException("Dados inválidos");
         }
-        Optional<Post> postFind = this.postRepository.findById(id);
+        Optional<Poster> postFind = this.postRepository.findById(id);
         if (!postFind.isPresent())
             throw new PostException("Post não encontrado, tente novamente");
         postFind.get().setAutor(user);
@@ -51,15 +51,15 @@ public class PostService {
     }
 
     public PostTituloDataTextoDTO findPost(Long id) {
-        Optional<Post> postFind = this.postRepository.findById(id);
+        Optional<Poster> postFind = this.postRepository.findById(id);
         if (!postFind.isPresent())
             throw new PostException("Post não encontrado, tente novamente");
         return new PostTituloDataTextoDTO(postFind.get());
     }
 
     public PostDTO findOneController(String token, Long id) throws PostException, UserApiException, TokenException {
-        Post post = this.findOne(token, id);
-        return new PostDTO(post);
+        Poster poster = this.findOne(token, id);
+        return new PostDTO(poster);
     }
 
     public PostDTO createNewPost(String token, PostCreateDTO post) throws UserApiException, TokenException {
@@ -67,33 +67,33 @@ public class PostService {
         UserApi user = userService.validateUser(userLog);
         if (user.getName().equals(""))
             throw new UserApiException("Dados inválidos");
-        Post postReturn = this.fromDTO(post);
-        postReturn.setAutor(user);
-        this.postRepository.save(postReturn);
-        return new PostDTO(postReturn);
+        Poster posterReturn = this.fromDTO(post);
+        posterReturn.setAutor(user);
+        this.postRepository.save(posterReturn);
+        return new PostDTO(posterReturn);
     }
 
     public PostDTO updatePost(String token, Long id, PostUpdateDTO post) throws PostException, UserApiException, TokenException {
-        Post postFinder = this.findOne(token, id);
+        Poster posterFinder = this.findOne(token, id);
         if (post.getTitulo().isPresent() && !post.getTitulo().get().equals(""))
-            postFinder.setTitulo(post.getTitulo().get());
+            posterFinder.setTitulo(post.getTitulo().get());
         if (post.getTexto().isPresent() && !post.getTexto().get().equals(""))
-            postFinder.setTexto(post.getTexto().get());
-        this.postRepository.save(postFinder);
-        return new PostDTO(postFinder);
+            posterFinder.setTexto(post.getTexto().get());
+        this.postRepository.save(posterFinder);
+        return new PostDTO(posterFinder);
     }
 
     public PostDTO deletePost(String token, Long id) throws PostException, UserApiException, TokenException {
-        Post post = this.findOne(token, id);
-        this.postRepository.delete(post);
-        return new PostDTO(post);
+        Poster poster = this.findOne(token, id);
+        this.postRepository.delete(poster);
+        return new PostDTO(poster);
     }
 
-    public Post fromDTO(PostDTO postDTO) {
-        return new Post(null, postDTO.getTitulo(), userService.fromDTO(postDTO.getAutor()), postDTO.getData(), postDTO.getTexto());
+    public Poster fromDTO(PostDTO postDTO) {
+        return new Poster(null, postDTO.getTitulo(), userService.fromDTO(postDTO.getAutor()), postDTO.getData(), postDTO.getTexto());
     }
 
-    public Post fromDTO(PostCreateDTO postDTO) {
-        return new Post(null, postDTO.getTitulo(), null, LocalDate.now(), postDTO.getTexto());
+    public Poster fromDTO(PostCreateDTO postDTO) {
+        return new Poster(null, postDTO.getTitulo(), null, LocalDate.now(), postDTO.getTexto());
     }
 }

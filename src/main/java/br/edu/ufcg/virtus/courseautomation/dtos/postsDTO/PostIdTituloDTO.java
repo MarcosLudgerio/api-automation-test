@@ -1,6 +1,6 @@
 package br.edu.ufcg.virtus.courseautomation.dtos.postsDTO;
 
-import br.edu.ufcg.virtus.courseautomation.models.Post;
+import br.edu.ufcg.virtus.courseautomation.models.Poster;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -10,7 +10,7 @@ public class PostIdTituloDTO {
     private Long id;
     private String titulo;
 
-    public PostIdTituloDTO(Post post) {
-        this(post.getId(), post.getTitulo());
+    public PostIdTituloDTO(Poster poster) {
+        this(poster.getId(), poster.getTitulo());
     }
 }

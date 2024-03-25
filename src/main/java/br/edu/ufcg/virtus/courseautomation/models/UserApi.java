@@ -22,7 +22,7 @@ public class UserApi {
 
 
     @OneToMany
-    private List<Post> posts;
+    private List<Poster> posters;
 
     public UserApi() {
     }
@@ -79,8 +79,8 @@ public class UserApi {
         this.password = password;
     }
 
-    public List<Post> getPosts() {
-        return posts;
+    public List<Poster> getPosts() {
+        return posters;
     }
 
     public String getSite() {
